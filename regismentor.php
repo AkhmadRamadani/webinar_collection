@@ -18,6 +18,7 @@ include "config/connection.php";
                   $pendidikan = "";
                   $pekerjaan = "";
                   $foto_profile ="";
+                  $bukti_ijazah ="";
               } else {
                   echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
               }
@@ -31,8 +32,7 @@ include "config/connection.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Page Data Mentor</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
+    <title>Webion - Registrasi Mentor Page</title>
     <link href="sytles/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="sytles/assets/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -64,12 +64,12 @@ include "config/connection.php";
                             <div class="form">
 
                                 <div id="alamat-field" class="field-wrapper input">
-                                    <label for="biodata">Biodata</label>
+                                    <label for="biodata">BIODATA</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
-                                    <input id="biodata" name="biodata" type="text" value="" class="form-control" placeholder="biodata">
+                                    <input id="biodata" name="biodata" type="text" value="" class="form-control" placeholder="Biodata">
                                 </div>
 
-                                <div id="pendidikan-field" class="field-wrapper input">
+                                <div id="pendidikan" class="field-wrapper input">
                                     <label for="pendidikan">PENDIDIKAN</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
                                     <input id="pendidikan" name="pendidikan" type="text" value="" class="form-control" placeholder="Pendidikan">
@@ -81,27 +81,16 @@ include "config/connection.php";
                                     <input id="pekerjaan" name="pekerjaan" type="text" value="" class="form-control" placeholder="Pekerjaan">
                                 </div>
 
-                                div id="pekerjaan-field" class="field-wrapper input">
-                                    <label for="fotoprofile">Foto Profile</label>
+                                <div id="fotoprofile-field" class="field-wrapper input">
+                                    <label for="fotoprofile">FOTO PROFILE</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
                                     <input id="fotoprofile" name="fotoprofile" type="text" value="" class="form-control" placeholder="Foto Profile">
                                 </div>
 
-                                div id="pekerjaan-field" class="field-wrapper input">
-                                    <label for="buktiijazah">Bukti Ijazah</label>
+                                <div id="buktiijazah-field" class="field-wrapper input">
+                                    <label for="buktiijazah">BUKTI IJAZAH</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
                                     <input id="buktiijazah" name="buktiijazah" type="text" value="" class="form-control" placeholder="Bukti Ijazah">
-                                </div>
-
-                                    
-                                <div class="field-wrapper terms_condition">
-                                    <div class="n-chk">
-                                        <label class="new-control new-checkbox checkbox-primary">
-                                          <input type="checkbox" class="new-control-input">
-                                          <span class="new-control-indicator"></span><span>I agree to the <a href="javascript:void(0);">  terms and conditions </a></span>
-                                        </label>
-                                    </div>
-
                                 </div>
 
                                 <div class="d-sm-flex justify-content-between">
@@ -109,8 +98,6 @@ include "config/connection.php";
                                         <button type="submit" class="btn btn-primary" value="">Get Started!</button>
                                     </div>
                                 </div>
-
-
                             </div>
                         </form>
 
