@@ -7,8 +7,7 @@ if (isset($_SESSION[''])) {
         $pendidikan = $_POST['pendidikan'];
         $pekerjaan = ($_POST['pekerjaan']);
         if (!$result->num_rows > 0) {
-            $sql = "INSERT INTO user_detail(detail_id, alamat, pekerjaan, pendidikan,)
-                      VALUES ('','$alamat', '$pekerjaan', '$pendidikan')";
+            $sql = "INSERT INTO user_detail(detail_id, alamat, pekerjaan, pendidikan,) VALUES ('','$alamat', '$pekerjaan', '$pendidikan')";
             $result = mysqli_query($connect, $sql);
             if ($result) {
                 echo "<script>alert('Berikut adalah data mentor!')</script>";
