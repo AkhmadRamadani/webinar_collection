@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 10:08 AM
+-- Generation Time: Mar 31, 2022 at 10:28 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -41,7 +41,7 @@ CREATE TABLE `acc_webinar` (
 --
 
 CREATE TABLE `kategori` (
-  `KATEGORI_ID` int(3) NOT NULL,
+  `KATEGORI_ID` int(11) NOT NULL,
   `NAMA_KATEGORI` varchar(50) DEFAULT NULL,
   `ICON_KATEGORI` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53,13 +53,19 @@ CREATE TABLE `kategori` (
 --
 
 CREATE TABLE `user` (
-  `USER_ID` int(255) NOT NULL,
-  `MENTOR_ID` int(255) DEFAULT NULL,
+  `USER_ID` int(11) NOT NULL,
   `NAMA` varchar(200) DEFAULT NULL,
   `EMAIL` varchar(100) DEFAULT NULL,
   `PASSWORD` varchar(256) DEFAULT NULL,
-  `ROLE` int(1) DEFAULT NULL
+  `ROLE` int(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`USER_ID`, `NAMA`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
+(1, 'Akhmad Ramadani', 'wkwkwkwkwkwk@ghmail.com', '202cb962ac59075b964b07152d234b70', 1);
 
 -- --------------------------------------------------------
 
@@ -68,7 +74,6 @@ CREATE TABLE `user` (
 --
 
 CREATE TABLE `user_detail` (
-  `MENTOR_ID` int(255) NOT NULL,
   `USER_ID` int(255) DEFAULT NULL,
   `BIODATA` text DEFAULT NULL,
   `PENDIDIKAN` varchar(1024) DEFAULT NULL,
@@ -84,7 +89,7 @@ CREATE TABLE `user_detail` (
 --
 
 CREATE TABLE `webinar` (
-  `WEBINAR_ID` int(255) NOT NULL,
+  `WEBINAR_ID` int(11) NOT NULL,
   `USER_ID` int(255) DEFAULT NULL,
   `JUDUL_WEBINAR` varchar(200) DEFAULT NULL,
   `DESKRIPSI_WEBINAR` text DEFAULT NULL,
@@ -137,14 +142,12 @@ ALTER TABLE `kategori`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`USER_ID`),
-  ADD KEY `FK_MEMILIKI2` (`MENTOR_ID`);
+  ADD PRIMARY KEY (`USER_ID`);
 
 --
 -- Indexes for table `user_detail`
 --
 ALTER TABLE `user_detail`
-  ADD PRIMARY KEY (`MENTOR_ID`),
   ADD KEY `FK_MEMILIKI` (`USER_ID`);
 
 --
@@ -169,47 +172,26 @@ ALTER TABLE `webinar_regist`
   ADD KEY `FK_WEBINAR_REGIST2` (`WEBINAR_ID`);
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Constraints for table `acc_webinar`
+-- AUTO_INCREMENT for table `kategori`
 --
-ALTER TABLE `acc_webinar`
-  ADD CONSTRAINT `FK_ACC_WEBINAR` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`USER_ID`),
-  ADD CONSTRAINT `FK_ACC_WEBINAR2` FOREIGN KEY (`WEBINAR_ID`) REFERENCES `webinar` (`WEBINAR_ID`);
+ALTER TABLE `kategori`
+  MODIFY `KATEGORI_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FK_MEMILIKI2` FOREIGN KEY (`MENTOR_ID`) REFERENCES `user_detail` (`MENTOR_ID`);
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for table `user_detail`
---
-ALTER TABLE `user_detail`
-  ADD CONSTRAINT `FK_MEMILIKI` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`USER_ID`);
-
---
--- Constraints for table `webinar`
+-- AUTO_INCREMENT for table `webinar`
 --
 ALTER TABLE `webinar`
-  ADD CONSTRAINT `FK_CREATE_WEBINAR` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`USER_ID`);
-
---
--- Constraints for table `webinar_kategori`
---
-ALTER TABLE `webinar_kategori`
-  ADD CONSTRAINT `FK_WEBINAR_KATEGORI` FOREIGN KEY (`KATEGORI_ID`) REFERENCES `kategori` (`KATEGORI_ID`),
-  ADD CONSTRAINT `FK_WEBINAR_KATEGORI2` FOREIGN KEY (`WEBINAR_ID`) REFERENCES `webinar` (`WEBINAR_ID`);
-
---
--- Constraints for table `webinar_regist`
---
-ALTER TABLE `webinar_regist`
-  ADD CONSTRAINT `FK_WEBINAR_REGIST` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`USER_ID`),
-  ADD CONSTRAINT `FK_WEBINAR_REGIST2` FOREIGN KEY (`WEBINAR_ID`) REFERENCES `webinar` (`WEBINAR_ID`);
+  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
