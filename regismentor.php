@@ -1,21 +1,23 @@
 <?php
 session_start();
 include "config/connection.php";
-  if (isset($_SESSION[''])) {
+  if (isset($_SESSION['user_id'])) {
     if (isset($_POST['submit'])) {
-      $alamat = $_POST['alamat'];
+      $biodata = $_POST['biodata'];
       $pendidikan = $_POST['pendidikan'];
       $pekerjaan = ($_POST['pekerjaan']);
+      $foto_profile = ($_POST['foto_profile']);
+      $bukti_ijazah = ($_POST['bukti_ijazah']);
             if (!$result->num_rows > 0) {
-              $sql = "INSERT INTO user_detail(detail_id, alamat, pekerjaan, pendidikan,)
-                      VALUES ('','$alamat', '$pekerjaan', '$pendidikan')";
+              $sql = "INSERT INTO user_detail(user_id, biodata, pendidikan, pekerjaan,foto_profile, bukti_ijazah)
+                      VALUES ('','$biodata', '$pendidikan','$pekerjaan', '$foto_profile', '$bukti_ijazah')";
               $result = mysqli_query($connect, $sql);
               if ($result) {
                   echo "<script>alert('Berikut adalah data mentor!')</script>";
-                  
-                  $alamat = "";
+                  $biodata = "";
                   $pendidikan = "";
                   $pekerjaan = "";
+                  $foto_profile ="";
               } else {
                   echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
               }
@@ -62,9 +64,9 @@ include "config/connection.php";
                             <div class="form">
 
                                 <div id="alamat-field" class="field-wrapper input">
-                                    <label for="alamat">ALAMAT</label>
+                                    <label for="biodata">Biodata</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
-                                    <input id="alamat" name="alamat" type="text" value="" class="form-control" placeholder="Alamat">
+                                    <input id="biodata" name="biodata" type="text" value="" class="form-control" placeholder="biodata">
                                 </div>
 
                                 <div id="pendidikan-field" class="field-wrapper input">
@@ -77,6 +79,18 @@ include "config/connection.php";
                                     <label for="pekerjaan">PEKERJAAN</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
                                     <input id="pekerjaan" name="pekerjaan" type="text" value="" class="form-control" placeholder="Pekerjaan">
+                                </div>
+
+                                div id="pekerjaan-field" class="field-wrapper input">
+                                    <label for="fotoprofile">Foto Profile</label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                                    <input id="fotoprofile" name="fotoprofile" type="text" value="" class="form-control" placeholder="Foto Profile">
+                                </div>
+
+                                div id="pekerjaan-field" class="field-wrapper input">
+                                    <label for="buktiijazah">Bukti Ijazah</label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                                    <input id="buktiijazah" name="buktiijazah" type="text" value="" class="form-control" placeholder="Bukti Ijazah">
                                 </div>
 
                                     
