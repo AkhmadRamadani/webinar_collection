@@ -98,7 +98,7 @@ include "config/connection.php";
 
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper">
-                                        <button type="submit" class="btn btn-primary" name="create">Get Started!</button>
+                                        <button type="submit" class="btn btn-primary" name="create">Create Account!</button>
                                     </div>
                                 </div>
 
