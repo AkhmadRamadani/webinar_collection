@@ -17,11 +17,7 @@
 
     <link href="styles/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
-    <style class="dark-theme">
-        #chart-2 path {
-            stroke: #0e1726;
-        }
-    </style>
+
 
 
 </head>
@@ -46,7 +42,7 @@
                 </svg></a>
 
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="/"><img alt="logo" src="styles/assets/img/90x90.jpg"> <span class="navbar-brand-name">WEBION</span></a>
+                <a class="navbar-brand" href="index.php"><img alt="logo" src="styles/assets/img/90x90.jpg"> <span class="navbar-brand-name">WEBION</span></a>
             </div>
 
             <ul class="navbar-item topbar-navigation">
@@ -54,19 +50,19 @@
                     <nav id="topbar">
                         <ul class="navbar-nav theme-brand flex-row  text-center">
                             <li class="nav-item theme-logo">
-                                <a href="/">
+                                <a href="index.php">
                                     <img src="styles/assets/img/90x90.jpg" class="navbar-logo" alt="logo">
                                 </a>
                             </li>
                             <li class="nav-item theme-text">
-                                <a href="/" class="nav-link"> WEBION </a>
+                                <a href="index.php" class="nav-link"> WEBION </a>
                             </li>
                         </ul>
 
                         <ul class="list-unstyled menu-categories" id="topAccordion">
 
                             <li class="menu single-menu active">
-                                <a href="#dashboard" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle autodroprown">
+                                <a href="index.php?page=beranda"  class="dropdown-toggle autodroprown">
                                     <div class="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -90,7 +86,7 @@
                             </li>
 
                             <li class="menu single-menu">
-                                <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <a href="index.php?page=kategori" class="dropdown-toggle">
                                     <div class="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard">
                                             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -106,7 +102,7 @@
                             </li>
 
                             <li class="menu single-menu">
-                                <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <a href="index.php?page=eventku"  class="dropdown-toggle">
                                     <div class="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard">
                                             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -298,7 +294,7 @@
             </ul>
 
             <ul class="navbar-item flex-row nav-dropdowns">
-                
+
                 <li class="nav-item dropdown notification-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
@@ -445,74 +441,26 @@
 
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
-            <div class="layout-px-spacing">
+            <?php
+            if (isset($_GET['page'])) {
+                $page = $_GET['page'];
 
-                <div class="page-header">
-                    <div class="page-title">
-                        <h3>Trending Webinar</h3>
-                    </div>
+                switch ($page) {
+                    case 'beranda':
+                        include './pages/home.php';
+                        break;
 
-                    <div class="bg-secondary rounded-circle p-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </div>
-
-                </div>
-
-                <div class="row layout-top-spacing">
-                    <div class="widget-content widget-content-area">
-                        <!-- Card Component -->
-                        <div class="card component-card_9">
-                            <img src="styles/assets/img/400x300.jpg" class="card-img-top" alt="widget-card-2">
-                            <div class="card-body">
-                                <p class="meta-date">25 Jan 2020</p>
-
-                                <h5 class="card-title">How to Start a Blog in 5 Easy Steps.</h5>
-                                <p class="card-text">Vestibulum vestibulum tortor ut eros tincidunt, ut
-                                    rutrum elit volutpat.</p>
-
-                                <div class="meta-info">
-                                    <div class="meta-user">
-                                        <div class="avatar avatar-sm">
-                                            <span class="avatar-title rounded-circle">AG</span>
-                                        </div>
-                                        <div class="user-name">Luke Ivory</div>
-                                    </div>
-
-                                    <div class="meta-action">
-                                        <div class="meta-likes">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
-                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                                </path>
-                                            </svg> 51
-                                        </div>
-
-                                        <div class="meta-view">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
-                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                </path>
-                                                <circle cx="12" cy="12" r="3"></circle>
-                                            </svg> 250
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-                <div class="footer-wrapper">
-                    
-                </div>
-
-            </div>
+                    case 'kategori':
+                        include './pages/kategori.php';
+                        break;
+                    default:
+                        include './pages/home.php';
+                        break;
+                }
+            }else{
+                echo 'fas';
+            }
+            ?>
         </div>
         <!--  END CONTENT PART  -->
 
