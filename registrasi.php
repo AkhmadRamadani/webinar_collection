@@ -10,8 +10,7 @@ include "config/connection.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CORK Admin Template - Login Page Register</title>
-    <link rel="icon" type="image/x-icon" href="styles/assets/img/favicon.ico" />
+    <title>Webion - Registrasi Page</title>
     <link href="styles/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="styles/assets/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -56,7 +55,7 @@ include "config/connection.php";
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama">
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama" required>
                                 </div>
                                 <!-- End Username -->
 
@@ -67,7 +66,7 @@ include "config/connection.php";
                                         <circle cx="12" cy="12" r="4"></circle>
                                         <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
                                     </svg>
-                                    <input id="email" name="email" type="text" value="" class="form-control" placeholder="Email">
+                                    <input id="email" name="email" type="text" value="" class="form-control" placeholder="Email" required>
                                 </div>
                                 <!-- End Email -->
 
@@ -80,7 +79,7 @@ include "config/connection.php";
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
-                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                         <circle cx="12" cy="12" r="3"></circle>
@@ -92,7 +91,6 @@ include "config/connection.php";
                                     <div class="n-chk">
                                         <label class="new-control new-checkbox checkbox-primary">
                                             <input type="checkbox" class="new-control-input">
-                                            <span class="new-control-indicator"></span><span>I agree to the <a href="javascript:void(0);"> terms and conditions </a></span>
                                         </label>
                                     </div>
 
@@ -130,6 +128,9 @@ include "config/connection.php";
 
         if ($result) {
             echo "<script>alert('Registrasi Akun anda berhasil!'); </script>";
+            $username = "";
+            $email = "";
+            $_POST['password'] = "";
             echo "<script>location='loginPage.php';</script>";
         } else {
             echo "<script>alert('Woops! Something Wrong Went.')</script>";
