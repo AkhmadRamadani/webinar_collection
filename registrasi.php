@@ -51,12 +51,12 @@ include "config/connection.php";
 
                                 <!-- Username -->
                                 <div id="username-field" class="field-wrapper input">
-                                    <label for="nama">USERNAME</label>
+                                    <label for="name">NAMA</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input id="username" name="username" type="text" class="form-control" placeholder="Username">
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama">
                                 </div>
                                 <!-- End Username -->
 
@@ -122,10 +122,10 @@ include "config/connection.php";
     <?php
 
     if (isset($_POST['create'])) {
-        $username = $_POST['nama'];
+        $username = $_POST['name'];
         $email = $_POST['email'];
         $password = md5($_POST['password']);
-        $sql = "INSERT INTO user (nama, email, password) VALUES ('$username', '$email', '$password')";
+        $sql = "INSERT INTO user (NAMA, EMAIL, PASSWORD) VALUES ('$username', '$email', '$password')";
         $result = mysqli_query($connect, $sql);
 
         if ($result) {
