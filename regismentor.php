@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "config/connection.php";
-  if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id'])) {
     if (isset($_POST['submit'])) {
       $biodata = $_POST['biodata'];
       $pendidikan = $_POST['pendidikan'];
@@ -23,11 +23,13 @@ include "config/connection.php";
                   echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
               }
             }
+        }
     }
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,12 +46,17 @@ include "config/connection.php";
     <link rel="stylesheet" type="text/css" href="assets/css/forms/theme-checkbox-radio.css">
     <link rel="stylesheet" type="text/css" href="assets/css/forms/switches.css">
 </head>
+
 <body class="form">
-    
+
     <!-- BEGIN LOADER -->
-    <div id="load_screen"> <div class="loader"> <div class="loader-content">
-        <div class="spinner-grow align-self-center"></div>
-    </div></div></div>
+    <div id="load_screen">
+        <div class="loader">
+            <div class="loader-content">
+                <div class="spinner-grow align-self-center"></div>
+            </div>
+        </div>
+    </div>
     <!--  END LOADER -->
 
     <div class="form-container outer">
@@ -71,13 +78,19 @@ include "config/connection.php";
 
                                 <div id="pendidikan" class="field-wrapper input">
                                     <label for="pendidikan">PENDIDIKAN</label>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+                                    </svg>
                                     <input id="pendidikan" name="pendidikan" type="text" value="" class="form-control" placeholder="Pendidikan">
                                 </div>
 
                                 <div id="pekerjaan-field" class="field-wrapper input">
                                     <label for="pekerjaan">PEKERJAAN</label>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign register">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+                                    </svg>
                                     <input id="pekerjaan" name="pekerjaan" type="text" value="" class="form-control" placeholder="Pekerjaan">
                                 </div>
 
@@ -101,25 +114,26 @@ include "config/connection.php";
                             </div>
                         </form>
 
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="bootstrap/js/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    
+
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <script src="assets/js/authentication/form-2.js"></script>
     <script>
         var loaderElement = document.querySelector('#load_screen');
-        setTimeout( function() {
+        setTimeout(function() {
             loaderElement.style.display = "none";
         }, 3000);
     </script>
 </body>
+
 </html>
