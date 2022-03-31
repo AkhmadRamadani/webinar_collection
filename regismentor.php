@@ -10,7 +10,7 @@ if (isset($_SESSION[''])) {
             $sql = "INSERT INTO user_detail(detail_id, alamat, pekerjaan, pendidikan,) VALUES ('','$alamat', '$pekerjaan', '$pendidikan')";
             $result = mysqli_query($connect, $sql);
             if ($result) {
-                echo "<script>alert('Berikut adalah data mentor!')</script>";
+                echo "<script>alert('Berikut ada`lah data mentor!')</script>";
 
                 $alamat = "";
                 $pendidikan = "";
@@ -91,7 +91,6 @@ if (isset($_SESSION[''])) {
                                     </svg>
                                     <input id="pekerjaan" name="pekerjaan" type="text" value="" class="form-control" placeholder="Pekerjaan">
                                 </div>
-
 
                                 <div class="field-wrapper terms_condition">
                                     <div class="n-chk">
