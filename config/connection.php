@@ -2,6 +2,7 @@
     $host = 'localhost';
     $username = 'root';
     $password = '';
-    $database = '';
+    $database = 'webinar_collection';
 
+    $connect = mysqli_connect($host, $username, $password, $database);
 ?>
