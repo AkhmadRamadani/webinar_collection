@@ -109,7 +109,7 @@ include "config/connection.php";
     //klik tombol login
     if (isset($_POST["LOGIN"])) {
         $username = $_POST["NAMA"];
-        $password = $_POST["PASSWORD"];
+        $password = md5($_POST["PASSWORD"]);
         //lakukan pengecekan akun di table user
         $ambil = $connect->query("SELECT*FROM user
                     where NAMA='$username' AND PASSWORD='$password'");
