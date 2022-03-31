@@ -19,9 +19,9 @@ if (isset($_SESSION['user_id'])) {
                   $pekerjaan = "";
                   $foto_profile ="";
                   $bukti_ijazah ="";
-              } else {
-                  echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
-              }
+                } else {
+                    echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
+                }
             }
         }
     }
