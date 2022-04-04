@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 10:28 AM
+-- Generation Time: Apr 04, 2022 at 03:16 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -44,6 +44,18 @@ CREATE TABLE `kategori` (
   `KATEGORI_ID` int(11) NOT NULL,
   `NAMA_KATEGORI` varchar(50) DEFAULT NULL,
   `ICON_KATEGORI` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `like_webinar`
+--
+
+CREATE TABLE `like_webinar` (
+  `ID_LIKE` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL,
+  `WEBINAR_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -96,8 +108,16 @@ CREATE TABLE `webinar` (
   `WAKTU_WEBINAR` datetime DEFAULT NULL,
   `MAKS_KAPASITAS` int(3) DEFAULT NULL,
   `LINK_MEETING` text DEFAULT NULL,
-  `COVER_WEBINAR` varchar(200) DEFAULT NULL
+  `COVER_WEBINAR` varchar(200) DEFAULT NULL,
+  `LOOKED` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `webinar`
+--
+
+INSERT INTO `webinar` (`WEBINAR_ID`, `USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBINAR`, `WAKTU_WEBINAR`, `MAKS_KAPASITAS`, `LINK_MEETING`, `COVER_WEBINAR`, `LOOKED`) VALUES
+(1, 1, 'The Courage To Be Disliked', 'Bedah buku \"The Courage To Be Disliked\" bersama penulisnya.', '2022-04-04 19:35:43', 100, 'https://zoom.us', 'media\\webinar_cover\\tctbd.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -137,6 +157,12 @@ ALTER TABLE `acc_webinar`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`KATEGORI_ID`);
+
+--
+-- Indexes for table `like_webinar`
+--
+ALTER TABLE `like_webinar`
+  ADD PRIMARY KEY (`ID_LIKE`);
 
 --
 -- Indexes for table `user`
@@ -182,6 +208,12 @@ ALTER TABLE `kategori`
   MODIFY `KATEGORI_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `like_webinar`
+--
+ALTER TABLE `like_webinar`
+  MODIFY `ID_LIKE` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -191,7 +223,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `webinar`
 --
 ALTER TABLE `webinar`
-  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
