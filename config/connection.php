@@ -1,8 +1,9 @@
 <?php 
-    $host = 'localhost';
+    $namaHost = 'localhost';
     $username = 'root';
     $password = '';
     $database = 'webinar_collection';
 
-    $connect = mysqli_connect($host, $username, $password, $database);
+    $connect = mysqli_connect($namaHost, $username, $password, $database);
+
 ?>
