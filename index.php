@@ -16,9 +16,10 @@
 
     <link href="styles/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="styles/assets/css/elements/alert.css">
 
     <?php
-        $page = $_GET['page'];
+    $page = $_GET['page'];
     ?>
 
 
@@ -56,8 +57,8 @@
                             </li>
                         </ul>
                         <ul class="list-unstyled menu-categories" id="topAccordion">
-                            <li class="menu single-menu <?php echo isset($_GET['page']) ? '' : 'active'?> ">
-                                <a href="index.php"  class="dropdown-toggle autodroprown">
+                            <li class="menu single-menu <?php echo isset($_GET['page']) ? '' : 'active' ?> ">
+                                <a href="index.php" class="dropdown-toggle autodroprown">
                                     <div class="">
                                         <span>Dashboard</span>
                                     </div>
@@ -66,7 +67,7 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="menu single-menu <?php echo $page === 'kategori' ? 'active' : ''?> ">
+                            <li class="menu single-menu <?php echo $page === 'kategori' ? 'active' : '' ?> ">
                                 <a href="index.php?page=kategori" class="dropdown-toggle">
                                     <div class="">
                                         <span>Kategori</span>
@@ -227,7 +228,7 @@
                         include './pages/home.php';
                         break;
                 }
-            }else{
+            } else {
                 include './pages/home.php';
             }
             ?>
