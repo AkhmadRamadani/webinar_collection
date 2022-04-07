@@ -8,21 +8,21 @@ $fetcheddata = mysqli_query($connect, $query);
 ?>
 <div class="layout-px-spacing">
 
-    <div class="page-header">
-        <div class="page-title">
-            <h3>Trending Webinar</h3>
-        </div>
-
-        <div class="bg-secondary rounded-circle p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        </div>
-
-    </div>
-
     <section class="section">
+        <div class="page-header px-4">
+            <div class="page-title">
+                <h3>Trending Webinar</h3>
+            </div>
+
+            <div class="bg-primary rounded-circle p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </div>
+
+        </div>
+
         <div class="container-fluid">
             <div class="port portfolio-masonry mt-4">
 
@@ -44,7 +44,7 @@ $fetcheddata = mysqli_query($connect, $query);
                                         <div class="meta-info">
                                             <div class="meta-user">
                                                 <div class="avatar avatar-sm">
-                                                    <span class="avatar-title rounded-circle">AR</span>
+                                                    <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data['NAMA']), 0, 2); ?></span>
                                                 </div>
                                                 <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                             </div>

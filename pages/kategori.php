@@ -120,7 +120,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                             <div class="meta-info">
                                                 <div class="meta-user">
                                                     <div class="avatar avatar-sm">
-                                                        <span class="avatar-title rounded-circle">AR</span>
+                                                        <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data['NAMA']), 0, 2); ?></span>
                                                     </div>
                                                     <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                                 </div>
