@@ -47,12 +47,12 @@ include "config/connection.php";
                             <div class="form">
 
                                 <div id="username-field" class="field-wrapper input">
-                                    <label for="NAMA">USERNAME</label>
+                                    <label for="NAMA">EMAIL</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input type="text" name="NAMA" class="form_login" placeholder="Isi username anda ..">
+                                    <input type="text" name="NAMA" class="form_login" placeholder="Isi email anda ..">
                                 </div>
 
                                 <div id="password-field" class="field-wrapper input mb-2">
@@ -111,7 +111,7 @@ include "config/connection.php";
         $password = md5($_POST["PASSWORD"]);
         //lakukan pengecekan akun di table user
         $ambil = $connect->query("SELECT*FROM user
-                    where NAMA='$username' AND PASSWORD='$password'");
+                    where EMAIL='$username' AND PASSWORD='$password'");
 
         //menghitung akun yg terpanggil
         $akunyangcocok = $ambil->num_rows;
@@ -128,7 +128,7 @@ include "config/connection.php";
         } else {
             //anda gagal login
             echo "<script>alert('Anda gagal login, periksa username atau password anda'); </script>";
-            echo "<script>location='loginAdmin.php';</script>";
+            echo "<script>location='loginPage.php';</script>";
         }
     }
     ?>
