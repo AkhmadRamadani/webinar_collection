@@ -41,7 +41,7 @@
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
             </a>
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="/"><img alt="logo" src="styles/assets/img/90x90.jpg"> <span class="navbar-brand-name">WEBION</span></a>
+                <a class="navbar-brand" href="index.php"><img alt="logo" src="styles/assets/img/90x90.jpg"> <span class="navbar-brand-name">WEBION</span></a>
             </div>
             <ul class="navbar-item topbar-navigation">
                 <!-- START TOPBAR -->
@@ -134,7 +134,7 @@
                                         <a href="#"> Register </a>
                                     </li>
                                     <li>
-                                        <a href="#"> Login </a>
+                                        <a href="loginPage.php"> Login </a>
                                     </li>
                                 </ul>
                             </li>

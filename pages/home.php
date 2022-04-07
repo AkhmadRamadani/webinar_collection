@@ -2,7 +2,9 @@
 include './config/connection.php';
 $query = "SELECT w.*, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT 
 FROM webinar w JOIN user u ON w.USER_ID = u.USER_ID 
-LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID ORDER BY w.LOOKED DESC;";
+LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
+GROUP BY w.WEBINAR_ID
+ORDER BY w.LOOKED DESC;";
 $fetcheddata = mysqli_query($connect, $query);
 
 ?>
@@ -34,7 +36,7 @@ $fetcheddata = mysqli_query($connect, $query);
                         <div class="col-lg-4 p-4 ">
                             <div class="item-box">
                                 <div class="card component-card_9">
-                                    <img src="<?php echo $data['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $data['COVER_WEBINAR']; ?>" class="card-img-top img-thumbnail" alt="widget-card-2">
+                                    <img src="<?php echo $data['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $data['COVER_WEBINAR']; ?>" class="card-img-top img-thumbnail" style="max-width: 100%; and height: 200px;" alt="widget-card-2">
                                     <div class="card-body">
                                         <p class="meta-date"><?php echo date("l, F jS, Y, g:i a", strtotime($data['WAKTU_WEBINAR'])) ?></p>
 
