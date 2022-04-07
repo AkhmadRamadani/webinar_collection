@@ -16,9 +16,11 @@
 
     <link href="styles/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="styles/assets/css/elements/alert.css">
 
     <?php
-        $page = $_GET['page'];
+    session_start();
+    $page = $_GET['page'];
     ?>
 
 
@@ -56,8 +58,8 @@
                             </li>
                         </ul>
                         <ul class="list-unstyled menu-categories" id="topAccordion">
-                            <li class="menu single-menu <?php echo isset($_GET['page']) ? '' : 'active'?> ">
-                                <a href="index.php"  class="dropdown-toggle autodroprown">
+                            <li class="menu single-menu <?php echo isset($_GET['page']) ? '' : 'active' ?> ">
+                                <a href="index.php" class="dropdown-toggle autodroprown">
                                     <div class="">
                                         <span>Dashboard</span>
                                     </div>
@@ -66,26 +68,51 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="menu single-menu <?php echo $page === 'kategori' ? 'active' : ''?> ">
+                            <li class="menu single-menu <?php echo $page === 'kategori' ? 'active' : '' ?> ">
                                 <a href="index.php?page=kategori" class="dropdown-toggle">
                                     <div class="">
-                                        <span>Kategori</span>
+                                        <span>Category</span>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
                                         <polyline points="6 9 12 15 18 9"></polyline>
                                     </svg>
                                 </a>
                             </li>
-                            <li class="menu single-menu">
-                                <a href="#" class="dropdown-toggle">
-                                    <div class="">
-                                        <span>My Events</span>
-                                    </div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
-                                </a>
-                            </li>
+                            <?php
+                            if (isset($_SESSION["user"])) {
+
+                                $akun = $_SESSION["user"];
+                                if ($akun['ROLE'] == 1) {
+                            ?>
+                                    <li class="menu single-menu <?php echo $page === 'eventku' ? 'active' : '' ?> ">
+                                        <a href="index.php?page=eventku" class="dropdown-toggle">
+                                            <div class="">
+                                                <span>My Events</span>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                                <polyline points="6 9 12 15 18 9"></polyline>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                <?php
+                                } else if ($akun['ROLE'] == 2) {
+                                ?>
+                                    <li class="menu single-menu <?php echo $page === 'eventku' ? 'active' : '' ?> ">
+                                        <a href="index.php?page=eventku" class="dropdown-toggle">
+                                            <div class="">
+                                                <span>My Webinars</span>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                                <polyline points="6 9 12 15 18 9"></polyline>
+                                            </svg>
+                                        </a>
+                                    </li>
+                            <?php
+                                }
+                            }
+
+                            ?>
+
                             <li class="menu single-menu menu-extras">
                                 <a href="#more" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                     <div class="">
@@ -123,82 +150,89 @@
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
-                    <form class="form-inline search-full form-inline search" role="search">
+                    <form class="form-inline search-full form-inline search" role="search" method="post" action="index.php?page=cari">
                         <div class="search-bar">
-                            <input type="text" class="form-control search-form-control  ml-lg-auto" placeholder="Search...">
+                            <input type="text" id="keyword" name="keyword" class="form-control search-form-control  ml-lg-auto" placeholder="Search...">
                         </div>
                     </form>
                 </li>
             </ul>
             <!-- Search -->
-            <!-- Notification -->
-            <ul class="navbar-item flex-row nav-dropdowns">
-                <li class="nav-item dropdown notification-dropdown">
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
-                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                        </svg>
-                        <!-- Green Alert -->
-                        <!-- <span class="badge badge-success"></span> -->
-                    </a>
-                    <div class="dropdown-menu position-absolute" aria-labelledby="notificationDropdown">
-                        <div class="notification-scroll">
-                            <div class="dropdown-item">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <div class="data-info">
-                                            <h6 class="">You don't have notification</h6>
-                                            <p class="">...</p>
-                                        </div>
-                                        <!-- x -->
-                                        <div class="icon-status">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                                            </svg>
-                                        </div>
-                                        <!-- v -->
-                                        <!-- 
+            <?php
+            if (isset($_SESSION["user"])) {
+            ?>
+
+                <!-- Notification -->
+                <ul class="navbar-item flex-row nav-dropdowns">
+                    <li class="nav-item dropdown notification-dropdown">
+                        <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <!-- Green Alert -->
+                            <!-- <span class="badge badge-success"></span> -->
+                        </a>
+                        <div class="dropdown-menu position-absolute" aria-labelledby="notificationDropdown">
+                            <div class="notification-scroll">
+                                <div class="dropdown-item">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <div class="data-info">
+                                                <h6 class="">You don't have notification</h6>
+                                                <p class="">...</p>
+                                            </div>
+                                            <!-- x -->
+                                            <div class="icon-status">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                </svg>
+                                            </div>
+                                            <!-- v -->
+                                            <!-- 
                                         <div class="icon-status">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
                                                 <polyline points="20 6 9 17 4 12"></polyline>
                                             </svg>
                                         </div> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <!-- Start Profile -->
-                <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="media">
-                            <img src="styles/assets/img/90x90.jpg" class="img-fluid" alt="admin-profile">
-                        </div>
-                    </a>
-                    <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                        <div class="user-profile-section">
-                            <div class="media mx-auto">
-                                <div class="media-body">
-                                    <h5>Username</h5>
-                                    <p>user</p>
+                    </li>
+                    <!-- Start Profile -->
+                    <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
+                        <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="media">
+                                <img src="styles/assets/img/90x90.jpg" class="img-fluid" alt="admin-profile">
+                            </div>
+                        </a>
+                        <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                            <div class="user-profile-section">
+                                <div class="media mx-auto">
+                                    <div class="media-body">
+                                        <h5>Username</h5>
+                                        <p>user</p>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="dropdown-item">
+                                <a href="user_profile.html">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg> <span>Profile</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="dropdown-item">
-                            <a href="user_profile.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg> <span>Profile</span>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <!-- End Profile -->
-            </ul>
+                    </li>
+                    <!-- End Profile -->
+                </ul>
+            <?php
+            }
+            ?>
         </header>
     </div>
     <!--  END NAVBAR  -->
@@ -223,11 +257,19 @@
                     case 'kategori':
                         include './pages/kategori.php';
                         break;
+
+                    case 'eventku':
+                        include './pages/my_event_page.php';
+                        break;
+
+                    case 'cari':
+                        include './pages/search.php';
+                        break;
                     default:
                         include './pages/home.php';
                         break;
                 }
-            }else{
+            } else {
                 include './pages/home.php';
             }
             ?>

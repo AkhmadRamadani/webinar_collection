@@ -1,29 +1,31 @@
 <?php
 include './config/connection.php';
+$keyword = $_POST['keyword'];
 $query = "SELECT w.*, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT 
 FROM webinar w JOIN user u ON w.USER_ID = u.USER_ID 
-LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID ORDER BY w.LOOKED DESC;";
+LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID
+HAVING (w.JUDUL_WEBINAR LIKE '%$keyword%' OR w.DESKRIPSI_WEBINAR LIKE '%$keyword%') 
+ORDER BY w.LOOKED DESC;";
+
 $fetcheddata = mysqli_query($connect, $query);
 
 ?>
 <div class="layout-px-spacing">
 
     <section class="section">
-        <div class="page-header px-4">
-            <div class="page-title">
-                <h3>Trending Webinar</h3>
-            </div>
-
-            <div class="bg-primary rounded-circle p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-            </div>
-
-        </div>
-
         <div class="container-fluid">
+            <?php
+            $jumlahdata = mysqli_num_rows($fetcheddata);
+            if ($jumlahdata <= 0) {
+            ?>
+
+                <div class="alert alert-primary mb-4" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg> ... </svg></button>
+                    <strong>Maaf!</strong> Pencarian Webinar Anda terkait "<?php echo "$keyword" ?>" belum ada
+                </div>
+            <?php
+            }
+            ?>
             <div class="port portfolio-masonry mt-4">
 
                 <div class="portfolioContainer row photo">
