@@ -21,7 +21,7 @@ $fetcheddata = mysqli_query($connect, $query);
 
                 <div class="alert alert-primary mb-4" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg> ... </svg></button>
-                    <strong>Maaf!</strong> Webinar pada kategori tersebut belum ada
+                    <strong>Maaf!</strong> Pencarian Webinar Anda terkait "<?php echo "$keyword" ?>" belum ada
                 </div>
             <?php
             }
