@@ -101,7 +101,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
             </div>
         </div>
         <section class="section">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="port portfolio-masonry">
                     <div class="portfolioContainer row photo">
                         <?php
