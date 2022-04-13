@@ -16,7 +16,7 @@
         </tr>
             <?php
             //memanggil file koneksi
-            include "koneksi.php";
+            include "config/conection.php";
             //query mengambil data dari tabel gambar di database
             $tampil = mysqli_query($mysqli,"select * from gambar");
             $sql = mysqli_num_rows($tampil);

@@ -69,8 +69,8 @@ if (isset($_SESSION['USER_ID'])) {
                     <div class="form-container">
                         <div class="form-content">
 
-                            <h1 class="">Create Webinar</h1>
-                            <form action="create_proses.php" method="POST" class="text-left">
+                            <h1 class="">Update Webinar</h1>
+                            <form action="mentorcreate.php" method="POST" class="text-left">
                                 <div class="form">
                                     <div id="userid-field" class="field-wrapper input">
                                         <label for="userid">ID</label>
@@ -117,14 +117,8 @@ if (isset($_SESSION['USER_ID'])) {
                                         </form>
                                     </div>
                                 </div>
-                                <div class="d-sm-flex justify-content-between">
-                                    <div class="field-wrapper">
-                                    <button class="btn btn-primary" name="submit">Get Started!</button>
-                                    </div>
-                                </div>
-                                <td><a href='mentorupdate.php?user_id=$row[user_id]'>Edit</a>
-                                    <a href='delete.php?user_id=$row[user_id]'>Delete</a>
-                                </td>
+                                <tr><td colspan="2"><button type="submit" value="simpan">SIMPAN PERUBAHAN</button>
+                                <a href="mentorcreate.php">Kembali</a></td></tr>
                             </form>
                         </div>
                     </div>

@@ -6,7 +6,7 @@
     $tipe_file = $_FILES['gambar']['type'];
     $tmp_file = $_FILES['gambar']['tmp_name'];
 
-    $path = "images/".$nama_file;
+    $path = "images/".$foto_profile;
 
     if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){ 
         if($ukuran_file <= 1000000){ 
@@ -23,20 +23,20 @@
                     //jika gagal insert data ke database maka akan memunculkan pesan seperti di bawah ini
                     echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
                     //link menuju halaman insert gambar
-                    echo "<br><a href='regismentor.php'>Kembali Ke Form</a>";
+                    echo "<br><a href='registermentor.php'>Kembali Ke Form</a>";
                 }
             }else{
                 echo "Maaf, Gambar gagal untuk diupload.";
-                echo "<br><a href='regismentor.php'>Kembali Ke Form</a>";
+                echo "<br><a href='registermentor.php'>Kembali Ke Form</a>";
             }
         }else{
         //jika ukuran gambar lebih besar dari 1MB maka akan memunculkan pesan seperti di bawah ini
         echo "Maaf, Ukuran gambar yang diupload tidak boleh lebih dari 1MB";
-        echo "<br><a href='regismentor.php'>Kembali Ke Form</a>";
+        echo "<br><a href='registermentor.php'>Kembali Ke Form</a>";
         }
         }else{
         //jika tipe gambar yang diupload bukan jpg atau png maka akan memunculkan pesan seperti di bawah ini
         echo "Maaf, Tipe gambar yang diupload harus JPG / JPEG / PNG.";
-        echo "<br><a href='regismentor.php'>Kembali Ke Form</a>";
+        echo "<br><a href='registermentor.php'>Kembali Ke Form</a>";
     }
 ?>
