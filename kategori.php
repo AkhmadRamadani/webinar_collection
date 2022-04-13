@@ -100,13 +100,13 @@
                                 </a>
                                 <ul class="collapse submenu list-unstyled animated fadeInUp" id="more" data-parent="#topAccordion">
                                     <li>
-                                        <a href="#"> Ajukan Mentor </a>
+                                        <a href="registermentor.php"> Ajukan Mentor </a>
                                     </li>
                                     <li>
-                                        <a href="#"> Register </a>
+                                        <a href="registrasi.php"> Register </a>
                                     </li>
                                     <li>
-                                        <a href="#"> Login </a>
+                                        <a href="loginPage.php"> Login </a>
                                     </li>
                                 </ul>
                             </li>
