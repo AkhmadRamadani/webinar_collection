@@ -18,6 +18,7 @@
     <link href="styles/assets/css/components/custom-carousel.css" rel="stylesheet" type="text/css">
     <link href="styles/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css">
+    <link href="styles/plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="styles/assets/css/elements/alert.css">
 
     <?php
@@ -328,6 +329,7 @@
     <script src="styles/assets/js/custom.js"></script>
     <script src="styles/plugins/highlight/highlight.pack.js"></script>
     <script src="styles/assets/js/scrollspyNav.js"></script>
+    <script src="styles/plugins/file-upload/file-upload-with-preview.min.js"></script>
 </body>
 
 </html>

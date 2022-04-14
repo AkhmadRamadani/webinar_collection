@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2022 at 09:58 AM
+-- Generation Time: Apr 14, 2022 at 06:46 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -28,11 +28,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `acc_webinar` (
-  `USER_ID` int(255) NOT NULL,
+  `ACC_WEBINAR_ID` int(11) NOT NULL,
+  `USER_ID` int(255) DEFAULT NULL,
   `WEBINAR_ID` int(255) NOT NULL,
   `PESAN` text DEFAULT NULL,
   `STATUS_PROPOSAL` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `acc_webinar`
+--
+
+INSERT INTO `acc_webinar` (`ACC_WEBINAR_ID`, `USER_ID`, `WEBINAR_ID`, `PESAN`, `STATUS_PROPOSAL`) VALUES
+(2, 5, 1, NULL, 1),
+(3, 5, 2, NULL, 0),
+(4, NULL, 4, NULL, 0),
+(5, NULL, 5, NULL, 0),
+(6, NULL, 6, NULL, 0),
+(7, NULL, 7, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -76,6 +89,16 @@ CREATE TABLE `like_webinar` (
   `USER_ID` int(11) NOT NULL,
   `WEBINAR_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `like_webinar`
+--
+
+INSERT INTO `like_webinar` (`ID_LIKE`, `USER_ID`, `WEBINAR_ID`) VALUES
+(1, 1, 2),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -140,8 +163,12 @@ CREATE TABLE `webinar` (
 --
 
 INSERT INTO `webinar` (`WEBINAR_ID`, `USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBINAR`, `WAKTU_WEBINAR`, `MAKS_KAPASITAS`, `LINK_MEETING`, `COVER_WEBINAR`, `LOOKED`) VALUES
-(1, 1, 'The Courage To Be Disliked', 'Bedah buku \"The Courage To Be Disliked\" bersama penulisnya.', '2022-04-30 19:35:43', 100, 'https://zoom.us', 'media\\webinar_cover\\gunung2.png', 1),
-(2, 1, 'Photoshop Dasar 1', 'Belajar Photoshop Dasar dengan materi sebagai berikut: \r\n1. \r\n2. \r\n3. \r\n4. \r\n5. ', '2022-04-29 15:30:54', 80, 'https://meet.google.com', 'media\\webinar_cover\\tctbd.jpg', 2);
+(1, 5, 'The Courage To Be Disliked', 'Bedah buku \"The Courage To Be Disliked\" bersama penulisnya.', '2022-04-30 19:35:43', 100, 'https://zoom.us', 'media\\webinar_cover\\gunung2.png', 1),
+(2, 5, 'Photoshop Dasar 1', 'Belajar Photoshop Dasar dengan materi sebagai berikut: \r\n1. \r\n2. \r\n3. \r\n4. \r\n5. ', '2022-04-29 15:30:54', 80, 'https://meet.google.com', 'media\\webinar_cover\\tctbd.jpg', 2),
+(4, 5, 'Test From App', 'aaafifkasjokjfaklsj', '2222-01-01 12:04:00', 242, 'https://facebook.com', 'media/webinar_cover/download.jpg', 0),
+(5, 5, 'test', 'asf', '2022-04-30 23:40:00', 413, 'https://facebook.com', 'media/webinar_cover/0.43616300 1649954471', 0),
+(6, 5, 'fsfsafgwqewe', 'safwqfsafa', '2022-04-23 23:43:00', 241, 'https://facebook.com', 'media/webinar_cover/33e9a288809ebc00b04fa199161063cejpg', 0),
+(7, 5, 'test ', 'asfg', '2022-04-30 23:45:00', 421, 'https://facebook.com', 'media/webinar_cover/53ee920ad930934ffacbe0990fa10828.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -178,7 +205,9 @@ CREATE TABLE `webinar_regist` (
 
 INSERT INTO `webinar_regist` (`USER_ID`, `WEBINAR_ID`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(2, 1),
+(3, 1);
 
 --
 -- Indexes for dumped tables
@@ -188,7 +217,7 @@ INSERT INTO `webinar_regist` (`USER_ID`, `WEBINAR_ID`) VALUES
 -- Indexes for table `acc_webinar`
 --
 ALTER TABLE `acc_webinar`
-  ADD PRIMARY KEY (`USER_ID`,`WEBINAR_ID`),
+  ADD PRIMARY KEY (`ACC_WEBINAR_ID`),
   ADD KEY `FK_ACC_WEBINAR2` (`WEBINAR_ID`);
 
 --
@@ -241,6 +270,12 @@ ALTER TABLE `webinar_regist`
 --
 
 --
+-- AUTO_INCREMENT for table `acc_webinar`
+--
+ALTER TABLE `acc_webinar`
+  MODIFY `ACC_WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
@@ -250,7 +285,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `like_webinar`
 --
 ALTER TABLE `like_webinar`
-  MODIFY `ID_LIKE` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_LIKE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -262,7 +297,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `webinar`
 --
 ALTER TABLE `webinar`
-  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

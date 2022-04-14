@@ -47,8 +47,8 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
                                 <div class="container-fluid" style="height: 360px; z-index: 2; position: absolute; background-color: rgba(0,0,0,0.5);">
 
                                 </div>
-                                <img class="d-block w-100 slide-image" style="height: 360px; object-fit: cover;" src="<?php echo $data_latest["COVER_WEBINAR"] ?>" alt="">
-                                <a href="?page=detail&id=<?php echo $data_latest['WEBINAR_ID'] ?>">
+                                <img class="d-block w-100 slide-image" style="height: 360px; object-fit: cover;" src="<?php echo $data_latest["COVER_WEBINAR"]; ?>" alt="">
+                                <a href="?page=detail&id=<?php echo $data_latest['WEBINAR_ID']; ?>">
 
                                     <div class="carousel-caption">
                                         <span class="badge"><?php echo $data_latest["NAMA_KATEGORI"] ?></span>

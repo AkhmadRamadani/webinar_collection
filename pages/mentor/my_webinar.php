@@ -1,77 +1,170 @@
 <?php
 include './config/connection.php';
-$query = "SELECT w.*, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT 
-FROM webinar w JOIN user u ON w.USER_ID = u.USER_ID 
+
+$akun = $_SESSION['user'];
+$id_user = $akun['USER_ID'];
+
+$query = "SELECT t1.*, t2.PARTICIPANTS_COUNT FROM
+(
+SELECT w.*, u.NAMA, u.EMAIL, 
+COUNT(l.ID_LIKE) LIKE_COUNT, ac.PESAN, ac.STATUS_PROPOSAL
+FROM webinar w 
+JOIN user u ON w.USER_ID = u.USER_ID 
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
-GROUP BY w.WEBINAR_ID
-ORDER BY w.LOOKED DESC;";
+JOIN acc_webinar ac ON ac.WEBINAR_ID = w.WEBINAR_ID 
+GROUP BY w.WEBINAR_ID 
+ORDER BY w.WEBINAR_ID DESC
+) as t1, 
+(
+SELECT w.WEBINAR_ID,
+COUNT(wr.WEBINAR_ID) PARTICIPANTS_COUNT 
+FROM webinar w 
+JOIN user u ON w.USER_ID = u.USER_ID 
+JOIN acc_webinar ac ON ac.WEBINAR_ID = w.WEBINAR_ID 
+LEFT JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID 
+GROUP BY w.WEBINAR_ID 
+ORDER BY w.WEBINAR_ID DESC) as t2
+WHERE t1.WEBINAR_ID = t2.WEBINAR_ID AND t1.USER_ID = $id_user";
+
 
 $currentdate = date("Y-m-d");
 $fetcheddata = mysqli_query($connect, $query);
 
 ?>
 <div class="layout-px-spacing">
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Webinar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group mb-4">
+                            <label class="control-label">Title:</label>
+                            <input type="text" name="title" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Description:</label>
+                            <textarea style="height: 150px;" name="description" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Time Start:</label>
+                            <input type="datetime-local" name="time_start" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Maximal Capacities:</label>
+                            <input type="number" name="max_caps" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Meeting Link:</label>
+                            <input type="text" name="meeting_link" value="https://" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Cover:</label>
+
+                            <div class="input-group mb-3">
+
+                                <div class="custom-file">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+
+                                    <input type="file" class="form-control" name="image_cover">
+
+                                    <!-- <input type="file" class="custom-file-input" name="cover_image">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save" name="kirim">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
+        <div class="container-fluid row d-flex justify-content-between">
+            <div class="p-2 mb-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Add
+                </button>
+            </div>
+            <form action="" method="post">
+                <div class="row">
+                    <div>
+                        <input type="text" class="form-control" placeholder="Kata kunci...">
+                    </div>
+                    <div class="p-2 mb-3">
+                        <input type="submit" id="btn-add" class="btn btn-dark" value="Cari" />
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+
         <div class="table-responsive">
             <table class="table table-bordered table-hover mb-4">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Sale</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Webinar Date</th>
+                        <th class="text-center">Capacities</th>
+                        <th class="text-center">Participants</th>
+                        <th class="text-center">Likes</th>
                         <th class="text-center">Status</th>
-                        <th></th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Shaun Park</td>
-                        <td>10/08/2020</td>
-                        <td>320</td>
-                        <td class="text-center"><span class="text-success">Complete</span></td>
-                        <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 icon">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                            </svg></td>
-                    </tr>
-                    <tr>
-                        <td> Alma Clarke</td>
-                        <td>11/08/2020</td>
-                        <td>420</td>
-                        <td class="text-center"><span class="text-secondary">Pending</span></td>
-                        <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 icon">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                            </svg></td>
-                    </tr>
-                    <tr>
-                        <td>Xavier</td>
-                        <td>12/08/2020</td>
-                        <td>130</td>
-                        <td class="text-center"><span class="text-info">In progress</span></td>
-                        <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 icon">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                            </svg></td>
-                    </tr>
-                    <tr>
-                        <td>Vincent Carpenter</td>
-                        <td>13/08/2020</td>
-                        <td>260</td>
-                        <td class="text-center"><span class="text-danger">Canceled</span></td>
-                        <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 icon">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                            </svg></td>
-                    </tr>
+                    <?php
+                    while ($data = mysqli_fetch_array($fetcheddata)) {
+                    ?>
+                        <tr>
+                            <td><?php echo $data['JUDUL_WEBINAR'] ?></td>
+                            <td><?php echo $data['WAKTU_WEBINAR'] ?></td>
+                            <td><?php echo $data['MAKS_KAPASITAS'] ?></td>
+                            <td><?php echo $data['PARTICIPANTS_COUNT'] ?></td>
+                            <td><?php echo $data['LIKE_COUNT'] ?></td>
+                            <td class="text-center">
+                                <?php
+                                if ($data['STATUS_PROPOSAL'] == 0) {
+                                ?>
+
+                                    <span class="text-secondary">WAITING
+                                    </span>
+                                <?php
+                                } else if ($data['STATUS_PROPOSAL'] == 1) {
+                                ?>
+
+                                    <span class="text-success">ACCEPTED
+                                    </span>
+                                <?php
+                                } else if ($data['STATUS_PROPOSAL'] == 2) { ?>
+
+                                    <span class="text-danger">REJECTED
+                                    </span>
+                                <?php
+                                }
+                                ?>
+                            </td>
+                            <td class="text-center">
+                                <a href="" class="btn btn-danger">Delete</a>
+                                <a href="" class="btn btn-secondary">Update</a>
+                                <a href="" class="btn btn-success">Detail</a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+
                 </tbody>
             </table>
         </div>
@@ -83,3 +176,58 @@ $fetcheddata = mysqli_query($connect, $query);
     </div>
 
 </div>
+<?php
+@$title = $_POST['title'];
+@$description = $_POST['description'];
+@$time_start = $_POST['time_start'];
+@$max_caps = $_POST['max_caps'];
+@$meeting_link = $_POST['meeting_link'];
+
+$dir = 'media/webinar_cover/';
+@$nama_file = $_FILES['image_cover']['name'];
+@$nama_tmp = $_FILES['image_cover']['tmp_name'];
+@$tipe = pathinfo($nama_file, PATHINFO_EXTENSION);
+$upload_file = $dir . md5(microtime()) .".". $tipe;
+$upload = move_uploaded_file($nama_tmp, $upload_file);
+
+@$kirim = $_POST['kirim'];
+$query = "INSERT INTO `webinar`(`USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBINAR`, `WAKTU_WEBINAR`, `MAKS_KAPASITAS`, `LINK_MEETING`, `COVER_WEBINAR`, `LOOKED`) VALUES ('$id_user','$title','$description','$time_start','$max_caps','$meeting_link','$upload_file','0')";
+if ($kirim) {
+    if ($upload) {
+        $hasil = mysqli_query($connect, $query);
+        if ($hasil) {
+
+            $last_id = mysqli_insert_id($connect);
+            $query_insert_acc_webinar = "INSERT INTO `acc_webinar`(`WEBINAR_ID`, `STATUS_PROPOSAL`) VALUES ('$last_id','0')";
+            $add_acc_webinar = mysqli_query($connect, $query_insert_acc_webinar);
+            if ($add_acc_webinar) {
+                echo "<script>location='index.php?page=webinarku';</script>";
+            } else {
+                echo "3";
+                // echo "<script>alert('Gagal menambahkan data'); </script>";
+                echo $query_insert_acc_webinar;
+                // echo "<script>location='index.php?page=webinarku';</script>";
+            }
+        } else {
+            echo "2";
+            echo $query;
+            // echo "<script>alert('Gagal menambahkan data'); </script>";
+            // echo "<script>location='index.php?page=webinarku';</script>";
+        }
+    } else {
+
+        echo "</p>";
+        echo '<pre>';
+        echo 'Here is some more debugging info:';
+        print_r($_FILES['']);
+        print "</pre>";
+        echo "1";
+        echo $upload;
+        echo $query;
+        // echo "<script>alert('Gagal menambahkan data'); </script>";
+        // echo "<script>location='index.php?page=webinarku';</script>";
+    }
+}
+
+
+?>
