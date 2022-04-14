@@ -109,14 +109,13 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                         <?php
                         while ($data = mysqli_fetch_array($fetcheddata)) {
                         ?>
-                            <div class="col-lg-4 p-4 ">
+                            <div class="col-lg-4 p-4 " >
                                 <div class="item-box">
                                     <div class="card component-card_9">
                                         <img src="<?php echo $data['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $data['COVER_WEBINAR']; ?>" class="card-img-top img-thumbnail" alt="widget-card-2">
                                         <div class="card-body">
                                             <p class="meta-date"><?php echo date("l, F jS, Y, g:i a", strtotime($data['WAKTU_WEBINAR'])) ?></p>
-
-                                            <h5 class="card-title"><?php echo $data['JUDUL_WEBINAR']; ?></h5>
+                                            <a href="webinar.php?WEBINAR_ID=<?=$data['WEBINAR_ID']?>"><h5 class="card-title"><?php echo $data['JUDUL_WEBINAR']; ?></h5></a>
                                             <p class="card-text"><?php echo $data['DESKRIPSI_WEBINAR']; ?></p>
 
                                             <div class="meta-info">
