@@ -18,6 +18,13 @@ include "config/connection.php";
     <link href="styles/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/authentication/form-2.css" rel="stylesheet" type="text/css" />
+
+    <link href="styles/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="styles/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+    <script src="styles/plugins/sweetalerts/promise-polyfill.js"></script>
+    <link href="styles/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="styles/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="styles/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <link rel="stylesheet" type="text/css" href="styles/assets/css/forms/theme-checkbox-radio.css">
     <link rel="stylesheet" type="text/css" href="styles/assets/css/forms/switches.css">
@@ -42,7 +49,7 @@ include "config/connection.php";
                     <div class="form-content">
 
                         <h1 class="">Register</h1>
-                        <p class="signup-link register">Already have an account? <a href="loginPage.php">Log in</a></p>
+                        <p class="signup-link register">Already have an account? <a href="login.php">Log in</a></p>
 
                         <!-- Start Form Registrasi -->
                         <form class="text-left" method="POST">
@@ -120,20 +127,27 @@ include "config/connection.php";
     <?php
 
     if (isset($_POST['create'])) {
+
         $username = $_POST['name'];
         $email = $_POST['email'];
         $password = md5($_POST['password']);
-        $sql = "INSERT INTO user (NAMA, EMAIL, PASSWORD) VALUES ('$username', '$email', '$password')";
-        $result = mysqli_query($connect, $sql);
+        $sql_checkuser = "SELECT * FROM user WHERE EMAIL = '$email'";
+        if (mysqli_num_rows(mysqli_query($connect, $sql_checkuser)) >= 1) {
 
-        if ($result) {
-            echo "<script>alert('Registrasi Akun anda berhasil!'); </script>";
-            $username = "";
-            $email = "";
-            $_POST['password'] = "";
-            echo "<script>location='loginPage.php';</script>";
+            echo "<script>alert('Email telah digunakan oleh user lain');</script>";
         } else {
-            echo "<script>alert('Woops! Something Wrong Went.')</script>";
+
+            $sql = "INSERT INTO user (NAMA, EMAIL, PASSWORD) VALUES ('$username', '$email', '$password')";
+            $result = mysqli_query($connect, $sql);
+            if ($result) {
+                echo "<script>alert('Registrasi Akun anda berhasil!'); </script>";
+                $username = "";
+                $email = "";
+                $_POST['password'] = "";
+                echo "<script>location='login.php';</script>";
+            } else {
+                echo "<script>alert('Woops! Ada yang salah.')</script>";
+            }
         }
     }
 
