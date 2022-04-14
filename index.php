@@ -15,7 +15,9 @@
     <link href="styles/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
 
     <link href="styles/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="styles/assets/css/components/custom-carousel.css" rel="stylesheet" type="text/css">
     <link href="styles/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+    <link href="styles/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="styles/assets/css/elements/alert.css">
 
     <?php
@@ -80,25 +82,23 @@
                             </li>
                             <?php
                             if (isset($_SESSION["user"])) {
-
-                                $akun = $_SESSION["user"];
-                                if ($akun['ROLE'] == 1) {
                             ?>
-                                    <li class="menu single-menu <?php echo $page === 'eventku' ? 'active' : '' ?> ">
-                                        <a href="index.php?page=eventku" class="dropdown-toggle">
-                                            <div class="">
-                                                <span>My Events</span>
-                                            </div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
-                                                <polyline points="6 9 12 15 18 9"></polyline>
-                                            </svg>
-                                        </a>
-                                    </li>
+                                <li class="menu single-menu <?php echo $page === 'eventku' ? 'active' : '' ?> ">
+                                    <a href="index.php?page=eventku" class="dropdown-toggle">
+                                        <div class="">
+                                            <span>My Events</span>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </a>
+                                </li>
                                 <?php
-                                } else if ($akun['ROLE'] == 2) {
+                                $akun = $_SESSION["user"];
+                                if ($akun['ROLE'] == 2) {
                                 ?>
-                                    <li class="menu single-menu <?php echo $page === 'eventku' ? 'active' : '' ?> ">
-                                        <a href="index.php?page=eventku" class="dropdown-toggle">
+                                    <li class="menu single-menu <?php echo $page === 'webinarku' ? 'active' : '' ?> ">
+                                        <a href="index.php?page=webinarku" class="dropdown-toggle">
                                             <div class="">
                                                 <span>My Webinars</span>
                                             </div>
@@ -127,15 +127,30 @@
                                     </svg>
                                 </a>
                                 <ul class="collapse submenu list-unstyled animated fadeInUp" id="more" data-parent="#topAccordion">
-                                    <li>
-                                        <a href="#"> Ajukan Mentor </a>
-                                    </li>
-                                    <li>
-                                        <a href="#"> Register </a>
-                                    </li>
-                                    <li>
-                                        <a href="loginPage.php"> Login </a>
-                                    </li>
+                                    <?php
+                                    if (isset($_SESSION["user"])) {
+
+                                        $akun = $_SESSION["user"];
+                                        if ($akun['ROLE'] == 1) {
+                                    ?>
+                                            <li>
+                                                <a href="#"> Ajukan Mentor </a>
+                                            </li>
+                                        <?php
+                                        }
+                                    } else {
+                                        ?>
+
+
+                                        <li>
+                                            <a href="registrasi.php"> Register </a>
+                                        </li>
+                                        <li>
+                                            <a href="login.php"> Login </a>
+                                        </li>
+                                    <?php
+                                    }
+                                    ?>
                                 </ul>
                             </li>
                         </ul>
@@ -160,6 +175,7 @@
             <!-- Search -->
             <?php
             if (isset($_SESSION["user"])) {
+
             ?>
 
                 <!-- Notification -->
@@ -213,8 +229,8 @@
                             <div class="user-profile-section">
                                 <div class="media mx-auto">
                                     <div class="media-body">
-                                        <h5>Username</h5>
-                                        <p>user</p>
+                                        <h5><?php echo $akun['NAMA'] ?></h5>
+                                        <!-- <p>user</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -269,8 +285,16 @@
                         include './pages/my_event_page.php';
                         break;
 
+                    case 'webinarku':
+                        include './pages/mentor/my_webinar.php';
+                        break;
+
                     case 'cari':
                         include './pages/search.php';
+                        break;
+
+                    case 'detail':
+                        include './pages/detail_webinar.php';
                         break;
                     default:
                         include './pages/home.php';
@@ -301,7 +325,9 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="styles/plugins/apex/apexcharts.min.js"></script>
     <script src="styles/assets/js/dashboard/dash_1.js"></script>
-
+    <script src="styles/assets/js/custom.js"></script>
+    <script src="styles/plugins/highlight/highlight.pack.js"></script>
+    <script src="styles/assets/js/scrollspyNav.js"></script>
 </body>
 
 </html>
