@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2022 at 03:16 PM
+-- Generation Time: Apr 14, 2022 at 09:58 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -46,6 +46,25 @@ CREATE TABLE `kategori` (
   `ICON_KATEGORI` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`KATEGORI_ID`, `NAMA_KATEGORI`, `ICON_KATEGORI`) VALUES
+(1, 'Sosial', ''),
+(2, 'Budaya', ''),
+(3, 'Politik', ''),
+(4, 'Bisnis', ''),
+(5, 'Ekonomi', ''),
+(6, 'Finansial', ''),
+(7, 'Literasi', ''),
+(8, 'Bahasa', ''),
+(9, 'Teknologi', ''),
+(10, 'Sciences', ''),
+(11, 'Kesehatan', ''),
+(12, 'Seni', ''),
+(13, 'Olahraga', '');
+
 -- --------------------------------------------------------
 
 --
@@ -77,7 +96,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`USER_ID`, `NAMA`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
-(1, 'Akhmad Ramadani', 'wkwkwkwkwkwk@ghmail.com', '202cb962ac59075b964b07152d234b70', 1);
+(1, 'Syekh Akhmad Ramadani', 'ram@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
+(2, 'Akhmad Ramadani', 'ramadani@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 1),
+(3, 'rama', 'ramadani@gmail.com', 'ec4bd19731eb536befbbbe0c77daa06b', 1),
+(4, 'rama', 'ramadani@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 1),
+(5, 'Akhmad Ramadani', 'a@g.com', '202cb962ac59075b964b07152d234b70', 2);
 
 -- --------------------------------------------------------
 
@@ -117,7 +140,8 @@ CREATE TABLE `webinar` (
 --
 
 INSERT INTO `webinar` (`WEBINAR_ID`, `USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBINAR`, `WAKTU_WEBINAR`, `MAKS_KAPASITAS`, `LINK_MEETING`, `COVER_WEBINAR`, `LOOKED`) VALUES
-(1, 1, 'The Courage To Be Disliked', 'Bedah buku \"The Courage To Be Disliked\" bersama penulisnya.', '2022-04-04 19:35:43', 100, 'https://zoom.us', 'media\\webinar_cover\\tctbd.jpg', 1);
+(1, 1, 'The Courage To Be Disliked', 'Bedah buku \"The Courage To Be Disliked\" bersama penulisnya.', '2022-04-30 19:35:43', 100, 'https://zoom.us', 'media\\webinar_cover\\gunung2.png', 1),
+(2, 1, 'Photoshop Dasar 1', 'Belajar Photoshop Dasar dengan materi sebagai berikut: \r\n1. \r\n2. \r\n3. \r\n4. \r\n5. ', '2022-04-29 15:30:54', 80, 'https://meet.google.com', 'media\\webinar_cover\\tctbd.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -130,6 +154,13 @@ CREATE TABLE `webinar_kategori` (
   `WEBINAR_ID` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `webinar_kategori`
+--
+
+INSERT INTO `webinar_kategori` (`KATEGORI_ID`, `WEBINAR_ID`) VALUES
+(7, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -140,6 +171,14 @@ CREATE TABLE `webinar_regist` (
   `USER_ID` int(255) NOT NULL,
   `WEBINAR_ID` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `webinar_regist`
+--
+
+INSERT INTO `webinar_regist` (`USER_ID`, `WEBINAR_ID`) VALUES
+(1, 1),
+(1, 2);
 
 --
 -- Indexes for dumped tables
@@ -205,7 +244,7 @@ ALTER TABLE `webinar_regist`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `KATEGORI_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KATEGORI_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `like_webinar`
@@ -217,13 +256,13 @@ ALTER TABLE `like_webinar`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `webinar`
 --
 ALTER TABLE `webinar`
-  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
