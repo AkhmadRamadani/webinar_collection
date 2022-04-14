@@ -211,7 +211,7 @@
                 <!-- Header -->
                 <div class="page-header">
                     <div class="title">
-                        <h3>Mentor Profile</h3>
+                        <h3>User Profile</h3>
                     </div>
                     <div class="layout-spacing">
                         <a href=""></a>
