@@ -6,7 +6,7 @@
     $tipe_file = $_FILES['gambar']['type'];
     $tmp_file = $_FILES['gambar']['tmp_name'];
 
-    $path = "images/".$foto_profile;
+    $path = "media/profile/".$foto_profile;
 
     if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){ 
         if($ukuran_file <= 1000000){ 
