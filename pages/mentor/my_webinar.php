@@ -30,6 +30,10 @@ WHERE t1.WEBINAR_ID = t2.WEBINAR_ID AND t1.USER_ID = $id_user";
 $currentdate = date("Y-m-d");
 $fetcheddata = mysqli_query($connect, $query);
 
+$query_kategori = "SELECT * FROM kategori";
+$fetchdatakategori = mysqli_query($connect, $query_kategori);
+
+
 ?>
 <div class="layout-px-spacing">
 
@@ -51,6 +55,18 @@ $fetcheddata = mysqli_query($connect, $query);
                         <div class="form-group mb-4">
                             <label class="control-label">Description:</label>
                             <textarea style="height: 150px;" name="description" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label lass="control-label">Categories:</label>
+                            <select class="selectpicker form-control" name="categories[]" multiple>
+                                <?php
+                                while ($datakategori = mysqli_fetch_array($fetchdatakategori)) {
+                                ?>
+                                    <option value="<?php echo $datakategori['KATEGORI_ID']; ?>"><?php echo $datakategori['NAMA_KATEGORI']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group mb-4">
                             <label class="control-label">Time Start:</label>
@@ -182,12 +198,13 @@ $fetcheddata = mysqli_query($connect, $query);
 @$time_start = $_POST['time_start'];
 @$max_caps = $_POST['max_caps'];
 @$meeting_link = $_POST['meeting_link'];
+@$categories = $_POST['categories'];
 
 $dir = 'media/webinar_cover/';
 @$nama_file = $_FILES['image_cover']['name'];
 @$nama_tmp = $_FILES['image_cover']['tmp_name'];
 @$tipe = pathinfo($nama_file, PATHINFO_EXTENSION);
-$upload_file = $dir . md5(microtime()) .".". $tipe;
+$upload_file = $dir . md5(microtime()) . "." . $tipe;
 $upload = move_uploaded_file($nama_tmp, $upload_file);
 
 @$kirim = $_POST['kirim'];
@@ -201,31 +218,40 @@ if ($kirim) {
             $query_insert_acc_webinar = "INSERT INTO `acc_webinar`(`WEBINAR_ID`, `STATUS_PROPOSAL`) VALUES ('$last_id','0')";
             $add_acc_webinar = mysqli_query($connect, $query_insert_acc_webinar);
             if ($add_acc_webinar) {
-                echo "<script>location='index.php?page=webinarku';</script>";
+                $query_insert_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
+                $query_insert_categories_parts = array();
+                foreach ($categories as $cat) {
+                    $query_insert_categories_parts[] = "('" . $cat . "', '" . $last_id . "')";
+                }
+                $query_insert_categories .= implode(',', $query_insert_categories_parts);
+                $add_categories = mysqli_query($connect, $query_insert_categories);
+                if ($add_categories) {
+                    echo "<script>location='index.php?page=webinarku';</script>";
+                }
             } else {
-                echo "3";
-                // echo "<script>alert('Gagal menambahkan data'); </script>";
-                echo $query_insert_acc_webinar;
-                // echo "<script>location='index.php?page=webinarku';</script>";
+                // echo "3";
+                echo "<script>alert('Gagal menambahkan data'); </script>";
+                // echo $query_insert_acc_webinar;
+                echo "<script>location='index.php?page=webinarku';</script>";
             }
         } else {
-            echo "2";
-            echo $query;
-            // echo "<script>alert('Gagal menambahkan data'); </script>";
-            // echo "<script>location='index.php?page=webinarku';</script>";
+            // echo "2";
+            // echo $query;
+            echo "<script>alert('Gagal menambahkan data'); </script>";
+            echo "<script>location='index.php?page=webinarku';</script>";
         }
     } else {
 
-        echo "</p>";
-        echo '<pre>';
-        echo 'Here is some more debugging info:';
-        print_r($_FILES['']);
-        print "</pre>";
-        echo "1";
-        echo $upload;
-        echo $query;
-        // echo "<script>alert('Gagal menambahkan data'); </script>";
-        // echo "<script>location='index.php?page=webinarku';</script>";
+        // echo "</p>";
+        // echo '<pre>';
+        // echo 'Here is some more debugging info:';
+        // print_r($_FILES['']);
+        // print "</pre>";
+        // echo "1";
+        // echo $upload;
+        // echo $query;
+        echo "<script>alert('Gagal menambahkan data'); </script>";
+        echo "<script>location='index.php?page=webinarku';</script>";
     }
 }
 

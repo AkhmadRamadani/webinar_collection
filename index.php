@@ -20,6 +20,7 @@
     <link href="styles/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css">
     <link href="styles/plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="styles/assets/css/elements/alert.css">
+    <link rel="stylesheet" type="text/css" href="styles/plugins/bootstrap-select/bootstrap-select.min.css">
 
     <?php
     session_start();
@@ -329,7 +330,7 @@
     <script src="styles/assets/js/custom.js"></script>
     <script src="styles/plugins/highlight/highlight.pack.js"></script>
     <script src="styles/assets/js/scrollspyNav.js"></script>
-    <script src="styles/plugins/file-upload/file-upload-with-preview.min.js"></script>
+    <script src="styles/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 </body>
 
 </html>
