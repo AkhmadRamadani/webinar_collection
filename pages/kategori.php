@@ -15,8 +15,8 @@ INNER JOIN user u
  ON w.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID 
-GROUP BY w.WEBINAR_ID
- HAVING wk.KATEGORI_ID = $selected_id_kategori";
+ WHERE wk.KATEGORI_ID = '$selected_id_kategori'
+ GROUP BY w.WEBINAR_ID";
     //  echo $query;
 } else {
     $query = "SELECT w.*, wk.*, k.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
