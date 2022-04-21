@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2022 at 06:46 PM
+-- Generation Time: Apr 21, 2022 at 06:48 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -40,12 +40,12 @@ CREATE TABLE `acc_webinar` (
 --
 
 INSERT INTO `acc_webinar` (`ACC_WEBINAR_ID`, `USER_ID`, `WEBINAR_ID`, `PESAN`, `STATUS_PROPOSAL`) VALUES
-(2, 5, 1, NULL, 1),
 (3, 5, 2, NULL, 0),
-(4, NULL, 4, NULL, 0),
-(5, NULL, 5, NULL, 0),
 (6, NULL, 6, NULL, 0),
-(7, NULL, 7, NULL, 0);
+(8, NULL, 8, NULL, 0),
+(10, NULL, 10, NULL, 0),
+(12, NULL, 12, NULL, 0),
+(14, NULL, 14, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -96,8 +96,6 @@ CREATE TABLE `like_webinar` (
 
 INSERT INTO `like_webinar` (`ID_LIKE`, `USER_ID`, `WEBINAR_ID`) VALUES
 (1, 1, 2),
-(2, 2, 1),
-(3, 3, 1),
 (4, 4, 2);
 
 -- --------------------------------------------------------
@@ -163,12 +161,38 @@ CREATE TABLE `webinar` (
 --
 
 INSERT INTO `webinar` (`WEBINAR_ID`, `USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBINAR`, `WAKTU_WEBINAR`, `MAKS_KAPASITAS`, `LINK_MEETING`, `COVER_WEBINAR`, `LOOKED`) VALUES
-(1, 5, 'The Courage To Be Disliked', 'Bedah buku \"The Courage To Be Disliked\" bersama penulisnya.', '2022-04-30 19:35:43', 100, 'https://zoom.us', 'media\\webinar_cover\\gunung2.png', 1),
 (2, 5, 'Photoshop Dasar 1', 'Belajar Photoshop Dasar dengan materi sebagai berikut: \r\n1. \r\n2. \r\n3. \r\n4. \r\n5. ', '2022-04-29 15:30:54', 80, 'https://meet.google.com', 'media\\webinar_cover\\tctbd.jpg', 2),
-(4, 5, 'Test From App', 'aaafifkasjokjfaklsj', '2222-01-01 12:04:00', 242, 'https://facebook.com', 'media/webinar_cover/download.jpg', 0),
-(5, 5, 'test', 'asf', '2022-04-30 23:40:00', 413, 'https://facebook.com', 'media/webinar_cover/haki.jpg', 0),
-(6, 5, 'fsfsafgwqewe', 'safwqfsafa', '2022-04-23 23:43:00', 241, 'https://facebook.com', 'media/webinar_cover/haki.jpg', 0),
-(7, 5, 'test ', 'asfg', '2022-04-30 23:45:00', 421, 'https://facebook.com', 'media/webinar_cover/53ee920ad930934ffacbe0990fa10828.jpg', 0);
+(6, 5, 'fsfsafgwqewe', 'safwqfsafa', '2022-04-23 23:43:00', 241, 'https://facebook.com', '', 0),
+(8, 5, 'Tes Kategori 123124', 'Desk', '2022-04-22 13:08:00', 23, 'https://facebook.com', 'media/webinar_cover/a2793bde6deb883db3fe597cf5a56941.jpg', 0),
+(10, 5, 'hy', 'h', '2022-04-29 20:26:00', 0, 'https://twitter.com', 'media/webinar_cover/7241454acd51162b0bc094fb557f79cb.png', 0),
+(12, 5, 'test1322142', 'safdsfaasfsaf', '2022-04-20 22:57:00', 2421, 'https://asasfs', 'media/webinar_cover/64c2715cff82ef6fb94485248e1d5be6.jpg', 0),
+(14, 5, 'test', 'uih', '2022-04-20 23:49:00', 2, 'https://twitter.com', 'media/webinar_cover/ba43920116de07ecd56db9a61ee214cc.png', 0);
+
+--
+-- Triggers `webinar`
+--
+DELIMITER $$
+CREATE TRIGGER `DELETE_ACC_WEBINAR` AFTER DELETE ON `webinar` FOR EACH ROW DELETE FROM acc_webinar WHERE acc_webinar.WEBINAR_ID = OLD.WEBINAR_ID
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `DELETE_LIKE_WEBINAR` AFTER DELETE ON `webinar` FOR EACH ROW DELETE FROM like_webinar WHERE 
+like_webinar.WEBINAR_ID = OLD.WEBINAR_ID
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `DELETE_WEBINAR_KATEGORI` AFTER DELETE ON `webinar` FOR EACH ROW DELETE FROM webinar_kategori WHERE webinar_kategori.WEBINAR_ID = OLD.WEBINAR_ID
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `DELETE_WEBINAR_REGIST` AFTER DELETE ON `webinar` FOR EACH ROW DELETE FROM webinar_regist 
+WHERE webinar_regist.WEBINAR_ID = OLD.WEBINAR_ID
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `UPDATE_CATEGORIES` AFTER UPDATE ON `webinar` FOR EACH ROW DELETE FROM webinar_kategori WHERE webinar_kategori.WEBINAR_ID = NEW.WEBINAR_ID
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -186,15 +210,12 @@ CREATE TABLE `webinar_kategori` (
 --
 
 INSERT INTO `webinar_kategori` (`KATEGORI_ID`, `WEBINAR_ID`) VALUES
-(7, 1),
-(7, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(7, 7)
-;
-
+(1, 14),
+(2, 14),
+(3, 10),
+(4, 14),
+(6, 10),
+(8, 10);
 
 -- --------------------------------------------------------
 
@@ -212,10 +233,7 @@ CREATE TABLE `webinar_regist` (
 --
 
 INSERT INTO `webinar_regist` (`USER_ID`, `WEBINAR_ID`) VALUES
-(1, 1),
-(1, 2),
-(2, 1),
-(3, 1);
+(1, 2);
 
 --
 -- Indexes for dumped tables
@@ -281,7 +299,7 @@ ALTER TABLE `webinar_regist`
 -- AUTO_INCREMENT for table `acc_webinar`
 --
 ALTER TABLE `acc_webinar`
-  MODIFY `ACC_WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ACC_WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -305,7 +323,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `webinar`
 --
 ALTER TABLE `webinar`
-  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
