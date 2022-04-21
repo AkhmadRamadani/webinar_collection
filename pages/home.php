@@ -114,7 +114,7 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
                             <div class="col-lg-4 p-4 ">
                                 <div class="item-box">
                                     <div class="card component-card_9">
-                                        <img src="<?php echo $data['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $data['COVER_WEBINAR']; ?>" class="card-img-top img-thumbnail" style="max-width: 100%; and height: 200px;" alt="widget-card-2">
+                                        <img src="<?php echo $data['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $data['COVER_WEBINAR']; ?>" class="card-img-top img-thumbnail" style="height: 400px; max-width: 100%; object-fit: cover;" alt="widget-card-2">
                                         <div class="card-body">
                                             <p class="meta-date"><?php echo date("l, F jS, Y, g:i a", strtotime($data['WAKTU_WEBINAR'])) ?></p>
 
