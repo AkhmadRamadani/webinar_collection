@@ -214,8 +214,9 @@
                         <h3>User Profile</h3>
                     </div>
                     <div class="layout-spacing">
-                        <a href=""></a>
-                        <button class="btn btn-outline-primary">Ajukan Mentor</button>
+                        <a href="registermentor.php">
+                            <button class="btn btn-outline-primary">Ajukan Mentor</button>
+                        </a>
                     </div>
                 </div>
                 <!-- End header -->
@@ -233,7 +234,16 @@
                         </div>
                         <div class="text-center user-info">
                             <img src="styles/assets/img/90x90.jpg" alt="avatar">
-                            <p class="">Narendra </p>
+                            <?php
+                            include "config/connection.php";
+
+                            $query = "SELECT nama,email from user";
+                            $result = mysqli_query($connect, $query);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                    <p class=""><?php echo $row['nama']; ?> </p>
                         </div>
                         <div class="user-info-list">
                             <div class="">
@@ -242,10 +252,14 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
-                                        </svg> narendra@gmail.com
+                                        </svg> <?php echo $row['email']; ?>
                                     </li>
                                 </ul>
                             </div>
+                    <?php
+                                }
+                            }
+                    ?>
                         </div>
                     </div>
                 </div>
