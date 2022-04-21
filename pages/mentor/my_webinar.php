@@ -4,7 +4,11 @@ include './config/connection.php';
 $akun = $_SESSION['user'];
 $id_user = $akun['USER_ID'];
 
-$query = "SELECT t1.*, t4.PARTICIPANTS_COUNT, t4.CATEGORIES FROM
+
+if (isset($_GET['keyword'])) {
+    $keyword = $_GET['keyword'];
+
+    $query = "SELECT t1.*, t4.PARTICIPANTS_COUNT, t4.CATEGORIES FROM
 (
 SELECT w.*, u.NAMA, u.EMAIL,
 COUNT(l.ID_LIKE) LIKE_COUNT, ac.PESAN, ac.STATUS_PROPOSAL
@@ -34,7 +38,41 @@ ORDER BY w.WEBINAR_ID DESC
     ON t2.WEBINAR_ID = t3.WEBINAR_ID
  GROUP BY t2.WEBINAR_ID
 ) as t4
-WHERE t1.WEBINAR_ID = t4.WEBINAR_ID AND t1.USER_ID = $id_user";
+WHERE t1.WEBINAR_ID = t4.WEBINAR_ID AND t1.USER_ID = $id_user AND (t1.JUDUL_WEBINAR LIKE '%$keyword%' OR t1.DESKRIPSI_WEBINAR LIKE '%$keyword%')";
+} else {
+
+    $query = "SELECT t1.*, t4.PARTICIPANTS_COUNT, t4.CATEGORIES FROM
+    (
+    SELECT w.*, u.NAMA, u.EMAIL,
+    COUNT(l.ID_LIKE) LIKE_COUNT, ac.PESAN, ac.STATUS_PROPOSAL
+    FROM webinar w 
+    JOIN user u ON w.USER_ID = u.USER_ID 
+    LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
+    JOIN acc_webinar ac ON ac.WEBINAR_ID = w.WEBINAR_ID 
+    GROUP BY w.WEBINAR_ID 
+    ORDER BY w.WEBINAR_ID DESC
+    ) as t1,
+    (SELECT t2.*, group_concat(t3.NAMA_KATEGORI separator ', ') as CATEGORIES FROM 
+        (
+        SELECT w.WEBINAR_ID,
+        COUNT(wr.WEBINAR_ID) PARTICIPANTS_COUNT 
+        FROM webinar w 
+        JOIN user u ON w.USER_ID = u.USER_ID 
+        JOIN acc_webinar ac ON ac.WEBINAR_ID = w.WEBINAR_ID 
+        LEFT JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID 
+        GROUP BY w.WEBINAR_ID 
+        ORDER BY w.WEBINAR_ID DESC) as t2
+        LEFT JOIN 
+        (
+        SELECT w.WEBINAR_ID, k.NAMA_KATEGORI 
+            FROM kategori k, webinar_kategori wk, webinar w 
+            WHERE w.WEBINAR_ID = wk.WEBINAR_ID AND k.KATEGORI_ID = wk.KATEGORI_ID
+        ) as t3
+        ON t2.WEBINAR_ID = t3.WEBINAR_ID
+     GROUP BY t2.WEBINAR_ID
+    ) as t4
+    WHERE t1.WEBINAR_ID = t4.WEBINAR_ID AND t1.USER_ID = $id_user";
+}
 
 
 $currentdate = date("Y-m-d");
@@ -123,10 +161,11 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                     Add
                 </button>
             </div>
-            <form action="" method="post">
+            <form action="" method="get">
                 <div class="row">
                     <div>
-                        <input type="text" class="form-control" placeholder="Kata kunci...">
+                        <input type="text" name="page" value="webinarku" hidden>
+                        <input type="text" class="form-control" placeholder="Kata kunci..." name="keyword">
                     </div>
                     <div class="p-2 mb-3">
                         <input type="submit" id="btn-add" class="btn btn-dark" value="Cari" />
