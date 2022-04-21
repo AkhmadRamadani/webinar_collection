@@ -250,26 +250,26 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
-
+                                    <form class="form-vertical" enctype="multipart/form-data" action="" method="POST" id="formupdate<?php echo $data['WEBINAR_ID']; ?>">
                                         <div class="modal-body">
                                             <div class="text-center user-info">
                                                 <img src="<?php echo $data['COVER_WEBINAR'] === null ? "styles/assets/img/90x90.jpg" : $data['COVER_WEBINAR']; ?>" alt="avatar" style="width: 200px">
                                             </div>
-                                            <input type="text" name="id_update_webinar" class="form-control" value="<?php echo $data['WEBINAR_ID'] ?>" hidden>
-                                            <input type="text" name="cover_webinar_setted" class="form-control" value="<?php echo $data['COVER_WEBINAR'] ?>" hidden>
+                                            <input type="text" name="id_update_webinar" class="form-control" value="<?php echo $data['WEBINAR_ID'] ?>" hidden />
+                                            <input type="text" name="cover_webinar_setted" class="form-control" value="<?php echo $data['COVER_WEBINAR'] ?>" hidden />
 
                                             <div class="form-group mb-4">
                                                 <label class="control-label">Title:</label>
-                                                <input type="text" name="title_update" class="form-control" value="<?php echo $data['JUDUL_WEBINAR'] ?>">
+                                                <input type="text" name="title_update" class="form-control" value="<?php echo $data['JUDUL_WEBINAR'] ?>" />
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label class="control-label">Description:</label>
-                                                <textarea style="height: 150px;" name="description_update" class="form-control" value=""><?php echo $data['DESKRIPSI_WEBINAR'] ?></textarea>
+                                                <textarea style="height: 150px;" name="description_update" class="form-control"><?php echo $data['DESKRIPSI_WEBINAR'] ?></textarea>
                                             </div>
+
                                             <div class="form-group mb-4">
-                                                <label lass="control-label">Categories:</label>
-                                                <select class="selectpicker form-control" name="kategori[]" multiple>
+                                                <label class="control-label">Categories:</label>
+                                                <select name="update_categories[]" class="selectpicker form-control" form="formupdate<?php echo $data['WEBINAR_ID']; ?>" multiple>
                                                     <?php
                                                     $data_selected_kategori[] = explode(', ', $data['CATEGORIES']);
 
@@ -284,12 +284,13 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                                     ?>
                                                 </select>
                                             </div>
+
                                             <div class="form-group mb-4">
                                                 <label class="control-label">Time Start:</label>
                                                 <?php
                                                 $newDate = date("Y-m-d\TH:i", strtotime($data['WAKTU_WEBINAR']));
                                                 ?>
-                                                <input type="datetime-local" name="time_start_update" class="form-control" value="<?php echo $newDate; ?>">
+                                                <input type="datetime-local" name="time_start_update" class="form-control" value="<?php echo $newDate; ?>" />
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label class="control-label">Maximal Capacities:</label>
@@ -316,7 +317,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-primary" value="Update" name="update">
+                                            <input type="submit" class="btn btn-primary" value="Update" name="update" form="formupdate<?php echo $data['WEBINAR_ID']; ?>">
 
                                         </div>
 
@@ -378,7 +379,6 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
     </div>
 
 </div>
-
 <?php
 /**
  * 
@@ -391,7 +391,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
 @$time_start_update = $_POST['time_start_update'];
 @$max_caps_update = $_POST['max_caps_update'];
 @$meeting_link_update = $_POST['meeting_link_update'];
-@$categories_update = $_POST['kategori'];
+@$categories_update = $_POST['update_categories'];
 @$cover_webinar_setted = $_POST['cover_webinar_setted'];
 
 $dir = 'media/webinar_cover/';
@@ -411,63 +411,64 @@ $upload_update = move_uploaded_file($nama_tmp_update, $upload_file_update);
 @$update = $_POST['update'];
 $query_update = "UPDATE `webinar` SET `JUDUL_WEBINAR`='$title_update',`DESKRIPSI_WEBINAR`='$description_update',`WAKTU_WEBINAR`='$time_start_update',`MAKS_KAPASITAS`='$max_caps_update',`LINK_MEETING`='$meeting_link_update',`COVER_WEBINAR`='$upload_file_update' WHERE `WEBINAR_ID`='$id_update_webinar'";
 if ($update) {
-    foreach ($categories_update as $cat) {
+    // print_r($_POST);
+    // foreach ($categories_update as $cat) {
 
-        echo "<script>alert($cat)</script>";
-    }
-    // if ($nama_file_update != null) {
-    //     if ($upload_update) {
-    //         $hasil = mysqli_query($connect, $query_update);
-    //         if ($hasil) {
-    //             if ($categories_update != null) {
-    //                 $last_id = $_POST['id_update_webinar'];
-    //                 $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
-    //                 $query_update_categories_parts = array();
-    //                 foreach ($categories_update as $cat) {
-    //                     $query_update_categories_parts[] = "('" . $cat . "', '" . $last_id . "')";
-    //                 }
-    //                 $query_update_categories .= implode(',', $query_update_categories_parts);
-    //                 $add_categories = mysqli_query($connect, $query_update_categories);
-    //                 if ($add_categories) {
-    //                     print_r($add_categories);
-    //                     print($query_update_categories);
-    //                     // echo "<script>location='index.php?page=webinarku';</script>";
-    //                 }
-    //             } else {
-    //                 echo "<script>location='index.php?page=webinarku';</script>";
-    //             }
-    //         } else {
-    //             // echo "2";
-    //             // echo $query;
-    //             echo "<script>alert('Gagal menambahkan data'); </script>";
-    //             echo "<script>location='index.php?page=webinarku';</script>";
-    //         }
-    //     }
-    // } else {
-    //     $hasil = mysqli_query($connect, $query_update);
-    //     if ($hasil) {
-    //         if ($categories_update !== NULL) {
-
-    //             $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
-    //             $query_update_categories_parts = array();
-    //             foreach ($categories_update as $cat) {
-    //                 $query_update_categories_parts[] = "('" . $cat . "', '" . $id_update_webinar . "')";
-    //             }
-    //             $query_update_categories .= implode(',', $query_update_categories_parts);
-    //             $add_categories = mysqli_query($connect, $query_update_categories);
-    //             if ($add_categories) {
-    //                 echo "<script>location='index.php?page=webinarku';</script>";
-    //             }
-    //         } else {
-    //             echo "<script>location='index.php?page=webinarku';</script>";
-    //         }
-    //     } else {
-    //         // echo "2";
-    //         // echo $query;
-    //         echo "<script>alert('Gagal menambahkan data'); </script>";
-    //         echo "<script>location='index.php?page=webinarku';</script>";
-    //     }
+    //     echo "<script>alert($cat)</script>";
     // }
+    if ($nama_file_update != null) {
+        if ($upload_update) {
+            $hasil = mysqli_query($connect, $query_update);
+            if ($hasil) {
+                if ($categories_update != null) {
+                    $last_id = $_POST['id_update_webinar'];
+                    $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
+                    $query_update_categories_parts = array();
+                    foreach ($categories_update as $cat) {
+                        $query_update_categories_parts[] = "('" . $cat . "', '" . $last_id . "')";
+                    }
+                    $query_update_categories .= implode(',', $query_update_categories_parts);
+                    $add_categories = mysqli_query($connect, $query_update_categories);
+                    if ($add_categories) {
+                        print_r($add_categories);
+                        print($query_update_categories);
+                        // echo "<script>location='index.php?page=webinarku';</script>";
+                    }
+                } else {
+                    echo "<script>location='index.php?page=webinarku';</script>";
+                }
+            } else {
+                // echo "2";
+                // echo $query;
+                echo "<script>alert('Gagal menambahkan data'); </script>";
+                echo "<script>location='index.php?page=webinarku';</script>";
+            }
+        }
+    } else {
+        $hasil = mysqli_query($connect, $query_update);
+        if ($hasil) {
+            if ($categories_update !== NULL) {
+
+                $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
+                $query_update_categories_parts = array();
+                foreach ($categories_update as $cat) {
+                    $query_update_categories_parts[] = "('" . $cat . "', '" . $id_update_webinar . "')";
+                }
+                $query_update_categories .= implode(',', $query_update_categories_parts);
+                $add_categories = mysqli_query($connect, $query_update_categories);
+                if ($add_categories) {
+                    echo "<script>location='index.php?page=webinarku';</script>";
+                }
+            } else {
+                echo "<script>location='index.php?page=webinarku';</script>";
+            }
+        } else {
+            // echo "2";
+            // echo $query;
+            echo "<script>alert('Gagal menambahkan data'); </script>";
+            echo "<script>location='index.php?page=webinarku';</script>";
+        }
+    }
 }
 
 ?>
