@@ -166,8 +166,8 @@ INSERT INTO `webinar` (`WEBINAR_ID`, `USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBI
 (1, 5, 'The Courage To Be Disliked', 'Bedah buku \"The Courage To Be Disliked\" bersama penulisnya.', '2022-04-30 19:35:43', 100, 'https://zoom.us', 'media\\webinar_cover\\gunung2.png', 1),
 (2, 5, 'Photoshop Dasar 1', 'Belajar Photoshop Dasar dengan materi sebagai berikut: \r\n1. \r\n2. \r\n3. \r\n4. \r\n5. ', '2022-04-29 15:30:54', 80, 'https://meet.google.com', 'media\\webinar_cover\\tctbd.jpg', 2),
 (4, 5, 'Test From App', 'aaafifkasjokjfaklsj', '2222-01-01 12:04:00', 242, 'https://facebook.com', 'media/webinar_cover/download.jpg', 0),
-(5, 5, 'test', 'asf', '2022-04-30 23:40:00', 413, 'https://facebook.com', 'media/webinar_cover/0.43616300 1649954471', 0),
-(6, 5, 'fsfsafgwqewe', 'safwqfsafa', '2022-04-23 23:43:00', 241, 'https://facebook.com', 'media/webinar_cover/33e9a288809ebc00b04fa199161063cejpg', 0),
+(5, 5, 'test', 'asf', '2022-04-30 23:40:00', 413, 'https://facebook.com', 'media/webinar_cover/haki.jpg', 0),
+(6, 5, 'fsfsafgwqewe', 'safwqfsafa', '2022-04-23 23:43:00', 241, 'https://facebook.com', 'media/webinar_cover/haki.jpg', 0),
 (7, 5, 'test ', 'asfg', '2022-04-30 23:45:00', 421, 'https://facebook.com', 'media/webinar_cover/53ee920ad930934ffacbe0990fa10828.jpg', 0);
 
 -- --------------------------------------------------------
@@ -186,7 +186,15 @@ CREATE TABLE `webinar_kategori` (
 --
 
 INSERT INTO `webinar_kategori` (`KATEGORI_ID`, `WEBINAR_ID`) VALUES
-(7, 1);
+(7, 1),
+(7, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(7, 7)
+;
+
 
 -- --------------------------------------------------------
 
