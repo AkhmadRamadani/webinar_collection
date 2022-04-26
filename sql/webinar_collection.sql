@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2022 at 06:48 AM
+-- Generation Time: Apr 26, 2022 at 05:54 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -45,7 +45,7 @@ INSERT INTO `acc_webinar` (`ACC_WEBINAR_ID`, `USER_ID`, `WEBINAR_ID`, `PESAN`, `
 (8, NULL, 8, NULL, 0),
 (10, NULL, 10, NULL, 0),
 (12, NULL, 12, NULL, 0),
-(14, NULL, 14, NULL, 0);
+(15, NULL, 15, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,6 @@ INSERT INTO `kategori` (`KATEGORI_ID`, `NAMA_KATEGORI`, `ICON_KATEGORI`) VALUES
 (2, 'Budaya', ''),
 (3, 'Politik', ''),
 (4, 'Bisnis', ''),
-(5, 'Ekonomi', ''),
 (6, 'Finansial', ''),
 (7, 'Literasi', ''),
 (8, 'Bahasa', ''),
@@ -77,6 +76,15 @@ INSERT INTO `kategori` (`KATEGORI_ID`, `NAMA_KATEGORI`, `ICON_KATEGORI`) VALUES
 (11, 'Kesehatan', ''),
 (12, 'Seni', ''),
 (13, 'Olahraga', '');
+
+--
+-- Triggers `kategori`
+--
+DELIMITER $$
+CREATE TRIGGER `DELETE_WEBINAR_KATEGORI_AFTER_DELETED_KATEGORI` AFTER DELETE ON `kategori` FOR EACH ROW DELETE FROM webinar_kategori 
+WHERE webinar_kategori.KATEGORI_ID = OLD.KATEGORI_ID
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -118,9 +126,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`USER_ID`, `NAMA`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
 (1, 'Syekh Akhmad Ramadani', 'ram@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
-(2, 'Akhmad Ramadani', 'ramadani@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 1),
-(3, 'rama', 'ramadani@gmail.com', 'ec4bd19731eb536befbbbe0c77daa06b', 1),
-(4, 'rama', 'ramadani@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 1),
+(4, 'rama', 'ramadani@gmail.com', '202cb962ac59075b964b07152d234b70', 3),
 (5, 'Akhmad Ramadani', 'a@g.com', '202cb962ac59075b964b07152d234b70', 2);
 
 -- --------------------------------------------------------
@@ -166,7 +172,7 @@ INSERT INTO `webinar` (`WEBINAR_ID`, `USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBI
 (8, 5, 'Tes Kategori 123124', 'Desk', '2022-04-22 13:08:00', 23, 'https://facebook.com', 'media/webinar_cover/a2793bde6deb883db3fe597cf5a56941.jpg', 0),
 (10, 5, 'hy', 'h', '2022-04-29 20:26:00', 0, 'https://twitter.com', 'media/webinar_cover/7241454acd51162b0bc094fb557f79cb.png', 0),
 (12, 5, 'test1322142', 'safdsfaasfsaf', '2022-04-20 22:57:00', 2421, 'https://asasfs', 'media/webinar_cover/64c2715cff82ef6fb94485248e1d5be6.jpg', 0),
-(14, 5, 'test', 'uih', '2022-04-20 23:49:00', 2, 'https://twitter.com', 'media/webinar_cover/ba43920116de07ecd56db9a61ee214cc.png', 0);
+(15, 5, 'Test ', 'test', '2022-04-23 12:08:00', 100, 'https://facebook.com', 'media/webinar_cover/e7207125abe95cfce402401f689eada2.png', 0);
 
 --
 -- Triggers `webinar`
@@ -210,10 +216,10 @@ CREATE TABLE `webinar_kategori` (
 --
 
 INSERT INTO `webinar_kategori` (`KATEGORI_ID`, `WEBINAR_ID`) VALUES
-(1, 14),
-(2, 14),
+(2, 15),
 (3, 10),
-(4, 14),
+(3, 15),
+(4, 8),
 (6, 10),
 (8, 10);
 
@@ -299,13 +305,13 @@ ALTER TABLE `webinar_regist`
 -- AUTO_INCREMENT for table `acc_webinar`
 --
 ALTER TABLE `acc_webinar`
-  MODIFY `ACC_WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ACC_WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `KATEGORI_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `KATEGORI_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `like_webinar`
@@ -323,7 +329,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `webinar`
 --
 ALTER TABLE `webinar`
-  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `WEBINAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
