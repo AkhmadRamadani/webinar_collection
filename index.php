@@ -84,19 +84,22 @@
                             </li>
                             <?php
                             if (isset($_SESSION["user"])) {
-                            ?>
-                                <li class="menu single-menu <?php echo $page === 'eventku' ? 'active' : '' ?> ">
-                                    <a href="index.php?page=eventku" class="dropdown-toggle">
-                                        <div class="">
-                                            <span>My Events</span>
-                                        </div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
-                                            <polyline points="6 9 12 15 18 9"></polyline>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <?php
+
                                 $akun = $_SESSION["user"];
+                                if ($akun['ROLE'] == 1 || $akun['ROLE'] == 2) {
+                            ?>
+                                    <li class="menu single-menu <?php echo $page === 'eventku' ? 'active' : '' ?> ">
+                                        <a href="index.php?page=eventku" class="dropdown-toggle">
+                                            <div class="">
+                                                <span>My Events</span>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                                <polyline points="6 9 12 15 18 9"></polyline>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                <?php
+                                }
                                 if ($akun['ROLE'] == 2) {
                                 ?>
                                     <li class="menu single-menu <?php echo $page === 'webinarku' ? 'active' : '' ?> ">
@@ -276,11 +279,19 @@
 
                 switch ($page) {
                     case 'beranda':
-                        include './pages/home.php';
+                        if ($akun['ROLE'] == 3) {
+                            echo 'admin';
+                        } else {
+                            include './pages/home.php';
+                        }
                         break;
 
                     case 'kategori':
-                        include './pages/kategori.php';
+                        if ($akun['ROLE'] == 3) {
+                            include './pages/admin/category_manage.php';
+                        } else {
+                            include './pages/kategori.php';
+                        }
                         break;
 
                     case 'eventku':
@@ -299,11 +310,19 @@
                         include './pages/detail_webinar.php';
                         break;
                     default:
-                        include './pages/home.php';
+                        if ($akun['ROLE'] == 3) {
+                            echo 'admin dasboard';
+                        } else {
+                            include './pages/home.php';
+                        }
                         break;
                 }
             } else {
-                include './pages/home.php';
+                if ($akun['ROLE'] == 3) {
+                    echo '';
+                } else {
+                    include './pages/home.php';
+                }
             }
             ?>
         </div>
