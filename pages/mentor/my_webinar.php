@@ -252,18 +252,21 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                             <textarea class="form-control" readonly><?php echo $data['CATEGORIES']; ?></textarea>
                                         </div>
                                         <div class="form-group mb-4">
-                                            <label class="control-label">Time Start:</label>
-                                            <input type="text" readonly name="time_start" class="form-control" value="<?php echo $data['WAKTU_WEBINAR']; ?>">
+                                            <label lass="control-label">Acceptance:</label>
+                                            <textarea class="form-control" readonly><?php
+                                                                                    if ($data['STATUS_PROPOSAL'] == 0) {
+                                                                                        echo "WAITING";
+                                                                                    } else if ($data['STATUS_PROPOSAL'] == 1) {
+                                                                                        echo "ACCEPTED";
+                                                                                    } else if ($data['STATUS_PROPOSAL'] == 2) {
+                                                                                        echo "REJECTED";
+                                                                                    }
+                                                                                    ?></textarea>
                                         </div>
                                         <div class="form-group mb-4">
-                                            <label class="control-label">Maximal Capacities:</label>
-                                            <input type="text" name="max_caps" class="form-control" value="<?php echo $data['MAKS_KAPASITAS']; ?>" readonly>
+                                            <label lass="control-label">Message:</label>
+                                            <textarea class="form-control" readonly><?php echo $data['PESAN']; ?></textarea>
                                         </div>
-                                        <div class="form-group mb-4">
-                                            <label class="control-label">Meeting Link:</label>
-                                            <input type="text" name="meeting_link" value="<?php echo $data['LINK_MEETING']; ?>" class="form-control" readonly>
-                                        </div>
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -450,30 +453,30 @@ $upload_update = move_uploaded_file($nama_tmp_update, $upload_file_update);
 @$update = $_POST['update'];
 $query_update = "UPDATE `webinar` SET `JUDUL_WEBINAR`='$title_update',`DESKRIPSI_WEBINAR`='$description_update',`WAKTU_WEBINAR`='$time_start_update',`MAKS_KAPASITAS`='$max_caps_update',`LINK_MEETING`='$meeting_link_update',`COVER_WEBINAR`='$upload_file_update' WHERE `WEBINAR_ID`='$id_update_webinar'";
 if ($update) {
-    // print_r($_POST);
-    // foreach ($categories_update as $cat) {
-
-    //     echo "<script>alert($cat)</script>";
-    // }
     if ($nama_file_update != null) {
         if ($upload_update) {
             $hasil = mysqli_query($connect, $query_update);
             if ($hasil) {
-                if ($categories_update != null) {
-                    $last_id = $_POST['id_update_webinar'];
-                    $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
-                    $query_update_categories_parts = array();
-                    foreach ($categories_update as $cat) {
-                        $query_update_categories_parts[] = "('" . $cat . "', '" . $last_id . "')";
-                    }
-                    $query_update_categories .= implode(',', $query_update_categories_parts);
-                    $add_categories = mysqli_query($connect, $query_update_categories);
-                    if ($add_categories) {
-                        print_r($add_categories);
-                        print($query_update_categories);
-                        // echo "<script>location='index.php?page=webinarku';</script>";
+                $query_update_acc_webinar = "UPDATE `acc_webinar` SET `STATUS_PROPOSAL`='0' WHERE `WEBINAR_ID`='$id_update_webinar'";
+                $update_acc_webinar = mysqli_query($connect, $query_update_acc_webinar);
+                if ($update_acc_webinar) {
+                    if ($categories_update != null) {
+                        $last_id = $_POST['id_update_webinar'];
+                        $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
+                        $query_update_categories_parts = array();
+                        foreach ($categories_update as $cat) {
+                            $query_update_categories_parts[] = "('" . $cat . "', '" . $last_id . "')";
+                        }
+                        $query_update_categories .= implode(',', $query_update_categories_parts);
+                        $add_categories = mysqli_query($connect, $query_update_categories);
+                        if ($add_categories) {
+                            echo "<script>location='index.php?page=webinarku';</script>";
+                        }
+                    } else {
+                        echo "<script>location='index.php?page=webinarku';</script>";
                     }
                 } else {
+                    echo "<script>alert('Gagal mengupdate data acceptance'); </script>";
                     echo "<script>location='index.php?page=webinarku';</script>";
                 }
             } else {
@@ -486,25 +489,32 @@ if ($update) {
     } else {
         $hasil = mysqli_query($connect, $query_update);
         if ($hasil) {
-            if ($categories_update !== NULL) {
+            $query_update_acc_webinar = "UPDATE `acc_webinar` SET `STATUS_PROPOSAL`='0' WHERE `WEBINAR_ID`='$id_update_webinar'";
+            $update_acc_webinar = mysqli_query($connect, $query_update_acc_webinar);
+            if ($update_acc_webinar) {
+                if ($categories_update !== NULL) {
 
-                $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
-                $query_update_categories_parts = array();
-                foreach ($categories_update as $cat) {
-                    $query_update_categories_parts[] = "('" . $cat . "', '" . $id_update_webinar . "')";
-                }
-                $query_update_categories .= implode(',', $query_update_categories_parts);
-                $add_categories = mysqli_query($connect, $query_update_categories);
-                if ($add_categories) {
+                    $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
+                    $query_update_categories_parts = array();
+                    foreach ($categories_update as $cat) {
+                        $query_update_categories_parts[] = "('" . $cat . "', '" . $id_update_webinar . "')";
+                    }
+                    $query_update_categories .= implode(',', $query_update_categories_parts);
+                    $add_categories = mysqli_query($connect, $query_update_categories);
+                    if ($add_categories) {
+                        echo "<script>location='index.php?page=webinarku';</script>";
+                    }
+                } else {
                     echo "<script>location='index.php?page=webinarku';</script>";
                 }
             } else {
+                echo "<script>alert('Gagal mengupdate data acceptance'); </script>";
                 echo "<script>location='index.php?page=webinarku';</script>";
             }
         } else {
             // echo "2";
             // echo $query;
-            echo "<script>alert('Gagal menambahkan data'); </script>";
+            echo "<script>alert('Gagal mengupdate data'); </script>";
             echo "<script>location='index.php?page=webinarku';</script>";
         }
     }

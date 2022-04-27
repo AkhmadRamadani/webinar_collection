@@ -274,52 +274,92 @@
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
             <?php
-            if (isset($_GET['page'])) {
-                $page = $_GET['page'];
+            if (isset($_SESSION["user"])) {
+                $akun = $_SESSION["user"];
 
-                switch ($page) {
-                    case 'beranda':
-                        if ($akun['ROLE'] == 3) {
-                            echo 'admin';
-                        } else {
-                            include './pages/home.php';
-                        }
-                        break;
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
 
-                    case 'kategori':
-                        if ($akun['ROLE'] == 3) {
-                            include './pages/admin/category_manage.php';
-                        } else {
-                            include './pages/kategori.php';
-                        }
-                        break;
+                    switch ($page) {
+                        case 'beranda':
 
-                    case 'eventku':
-                        include './pages/my_event_page.php';
-                        break;
+                            if ($akun['ROLE'] == 3) {
+                                include './pages/admin/all_webinar.php';
+                            } else {
+                                include './pages/home.php';
+                            }
+                            break;
 
-                    case 'webinarku':
-                        include './pages/mentor/my_webinar.php';
-                        break;
+                        case 'kategori':
+                            if ($akun['ROLE'] == 3) {
+                                include './pages/admin/category_manage.php';
+                            } else {
+                                include './pages/kategori.php';
+                            }
+                            break;
 
-                    case 'cari':
-                        include './pages/search.php';
-                        break;
+                        case 'eventku':
+                            include './pages/my_event_page.php';
+                            break;
 
-                    case 'detail':
-                        include './pages/detail_webinar.php';
-                        break;
-                    default:
-                        if ($akun['ROLE'] == 3) {
-                            echo 'admin dasboard';
-                        } else {
-                            include './pages/home.php';
-                        }
-                        break;
+                        case 'webinarku':
+                            include './pages/mentor/my_webinar.php';
+                            break;
+
+                        case 'cari':
+                            include './pages/search.php';
+                            break;
+
+                        case 'detail':
+                            include './pages/detail_webinar.php';
+                            break;
+                        default:
+                            if ($akun['ROLE'] == 3) {
+                                include './pages/admin/all_webinar.php';
+                            } else {
+                                include './pages/home.php';
+                            }
+                            break;
+                    }
+                } else {
+                    if ($akun['ROLE'] == 3) {
+                        include './pages/admin/all_webinar.php';
+                    } else {
+                        include './pages/home.php';
+                    }
                 }
             } else {
-                if ($akun['ROLE'] == 3) {
-                    echo '';
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+
+                    switch ($page) {
+                        case 'beranda':
+                            include './pages/home.php';
+                            break;
+
+                        case 'kategori':
+                            include './pages/kategori.php';
+                            break;
+
+                        case 'eventku':
+                            include './pages/my_event_page.php';
+                            break;
+
+                        case 'webinarku':
+                            include './pages/mentor/my_webinar.php';
+                            break;
+
+                        case 'cari':
+                            include './pages/search.php';
+                            break;
+
+                        case 'detail':
+                            include './pages/detail_webinar.php';
+                            break;
+                        default:
+                            include './pages/home.php';
+                            break;
+                    }
                 } else {
                     include './pages/home.php';
                 }
