@@ -15,6 +15,8 @@
     <link href="styles/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link href="styles/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="styles/plugins/dropify/dropify.min.css">
+    <link href="styles/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
 
     <link href="styles/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
 </head>
