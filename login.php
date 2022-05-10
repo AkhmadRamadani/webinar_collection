@@ -110,7 +110,15 @@ include "config/connection.php";
         $username = $_POST["NAMA"];
         $password = md5($_POST["PASSWORD"]);
         //lakukan pengecekan akun di table user
-        $ambil = $connect->query("SELECT*FROM user
+        $ambil = $connect->query("SELECT u.*, ud.BIODATA, 
+        ud.PENDIDIKAN, ud.PEKERJAAN, 
+        ud.FOTO_PROFILE, ud.BUKTI_IJAZAH,
+        am.MESSAGE, am.STATUS_PROPOSAL 
+        FROM user u 
+        LEFT JOIN user_detail ud 
+        ON u.USER_ID = ud.USER_ID
+        LEFT JOIN acc_mentor am 
+        ON u.USER_ID = am.USER_ID
                     where EMAIL='$username' AND PASSWORD='$password'");
 
         //menghitung akun yg terpanggil

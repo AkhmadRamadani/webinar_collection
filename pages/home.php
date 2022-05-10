@@ -26,65 +26,72 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
 
 ?>
 <div class="layout-px-spacing">
-    <div class="container-fluid ">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 mb-5 p-0">
-                <div id="style1" class="carousel slide style-custom-1" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#style1" data-slide-to="0" class="active"></li>
-                        <li data-target="#style1" data-slide-to="1"></li>
-                        <li data-target="#style1" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <?php
-                        $i = 0;
-                        while (($data_latest = mysqli_fetch_array($fetcheddatalatest))  && $i <= 2) {
 
-                        ?>
+    <?php
+    if (mysqli_num_rows($fetcheddatalatest) >= 1) {
+    ?> <div class="container-fluid ">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 mb-5 p-0">
+                    <div id="style1" class="carousel slide style-custom-1" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#style1" data-slide-to="0" class="active"></li>
+                            <li data-target="#style1" data-slide-to="1"></li>
+                            <li data-target="#style1" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <?php
+                            $i = 0;
+                            while (($data_latest = mysqli_fetch_array($fetcheddatalatest))  && $i <= 2) {
 
-                            <div class="carousel-item <?php echo $i == 0 ? "active" : ""; ?>">
+                            ?>
 
-                                <div class="container-fluid" style="height: 360px; z-index: 2; position: absolute; background-color: rgba(0,0,0,0.5);">
+                                <div class="carousel-item <?php echo $i == 0 ? "active" : ""; ?>">
 
-                                </div>
-                                <img class="d-block w-100 slide-image" style="height: 360px; object-fit: cover;" src="<?php echo $data_latest["COVER_WEBINAR"]; ?>" alt="">
-                                <a href="?page=detail&id=<?php echo $data_latest['WEBINAR_ID']; ?>">
+                                    <div class="container-fluid" style="height: 360px; z-index: 2; position: absolute; background-color: rgba(0,0,0,0.5);">
 
-                                    <div class="carousel-caption">
-                                        <span class="badge"><?php echo $data_latest["NAMA_KATEGORI"] ?></span>
-                                        <h3><?php echo $data_latest["JUDUL_WEBINAR"] ?></h3>
-                                        <div class="media">
-                                            <img src="styles/assets/img/90x90.jpg" class="" alt="avatar">
-                                            <div class="media-body">
-                                                <h6 class="user-name"><?php echo $data_latest["NAMA"] ?></h6>
-                                                <p class="meta-time"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-                                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                                                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                                                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                                                    </svg> <?php echo date("l, F jS, Y, g:i a", strtotime($data_latest['WAKTU_WEBINAR'])) ?></p>
+                                    </div>
+                                    <img class="d-block w-100 slide-image" style="height: 360px; object-fit: cover;" src="<?php echo $data_latest["COVER_WEBINAR"]; ?>" alt="">
+                                    <a href="?page=detail&id=<?php echo $data_latest['WEBINAR_ID']; ?>">
+
+                                        <div class="carousel-caption">
+                                            <span class="badge"><?php echo $data_latest["NAMA_KATEGORI"] ?></span>
+                                            <h3><?php echo $data_latest["JUDUL_WEBINAR"] ?></h3>
+                                            <div class="media">
+                                                <img src="styles/assets/img/90x90.jpg" class="" alt="avatar">
+                                                <div class="media-body">
+                                                    <h6 class="user-name"><?php echo $data_latest["NAMA"] ?></h6>
+                                                    <p class="meta-time"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                                        </svg> <?php echo date("l, F jS, Y, g:i a", strtotime($data_latest['WAKTU_WEBINAR'])) ?></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                </a>
-                            </div>
-                        <?php
-                            $i++;
-                        } ?>
+                                    </a>
+                                </div>
+                            <?php
+                                $i++;
+                            } ?>
+                        </div>
+                        <a class="carousel-control-prev" href="#style1" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#style1" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-                    <a class="carousel-control-prev" href="#style1" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#style1" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
+
 
 
     <section class="section">

@@ -24,6 +24,9 @@
 
     <?php
     session_start();
+    // error_reporting(0);
+    include './config/connection.php';
+
     $page = $_GET['page'];
     ?>
 
@@ -36,6 +39,197 @@
         <div class="loader">
             <div class="loader-content">
                 <div class="spinner-grow align-self-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ajukanMentorModal" tabindex="-1" role="dialog" aria-labelledby="ajukanMentorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ajukanMentorModalLabel">Ajukan Mentor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group mb-4">
+                            <label class="control-label">Biodata Singkat:</label>
+                            <textarea type="text" name="biodata" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Pendidikan Terakhir:</label>
+                            <input type="text" name="last_degree" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Pekerjaan Saat Ini:</label>
+                            <input type="text" name="occupation" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Bukti Ijazah Terakhir:</label>
+
+                            <div class="input-group mb-3">
+
+                                <div class="custom-file">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+
+                                    <input type="file" class="form-control" name="bukti_ijazah">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label">Foto Profil:</label>
+
+                            <div class="input-group mb-3">
+
+                                <div class="custom-file">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+
+                                    <input type="file" class="form-control" name="foto_profil">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save" name="kirim">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pengajuanMentorUpdate" tabindex="-1" role="dialog" aria-labelledby="pengajuanMentorUpdateLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pengajuanMentorUpdateLabel">Pengajuan Mentor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php
+                if (isset($_SESSION["user"])) {
+                    $akun = $_SESSION["user"];
+                    $userid = $akun["USER_ID"];
+                }
+                $query_get_data = "SELECT u.*, ud.BIODATA, 
+                    ud.PENDIDIKAN, ud.PEKERJAAN, 
+                    ud.FOTO_PROFILE, ud.BUKTI_IJAZAH,
+                    am.MESSAGE, am.STATUS_PROPOSAL 
+                    FROM user u 
+                    LEFT JOIN user_detail ud 
+                    ON u.USER_ID = ud.USER_ID
+                    LEFT JOIN acc_mentor am 
+                    ON u.USER_ID = am.USER_ID WHERE u.USER_ID = '$userid'";
+                // echo $query_get_data;
+                $execgetdata = mysqli_query($connect, $query_get_data);
+                $row = mysqli_fetch_assoc($execgetdata);
+                ?>
+                <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
+                    <div class="modal-body">
+                        <?php
+                        if ($row['STATUS_PROPOSAL'] == 0) {
+                        ?>
+                            <div class="alert alert-primary mb-4" role="alert">
+                                <strong>Maaf!</strong> Data sedang diverifikasi. Silakan tunggu
+                            </div>
+                        <?php
+                        } else if ($row['STATUS_PROPOSAL'] == 1) {
+                        ?>
+                            <div class="alert alert-success mb-4" role="alert">
+                                <strong>Selamat!</strong> Data Anda telah diverifikasi dan diterima oleh Admin. <br>
+                                Silakan login kembali untuk menjadi mentor!!!
+                            </div>
+                        <?php
+                        } else if ($row['STATUS_PROPOSAL'] == 2) {
+                        ?>
+                            <div class="alert alert-danger mb-4" role="alert">
+                                <strong>Maaf!</strong> Silakan perbaiki data Anda.<br>
+                                Message:
+                                <?php echo $row['MESSAGE']; ?>
+                            </div>
+                        <?php
+                        }
+
+                        if ($row['STATUS_PROPOSAL'] == 2 || $row['STATUS_PROPOSAL'] == 0) {
+                        ?>
+
+                            <div class="form-group mb-4">
+                                <label class="control-label">Biodata Singkat:</label>
+                                <textarea type="text" name="biodata_update" class="form-control"><?php echo $row['BIODATA']; ?></textarea>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="control-label">Pendidikan Terakhir:</label>
+                                <input type="text" name="last_degree_update" class="form-control" value="<?php echo $row['PENDIDIKAN']; ?>">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="control-label">Pekerjaan Saat Ini:</label>
+                                <input type="text" name="occupation_update" class="form-control" value="<?php echo $row['PEKERJAAN']; ?>">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="control-label">Bukti Ijazah Terakhir:</label>
+
+                                <div class="input-group mb-3">
+
+                                    <div class="custom-file">
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+
+                                        <input type="file" class="form-control" name="bukti_ijazah_update">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center user-info">
+                                <img src="<?php echo $row['BUKTI_IJAZAH'] === null ? "styles/assets/img/90x90.jpg" : $row['BUKTI_IJAZAH']; ?>" alt="avatar" style="width: 200px">
+                            </div>
+                            <input type="text" name="bukti_ijazah_update_setted" value="<?php echo $row['BUKTI_IJAZAH'] ?>" hidden>
+                            <input type="text" name="foto_profil_update_setted" value="<?php echo $row['FOTO_PROFILE'] ?>" hidden>
+                            <div class="form-group mb-4">
+                                <label class="control-label">Foto Profil:</label>
+
+                                <div class="input-group mb-3">
+
+                                    <div class="custom-file">
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+
+                                        <input type="file" class="form-control" name="foto_profil_update">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center user-info">
+                                <img src="<?php echo $row['FOTO_PROFILE'] === null ? "styles/assets/img/90x90.jpg" : $row['FOTO_PROFILE']; ?>" alt="avatar" style="width: 200px">
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+                    <div class="modal-footer">
+                        <?php
+                        if ($row['STATUS_PROPOSAL'] == 0) {
+                        ?>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <?php
+                        } else if ($row['STATUS_PROPOSAL'] == 2) {
+                        ?>
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Update" name="update">
+                        <?php
+                        } else if ($row['STATUS_PROPOSAL'] == 1) {
+                        ?>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Logout" name="logout">
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -112,6 +306,20 @@
                                             </svg>
                                         </a>
                                     </li>
+                                <?php
+                                }
+                                if ($akun['ROLE'] == 3) {
+                                ?>
+                                    <li class="menu single-menu <?php echo $page === 'mentor' ? 'active' : '' ?> ">
+                                        <a href="index.php?page=mentor" class="dropdown-toggle">
+                                            <div class="">
+                                                <span>Mentor</span>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                                <polyline points="6 9 12 15 18 9"></polyline>
+                                            </svg>
+                                        </a>
+                                    </li>
                             <?php
                                 }
                             }
@@ -137,11 +345,20 @@
 
                                         $akun = $_SESSION["user"];
                                         if ($akun['ROLE'] == 1) {
+                                            if ($akun['STATUS_PROPOSAL'] != null) {
                                     ?>
-                                            <li>
-                                                <a href="#"> Ajukan Mentor </a>
-                                            </li>
+
+                                                <li>
+                                                    <a href="" data-toggle="modal" data-target="#pengajuanMentorUpdate"> Lihat Pengajuan Mentor </a>
+                                                </li>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <li>
+                                                    <a href="" data-toggle="modal" data-target="#ajukanMentorModal"> Ajukan Mentor </a>
+                                                </li>
                                         <?php
+                                            }
                                         }
                                     } else {
                                         ?>
@@ -310,8 +527,16 @@
                             include './pages/search.php';
                             break;
 
+                        case 'mentor':
+                            include './pages/admin/mentor_manage.php';
+                            break;
+
                         case 'detail':
                             include './pages/detail_webinar.php';
+                            break;
+
+                        case 'ajukan_mentor':
+                            include './pages/mentor/ajukan_mentor.php';
                             break;
                         default:
                             if ($akun['ROLE'] == 3) {
@@ -356,6 +581,11 @@
                         case 'detail':
                             include './pages/detail_webinar.php';
                             break;
+
+                        case 'mentor':
+                            include './pages/admin/mentor_manage.php';
+                            break;
+
                         default:
                             include './pages/home.php';
                             break;
@@ -393,3 +623,155 @@
 </body>
 
 </html>
+
+<?php
+
+if (isset($_SESSION["user"])) {
+
+    $akun = $_SESSION["user"];
+    $id_user = $akun['USER_ID'];
+}
+
+
+/**
+ *
+ * INSERT QUERY 
+ * 
+ */
+@$biodata = $_POST['biodata'];
+@$last_degree = $_POST['last_degree'];
+@$occupation = $_POST['occupation'];
+// @$bukti_ijazah = $_POST['bukti_ijazah'];
+// @$foto_profil = $_POST['foto_profil'];
+
+/**
+ * Upload Ijazah File
+ * */
+$dir_ijazah = 'media/ijazah/';
+@$nama_file_ijazah = $_FILES['bukti_ijazah']['name'];
+@$nama_tmp_ijazah = $_FILES['bukti_ijazah']['tmp_name'];
+@$tipe_of_ijazah = pathinfo($nama_file_ijazah, PATHINFO_EXTENSION);
+$upload_file_ijazah = $dir_ijazah . md5(microtime()) . "." . $tipe_of_ijazah;
+$upload_ijazah = move_uploaded_file($nama_tmp_ijazah, $upload_file_ijazah);
+
+/**
+ * Upload Foto Profile File
+ */
+$dir_profile = 'media/profile/';
+@$nama_file_profile = $_FILES['foto_profil']['name'];
+@$nama_tmp_profile = $_FILES['foto_profil']['tmp_name'];
+@$tipe_of_profile = pathinfo($nama_file_profile, PATHINFO_EXTENSION);
+$upload_file_profile = $dir_profile . md5(microtime()) . "." . $tipe_of_profile;
+$upload_profile = move_uploaded_file($nama_tmp_profile, $upload_file_profile);
+
+@$kirim = $_POST['kirim'];
+$query = "INSERT INTO `user_detail`(`USER_ID`, `BIODATA`, `PENDIDIKAN`, `PEKERJAAN`, `FOTO_PROFILE`, `BUKTI_IJAZAH`) VALUES ('$id_user','$biodata','$last_degree','$occupation','$upload_file_profile','$upload_file_ijazah')";
+if ($kirim) {
+    if ($upload_profile) {
+        if ($upload_ijazah) {
+            $hasil = mysqli_query($connect, $query);
+            if ($hasil) {
+                $query_insert_acc_webinar = "INSERT INTO `acc_mentor`(`USER_ID`, `STATUS_PROPOSAL`) VALUES ('$id_user','0')";
+                $add_acc_webinar = mysqli_query($connect, $query_insert_acc_webinar);
+                if ($add_acc_webinar) {
+                    echo "<script>location='index.php';</script>";
+                } else {
+                    // echo "3";
+                    echo "<script>alert('Gagal menambahkan data'); </script>";
+                    // echo $query_insert_acc_webinar;
+                    echo "<script>location='index.php';</script>";
+                }
+            } else {
+                // echo "2";
+                // echo $query;
+                echo "<script>alert('Gagal menambahkan data'); </script>";
+                echo "<script>location='index.php';</script>";
+            }
+        }
+    } else {
+
+        // echo "</p>";
+        // echo '<pre>';
+        // echo 'Here is some more debugging info:';
+        // print_r($_FILES['']);
+        // print "</pre>";
+        // echo "1";
+        // echo $upload;
+        // echo $query;
+        echo "<script>alert('Gagal menambahkan data'); </script>";
+        echo "<script>location='index.php';</script>";
+    }
+}
+
+
+?>
+<?php
+/**
+ * 
+ * UPDATE Query
+ * 
+ */
+@$biodata_update = $_POST['biodata_update'];
+@$last_degree_update = $_POST['last_degree_update'];
+@$occupation_update = $_POST['occupation_update'];
+@$bukti_ijazah_update_setted = $_POST['bukti_ijazah_update_setted'];
+@$foto_profil_update_setted = $_POST['foto_profil_update_setted'];
+
+
+
+/**
+ * Upload Ijazah File
+ * */
+$dir_ijazah_update = 'media/ijazah/';
+@$nama_file_ijazah_update = $_FILES['bukti_ijazah_update']['name'];
+@$nama_tmp_ijazah_update = $_FILES['bukti_ijazah_update']['tmp_name'];
+@$tipe_of_ijazah_update = pathinfo($nama_file_ijazah_update, PATHINFO_EXTENSION);
+
+if ($nama_file_ijazah_update == null) {
+    $upload_file_ijazah_update = $bukti_ijazah_update_setted;
+} else {
+    $upload_file_ijazah_update = $dir_ijazah_update . md5(microtime()) . "." . $tipe_of_ijazah_update;
+}
+
+$upload_ijazah_update = move_uploaded_file($nama_tmp_ijazah_update, $upload_file_ijazah_update);
+
+
+/**
+ * Upload Foto Profile File
+ */
+$dir_profil_update = 'media/profile/';
+@$nama_file_profil_update = $_FILES['foto_profil_update']['name'];
+@$nama_tmp_profil_update = $_FILES['foto_profil_update']['tmp_name'];
+@$tipe_of_profil_update = pathinfo($nama_file_profil_update, PATHINFO_EXTENSION);
+
+if ($nama_file_profil_update == null) {
+    $upload_file_profil_update = $foto_profil_update_setted;
+} else {
+    $upload_file_profil_update = $dir_profil_update . md5(microtime()) . "." . $tipe_of_profil_update;
+}
+
+$upload_profil_update = move_uploaded_file($nama_tmp_profil_update, $upload_file_profil_update);
+
+
+@$update = $_POST['update'];
+$query_update = "UPDATE `user_detail` SET `BIODATA`='$biodata_update',`PENDIDIKAN`='$last_degree_update',`PEKERJAAN`='$occupation_update',`FOTO_PROFILE`='$upload_file_profil_update',`BUKTI_IJAZAH`='$upload_file_ijazah_update' WHERE `USER_ID`='$id_user'";
+if ($update) {
+    $hasil = mysqli_query($connect, $query_update);
+    if ($hasil) {
+        $query_update_acc_webinar = "UPDATE `acc_mentor` SET `STATUS_PROPOSAL`='0' WHERE `USER_ID`='$id_user'";
+        $update_acc_webinar = mysqli_query($connect, $query_update_acc_webinar);
+        if ($update_acc_webinar) {
+            echo "<script>location='index.php';</script>";
+        } else {
+            echo "<script>alert('Gagal mengupdate data acceptance'); </script>";
+            echo "<script>location='index.php';</script>";
+        }
+    } else {
+        // echo "2";
+        // echo $query;
+        echo "<script>alert('Gagal mengupdate data'); </script>";
+        echo "<script>location='index.php';</script>";
+    }
+}
+
+?>

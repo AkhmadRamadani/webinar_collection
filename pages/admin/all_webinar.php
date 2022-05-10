@@ -164,8 +164,8 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                             <div class="form-group mb-4">
                                                 <label class="control-label">Acceptance:</label>
                                                 <select name="acceptance" id="" class="selectpicker form-control" form="formupdate<?php echo $data['WEBINAR_ID']; ?>">
-                                                    <option value="1">Accept</option>
-                                                    <option value="2">Decline</option>
+                                                    <option value="1" <?php echo $data['STATUS_PROPOSAL'] == 1  ? 'selected' : '' ?>>Accept</option>
+                                                    <option value="2" <?php echo $data['STATUS_PROPOSAL'] == 2  ? 'selected' : '' ?>>Decline</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4">
