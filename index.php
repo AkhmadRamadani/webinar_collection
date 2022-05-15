@@ -625,11 +625,11 @@
 </html>
 
 <?php
-
+@$id_user = 0;
 if (isset($_SESSION["user"])) {
 
-    $akun = $_SESSION["user"];
-    $id_user = $akun['USER_ID'];
+    @$akun = $_SESSION["user"];
+    @$id_user = $akun['USER_ID'];
 }
 
 
@@ -674,7 +674,8 @@ if ($kirim) {
                 $query_insert_acc_webinar = "INSERT INTO `acc_mentor`(`USER_ID`, `STATUS_PROPOSAL`) VALUES ('$id_user','0')";
                 $add_acc_webinar = mysqli_query($connect, $query_insert_acc_webinar);
                 if ($add_acc_webinar) {
-                    echo "<script>location='index.php';</script>";
+                    echo "<script>alert('Pendaftaran berhasil, Silakan login kembali'); </script>";
+                    echo "<script>location='config/logout_proses.php';</script>";
                 } else {
                     // echo "3";
                     echo "<script>alert('Gagal menambahkan data'); </script>";
