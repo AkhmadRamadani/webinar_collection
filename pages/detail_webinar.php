@@ -23,8 +23,8 @@ $fetcheddata = mysqli_fetch_assoc($data);
             <div class="widget-content widget-content-area">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
-                        <div class="image-wrapper mb-2" style="background: #888ea8; text-align: center;">
-                            <img src="<?php echo $fetcheddata['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $fetcheddata['COVER_WEBINAR']; ?>" style="height: 500px; max-width: 100%; object-fit: cover;" alt>
+                        <div class="image-wrapper mb-2" style="background:#F1F6F9; text-align: center; border-radius: 15px; /* border: 2px solid #4361ee;*/">
+                            <img src="<?php echo $fetcheddata['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $fetcheddata['COVER_WEBINAR']; ?>" style="height: 500px; max-width: 100%; object-fit: cover; border-radius: 15px;" alt>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
@@ -39,7 +39,7 @@ $fetcheddata = mysqli_fetch_assoc($data);
                             </svg>&nbsp;<?php echo $fetcheddata['LOOKED']; ?>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 mt-2">
                             <div class="mt-1 mb-1" style="width: 550px; height: 20px;"><h6 class=""><?php echo date("l, F jS, Y, g:i a", strtotime($fetcheddata['WAKTU_WEBINAR'])) ?></h6></div>
                             <div class="mt-1 mb-1" style="width: 550px; height: 50px;"><h3 class=""><?php echo $fetcheddata['JUDUL_WEBINAR']; ?></h3></div>
                             <div class="mt-1 mb-1" style="width: 550px; height: 280px;"><p class=""><?php echo $fetcheddata['DESKRIPSI_WEBINAR']; ?></p></div>

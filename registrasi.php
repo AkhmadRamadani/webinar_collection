@@ -48,7 +48,9 @@ include "config/connection.php";
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-
+                        <div class="mb-4"><a href="index.php">
+                        <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
+                        </div>
                         <h1 class="">Register</h1>
                         <p class="signup-link register">Already have an account? <a href="login.php">Log in</a></p>
 
@@ -79,7 +81,7 @@ include "config/connection.php";
                                 <!-- End Email -->
 
                                 <!-- Password -->
-                                <div id="password-field" class="field-wrapper input mb-2">
+                                <div id="password-field" class="field-wrapper input">
                                     <div class="d-flex justify-content-between">
                                         <label for="password">PASSWORD</label>
                                     </div>
