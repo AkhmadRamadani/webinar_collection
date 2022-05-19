@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include "config/connection.php";
+session_start();
+?>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>Webinar Collection - User Profile Page</title>
-    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png"/>
+    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png" />
     <link href="styles/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="styles/assets/js/loader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
@@ -236,15 +240,16 @@
                         <div class="text-center user-info">
                             <img src="styles/assets/img/90x90.jpg" alt="avatar">
                             <?php
-                            include "config/connection.php";
-
-                            $query = "SELECT nama,email from user";
+                            if (isset($_SESSION["user"])) {
+                                $akun = $_SESSION["user"];
+                                $userid = $akun["USER_ID"];
+                            }
+                            $query = "SELECT * from user u where user_id = '$userid'";
                             $result = mysqli_query($connect, $query);
 
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
+                            while ($row = mysqli_fetch_assoc($result)) {
                             ?>
-                                    <p class=""><?php echo $row['nama']; ?> </p>
+                                <p class=""><?php echo $row['NAMA']; ?> </p>
                         </div>
                         <div class="user-info-list">
                             <div class="">
@@ -253,14 +258,13 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
-                                        </svg> <?php echo $row['email']; ?>
+                                        </svg> <?php echo $row['EMAIL']; ?>
                                     </li>
                                 </ul>
                             </div>
-                    <?php
-                                }
+                        <?php
                             }
-                    ?>
+                        ?>
                         </div>
                     </div>
                 </div>
