@@ -5,7 +5,7 @@ $selected_id_kategori = $_GET['kategori'];
 
 if (isset($_GET['kategori'])) {
 
-    $query = "SELECT w.*, wk.*, k.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+    $query = "SELECT w.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 INNER JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
@@ -19,12 +19,10 @@ LEFT JOIN like_webinar l
  GROUP BY w.WEBINAR_ID";
     //  echo $query;
 } else {
-    $query = "SELECT w.*, wk.*, k.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+    $query = "SELECT w.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
-LEFT JOIN kategori k 
- ON wk.KATEGORI_ID = k.KATEGORI_ID 
 INNER JOIN user u
  ON w.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
@@ -109,13 +107,14 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                         <?php
                         while ($data = mysqli_fetch_array($fetcheddata)) {
                         ?>
+                        <a href="?page=detail&id=<?php echo $data['WEBINAR_ID']; ?>">
                             <div class="col-lg-4 p-4 " >
                                 <div class="item-box">
                                     <div class="card component-card_9">
                                         <img src="<?php echo $data['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $data['COVER_WEBINAR']; ?>" class="card-img-top img-thumbnail" alt="widget-card-2" style="height: 400px; max-width: 100%; object-fit: cover;">
                                         <div class="card-body">
                                             <p class="meta-date"><?php echo date("l, F jS, Y, g:i a", strtotime($data['WAKTU_WEBINAR'])) ?></p>
-                                            <a href="webinar.php?WEBINAR_ID=<?=$data['WEBINAR_ID']?>"><h5 class="card-title"><?php echo $data['JUDUL_WEBINAR']; ?></h5></a>
+                                            <h5 class="card-title"><?php echo $data['JUDUL_WEBINAR']; ?></h5>
                                             <p class="card-text"><?php echo $data['DESKRIPSI_WEBINAR']; ?></p>
 
                                             <div class="meta-info">
@@ -147,7 +146,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                     </div>
                                 </div>
                             </div>
-
+                        </a>
                         <?php
                         }
                         ?>
