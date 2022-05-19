@@ -38,6 +38,7 @@ if (isset($_SESSION['USER_ID'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>Webion - Mentor Create Webinar</title>
+    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png"/>
     <link href="styles/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="styles/assets/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->

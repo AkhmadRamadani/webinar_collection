@@ -3,6 +3,7 @@
 
 <head>
     <title>Webinar Collection</title>
+    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -239,7 +240,7 @@
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
             </a>
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="index.php"><img alt="logo" src="styles/assets/img/90x90.jpg"> <span class="navbar-brand-name">WEBION</span></a>
+                <a class="navbar-brand" href="index.php"><img alt="logo" src="styles/assets/img/webion.png"> <span class="navbar-brand-name">WEBION</span></a>
             </div>
             <ul class="navbar-item topbar-navigation">
                 <!-- START TOPBAR -->
@@ -373,6 +374,15 @@
                                     <?php
                                     }
                                     ?>
+                                        <li>
+                                            <a href="FAQ.php"> FAQ </a>
+                                        </li>
+                                        <li>
+                                            <a href="AboutUs.php"> About Us </a>
+                                        </li>
+                                        <li>
+                                            <a href="ContactUs.php"> Contact Us </a>
+                                        </li>
                                 </ul>
                             </li>
                         </ul>

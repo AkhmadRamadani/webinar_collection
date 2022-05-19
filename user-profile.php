@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>Webinar Collection - User Profile Page</title>
+    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png"/>
     <link href="styles/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="styles/assets/js/loader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
@@ -37,7 +38,7 @@
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"></a>
             <div class="nav-logo align-self-center">
                 <a class="navbar-brand" href="/">
-                    <img alt="logo" src="styles/assets/img/90x90.jpg">
+                    <img alt="logo" src="styles/assets/img/webion.png">
                     <span class="navbar-brand-name">WEBION</span></a>
             </div>
 
