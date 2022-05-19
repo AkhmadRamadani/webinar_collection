@@ -3,7 +3,7 @@
 
 <head>
     <title>Webinar Collection</title>
-    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png"/>
+    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -374,15 +374,15 @@
                                     <?php
                                     }
                                     ?>
-                                        <li>
-                                            <a href="FAQ.php"> FAQ </a>
-                                        </li>
-                                        <li>
-                                            <a href="AboutUs.php"> About Us </a>
-                                        </li>
-                                        <li>
-                                            <a href="ContactUs.php"> Contact Us </a>
-                                        </li>
+                                    <li>
+                                        <a href="FAQ.php"> FAQ </a>
+                                    </li>
+                                    <li>
+                                        <a href="AboutUs.php"> About Us </a>
+                                    </li>
+                                    <li>
+                                        <a href="ContactUs.php"> Contact Us </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -467,7 +467,7 @@
                                 </div>
                             </div>
                             <div class="dropdown-item">
-                                <a href="user_profile.html">
+                                <a href="user-profile.php">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
