@@ -105,7 +105,7 @@ $fetcheddata = mysqli_query($connect, $query);
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">Delete Kategori</h5>
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">Delete Mentor</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
