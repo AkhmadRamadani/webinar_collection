@@ -115,7 +115,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                         <div class="card-body">
                                             <p class="meta-date"><?php echo date("l, F jS, Y, g:i a", strtotime($data['WAKTU_WEBINAR'])) ?></p>
                                             <h5 class="card-title"><?php echo $data['JUDUL_WEBINAR']; ?></h5>
-                                            <p class="card-text"><?php echo $data['DESKRIPSI_WEBINAR']; ?></p>
+                                            <p class="card-text"><?php echo substr($data['DESKRIPSI_WEBINAR'], 0, 25) . '...'; ?></p>
 
                                             <div class="meta-info">
                                                 <div class="meta-user">
