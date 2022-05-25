@@ -40,7 +40,9 @@ include "config/connection.php";
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-
+                    <div class="mb-4"><a href="index.php">
+                        <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
+                        </div>
                         <h1 class="">Login</h1>
                         <p class="">Log in to your account to continue.</p>
 
@@ -71,7 +73,7 @@ include "config/connection.php";
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                 </div>
-                                <div class="d-sm-flex justify-content-between">
+                                <div class="d-sm-flex justify-content-between mb-3">
                                     <div class="field-wrapper">
                                         <button class="btn btn-primary" name="LOGIN">Log In</button>
                                     </div>
