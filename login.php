@@ -10,7 +10,7 @@ include "config/connection.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>Webion - Login Page</title>
-    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png"/>
+    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png" />
     <link href="styles/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="styles/assets/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -53,7 +53,7 @@ include "config/connection.php";
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input type="text" name="NAMA" class="form_login" placeholder="Isi email anda ..">
+                                    <input type="text" name="NAMA" class="form_login" placeholder="Email">
                                 </div>
 
                                 <div id="password-field" class="field-wrapper input mb-2">
@@ -65,7 +65,7 @@ include "config/connection.php";
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
-                                    <input type="text" name="PASSWORD" class="form_login" placeholder="Isi password anda ..">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                         <circle cx="12" cy="12" r="3"></circle>
