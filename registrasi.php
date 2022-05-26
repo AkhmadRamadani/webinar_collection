@@ -65,7 +65,7 @@ include "config/connection.php";
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input id="name" name="name" type="text" class="form-control" placeholder="Name" required>
+                                    <input id="name" name="name" type="text" class="form-login" placeholder="Name" required>
                                 </div>
                                 <!-- End Username -->
 
@@ -76,7 +76,7 @@ include "config/connection.php";
                                         <circle cx="12" cy="12" r="4"></circle>
                                         <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
                                     </svg>
-                                    <input id="email" name="email" type="text" value="" class="form-control" placeholder="Email" required>
+                                    <input id="email" name="email" type="text" value="" class="form-login" placeholder="Email" required>
                                 </div>
                                 <!-- End Email -->
 
@@ -89,7 +89,7 @@ include "config/connection.php";
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
-                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
+                                    <input id="password" name="password" type="password" class="form-login" placeholder="Password" required>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                         <circle cx="12" cy="12" r="3"></circle>

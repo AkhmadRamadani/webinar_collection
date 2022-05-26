@@ -61,7 +61,7 @@ include "config/connection.php";
                                 <div id="password-field" class="field-wrapper input mb-2">
                                     <div class="d-flex justify-content-between">
                                         <label for="PASSWORD">PASSWORD</label>
-                                        <a href="......" class="forgot-pass-link">Forgot Password?</a>
+                                        <a href="forgotpass.php" class="forgot-pass-link">Forgot Password?</a>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock">
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
