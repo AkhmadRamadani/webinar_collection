@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="styles/assets/css/elements/alert.css">
     <link rel="stylesheet" type="text/css" href="styles/plugins/bootstrap-select/bootstrap-select.min.css">
 
+    <link href="styles/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
+
     <?php
     session_start();
     // error_reporting(0);
@@ -454,7 +456,7 @@
                     <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
                         <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="media">
-                                <img src="styles/assets/img/90x90.jpg" class="img-fluid" alt="admin-profile">
+                                <img src="styles/assets/img/user.png" class="img-fluid" alt="admin-profile">
                             </div>
                         </a>
                         <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
@@ -468,7 +470,6 @@
                             </div>
                             <div class="dropdown-item">
                             <?php
-                            if (isset($_SESSION["user"])) {
                                 $akun = $_SESSION["user"];
                                 if ($akun['ROLE'] == 1 || $akun['ROLE'] == 2) {
                                     echo $page === 'profile' ? 'active' : ''
@@ -481,7 +482,7 @@
                                 </a>
                             <?php
                                 }
-                            }
+                            
                             ?>
                             </div>
                             <div class="dropdown-item">
