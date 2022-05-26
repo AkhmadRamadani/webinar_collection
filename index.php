@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Webion - Dashboard Page</title>
+    <title>Webinar Collection</title>
     <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -472,7 +472,6 @@
                             <?php
                                 $akun = $_SESSION["user"];
                                 if ($akun['ROLE'] == 1 || $akun['ROLE'] == 2) {
-                                    echo $page === 'profile' ? 'active' : ''
                             ?>
                                 <a href="index.php?page=profile" class="dropdown-toggle">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
@@ -482,7 +481,6 @@
                                 </a>
                             <?php
                                 }
-                            
                             ?>
                             </div>
                             <div class="dropdown-item">
