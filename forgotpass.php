@@ -50,7 +50,7 @@ include "config/connection.php";
                             <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
                         </div>
                         <h1 class="">Password Recovery</h1>
-                        <p class="signup-link recovery">Enter your email!</p>
+                        <p class="signup-link recovery">Enter your name & email!</p>
                         
                         <form class="text-left" name="forgot" method="POST">
                             <div class="form">
@@ -110,11 +110,11 @@ include "config/connection.php";
                                         <button type="submit" name="change" onclick="return valid();" class="btn btn-primary" value="">Reset</button>
                                     </div>
                                 </div>
-                                <!-- <div class="mt-4">
+                                <div class="mt-4">
                                     <p class="signup-link recovery">Back?
                                         <a href="login.php">Log in</a>
                                     </p>
-                                </div> -->
+                                </div>
                             </div>
                         </form>
 
