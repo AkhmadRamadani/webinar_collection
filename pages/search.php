@@ -4,7 +4,7 @@ $keyword = $_POST['keyword'];
 $query = "SELECT w.*, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT 
 FROM webinar w JOIN user u ON w.USER_ID = u.USER_ID 
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID
-
+JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
 GROUP BY w.WEBINAR_ID
 HAVING (w.JUDUL_WEBINAR LIKE '%$keyword%' OR w.DESKRIPSI_WEBINAR LIKE '%$keyword%') 
 ORDER BY w.LOOKED DESC;";
