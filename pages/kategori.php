@@ -15,7 +15,9 @@ INNER JOIN user u
  ON w.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID 
- WHERE wk.KATEGORI_ID = '$selected_id_kategori'
+ JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID 
+ WHERE aw.STATUS_PROPOSAL = 1 
+ AND wk.KATEGORI_ID = '$selected_id_kategori'
  GROUP BY w.WEBINAR_ID";
     //  echo $query;
 } else {
@@ -27,6 +29,7 @@ INNER JOIN user u
  ON w.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID
+ JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
  GROUP BY w.WEBINAR_ID;";
 }
 

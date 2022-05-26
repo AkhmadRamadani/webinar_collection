@@ -9,20 +9,21 @@ $id_user = $akun['USER_ID'];
 $query_comingsoon = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
 JOIN user u ON w.USER_ID = u.USER_ID 
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
-JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID AND wr.USER_ID = u.USER_ID 
+JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID
+WHERE w.WAKTU_WEBINAR > '$currentdate'  AND wr.USER_ID ='$id_user'
 GROUP BY w.WEBINAR_ID 
-HAVING u.USER_ID = $id_user AND w.WAKTU_WEBINAR > '$currentdate' 
 ORDER BY w.WEBINAR_ID DESC";
 $fetcheddata_comingsoon = mysqli_query($connect, $query_comingsoon);
 
+// echo $query_comingsoon;
 // ON PROGRESS QUERY
 
 $query_onprogress = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
 JOIN user u ON w.USER_ID = u.USER_ID 
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
-JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID AND wr.USER_ID = u.USER_ID 
+JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID
+WHERE  w.WAKTU_WEBINAR = '$currentdate' AND wr.USER_ID ='$id_user'
 GROUP BY w.WEBINAR_ID 
-HAVING u.USER_ID = $id_user AND w.WAKTU_WEBINAR = '$currentdate'
 ORDER BY w.WEBINAR_ID DESC";
 $fetcheddata_onprogress = mysqli_query($connect, $query_onprogress);
 
@@ -32,9 +33,9 @@ $fetcheddata_onprogress = mysqli_query($connect, $query_onprogress);
 $query_finished = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
 JOIN user u ON w.USER_ID = u.USER_ID 
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
-JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID AND wr.USER_ID = u.USER_ID 
+JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID
+WHERE w.WAKTU_WEBINAR < '$currentdate'  AND wr.USER_ID ='$id_user'
 GROUP BY w.WEBINAR_ID 
-HAVING u.USER_ID = $id_user AND w.WAKTU_WEBINAR < '$currentdate' 
 ORDER BY w.WEBINAR_ID DESC";
 $fetcheddata_finished = mysqli_query($connect, $query_finished);
 
@@ -45,7 +46,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
         <div class="col-sm-3 col-12">
             <div class="nav flex-column nav-pills mb-sm-0 mb-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active mb-2" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Coming Soon</a>
-                <a class="nav-link mb-2" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile">On Progress</a>
+                <a class="nav-link mb-2" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile">Today's Webinar</a>
                 <a class="nav-link mb-2" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages">Finished</a>
             </div>
         </div>
@@ -186,7 +187,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
                     <section class="section">
                         <div class="page-header px-4">
                             <div class="page-title">
-                                <h3>On Progress</h3>
+                                <h3>Today's Webinar</h3>
                             </div>
                         </div>
 
