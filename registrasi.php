@@ -97,14 +97,14 @@ include "config/connection.php";
                                 </div>
                                 <!-- End Password -->
 
-                                <div class="field-wrapper terms_condition">
-                                    <div class="n-chk">
+                                
+                                    <div class="">
                                         <label class="new-control new-checkbox checkbox-primary">
                                             <input type="checkbox" class="new-control-input">
                                         </label>
                                     </div>
 
-                                </div>
+                                
 
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper">
