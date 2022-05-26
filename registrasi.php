@@ -10,8 +10,8 @@ include "config/connection.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Webion - Registrasi Page</title>
-    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png"/>
+    <title>Webion - Register Page</title>
+    <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png" />
     <link href="styles/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="styles/assets/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -49,7 +49,7 @@ include "config/connection.php";
                 <div class="form-container">
                     <div class="form-content">
                         <div class="mb-4"><a href="index.php">
-                        <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
+                                <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
                         </div>
                         <h1 class="">Register</h1>
                         <p class="signup-link register">Already have an account? <a href="login.php">Log in</a></p>
@@ -60,12 +60,12 @@ include "config/connection.php";
 
                                 <!-- Username -->
                                 <div id="username-field" class="field-wrapper input">
-                                    <label for="name">NAMA</label>
+                                    <label for="name">NAME</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama" required>
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="Name" required>
                                 </div>
                                 <!-- End Username -->
 
@@ -97,14 +97,14 @@ include "config/connection.php";
                                 </div>
                                 <!-- End Password -->
 
-                                <div class="field-wrapper terms_condition">
-                                    <div class="n-chk">
+                                
+                                    <div class="">
                                         <label class="new-control new-checkbox checkbox-primary">
                                             <input type="checkbox" class="new-control-input">
                                         </label>
                                     </div>
 
-                                </div>
+                                
 
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper">
