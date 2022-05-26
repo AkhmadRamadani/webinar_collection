@@ -1,9 +1,17 @@
 <?php
 include './config/connection.php';
-$query = "SELECT w.*, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT 
-FROM webinar w JOIN user u ON w.USER_ID = u.USER_ID 
-LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
-GROUP BY w.WEBINAR_ID
+$query = "SELECT w.*, wk.*, k.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+FROM webinar w
+LEFT JOIN webinar_kategori wk 
+ ON wk.WEBINAR_ID = w.WEBINAR_ID 
+LEFT JOIN kategori k 
+ ON wk.KATEGORI_ID = k.KATEGORI_ID 
+INNER JOIN user u
+ ON w.USER_ID = u.USER_ID
+LEFT JOIN like_webinar l
+ ON w.WEBINAR_ID = l.WEBINAR_ID
+ JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
+ GROUP BY w.WEBINAR_ID
 ORDER BY w.LOOKED DESC;";
 
 $currentdate = date("Y-m-d");
@@ -18,6 +26,7 @@ INNER JOIN user u
  ON w.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID
+ JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
  GROUP BY w.WEBINAR_ID
  HAVING w.WAKTU_WEBINAR > '$currentdate'
 ORDER BY w.WAKTU_WEBINAR DESC LIMIT 3;";
