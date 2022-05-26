@@ -40,8 +40,8 @@ include "config/connection.php";
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-                    <div class="mb-4"><a href="index.php">
-                        <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
+                        <div class="mb-4"><a href="index.php">
+                                <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
                         </div>
                         <h1 class="">Login</h1>
                         <p class="">Log in to your account to continue.</p>
@@ -67,7 +67,7 @@ include "config/connection.php";
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
-                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
+                                    <input id="password" name="PASSWORD" type="password" class="form_login" placeholder="Password">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                         <circle cx="12" cy="12" r="3"></circle>
