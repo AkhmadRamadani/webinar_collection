@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Webinar Collection</title>
+    <title>Webion - Dashboard Page</title>
     <link rel="icon" type="image/x-icon" href="styles/assets/img/logo.png" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -467,12 +467,22 @@
                                 </div>
                             </div>
                             <div class="dropdown-item">
-                                <a href="user-profile.php">
+                            <?php
+                            if (isset($_SESSION["user"])) {
+                                $akun = $_SESSION["user"];
+                                if ($akun['ROLE'] == 1 || $akun['ROLE'] == 2) {
+                                    echo $page === 'profile' ? 'active' : ''
+                            ?>
+                                <a href="index.php?page=profile" class="dropdown-toggle">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg> <span>Profile</span>
                                 </a>
+                            <?php
+                                }
+                            }
+                            ?>
                             </div>
                             <div class="dropdown-item">
                                 <a href="config/logout_proses.php">
@@ -516,6 +526,14 @@
                                 include './pages/admin/all_webinar.php';
                             } else {
                                 include './pages/home.php';
+                            }
+                            break;
+                        
+                        case 'profile':
+                            if ($akun['ROLE'] == 1){
+                                include './pages/user-profile.php';
+                            } else if ($akun['ROLE'] == 2){
+                                include './pages/mentor/mentor-profile.php';
                             }
                             break;
 
