@@ -1,8 +1,10 @@
 <?php
 include './config/connection.php';
 $keyword = $_POST['keyword'];
-$query = "SELECT w.*, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT 
+$query = "SELECT w.*, u.NAMA, u.EMAIL,d.*, COUNT(l.ID_LIKE) LIKE_COUNT 
 FROM webinar w JOIN user u ON w.USER_ID = u.USER_ID 
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID
 JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
 GROUP BY w.WEBINAR_ID
@@ -48,7 +50,7 @@ $fetcheddata = mysqli_query($connect, $query);
                                         <div class="meta-info">
                                             <div class="meta-user">
                                                 <div class="avatar avatar-sm">
-                                                    <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data['NAMA']), 0, 2); ?></span>
+                                                    <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
                                                 </div>
                                                 <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                             </div>

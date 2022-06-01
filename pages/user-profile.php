@@ -1,4 +1,4 @@
-    <!--  Main Container  -->
+  <!--  Main Container  -->
     <div class="main-container" id="container">
 
         <div class="overlay"></div>

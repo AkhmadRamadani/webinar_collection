@@ -7,7 +7,7 @@ $id_webinar = $_GET['id'];
 @$id_user = $akun['USER_ID'];
 
 $query = "	SELECT * FROM 
-(SELECT w.*, wk.KATEGORI_ID, k.NAMA_KATEGORI, u.NAMA, COUNT(l.ID_LIKE) LIKE_COUNT  
+(SELECT w.*, wk.KATEGORI_ID, k.NAMA_KATEGORI, u.NAMA, d.FOTO_PROFILE, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
@@ -15,6 +15,8 @@ LEFT JOIN kategori k
  ON wk.KATEGORI_ID = k.KATEGORI_ID 
 INNER JOIN user u
  ON w.USER_ID = u.USER_ID
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID
  GROUP BY w.WEBINAR_ID
@@ -93,7 +95,9 @@ $fetcheddata = mysqli_fetch_assoc($data);
                             <p class=""><?php echo $fetcheddata['DESKRIPSI_WEBINAR']; ?></p>
                         </div>
                         <div class="image-wrapper avatar mt-2 mb-4" style="width: 550px; height: 50px;">
-                            <img alt="avatar" src="styles/assets/img/90x90.jpg" class="rounded-circle" style="width: 50px; height: 50px;" />&nbsp;&nbsp;&nbsp;<?php echo $fetcheddata['NAMA']; ?>
+                        <a href="?page=userseen&id=<?php echo $fetcheddata['USER_ID']; ?>">
+                            <img alt="avatar" src="<?php echo $fetcheddata['FOTO_PROFILE'];?>" class="rounded-circle" style="width: 50px; height: 50px;" />&nbsp;&nbsp;&nbsp;<?php echo $fetcheddata['NAMA']; ?>
+                        </a>
                         </div>
                         <?php
                         if (isset($akun)) {

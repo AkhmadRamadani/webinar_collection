@@ -6,8 +6,10 @@ $id_user = $akun['USER_ID'];
 
 
 // Comingsoon query
-$query_comingsoon = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
+$query_comingsoon = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, d.*,COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
 JOIN user u ON w.USER_ID = u.USER_ID 
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
 JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID
 WHERE w.WAKTU_WEBINAR > '$currentdate'  AND wr.USER_ID ='$id_user'
@@ -18,8 +20,10 @@ $fetcheddata_comingsoon = mysqli_query($connect, $query_comingsoon);
 // echo $query_comingsoon;
 // ON PROGRESS QUERY
 
-$query_onprogress = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
+$query_onprogress = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, d.*,COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
 JOIN user u ON w.USER_ID = u.USER_ID 
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
 JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID
 WHERE  w.WAKTU_WEBINAR = '$currentdate' AND wr.USER_ID ='$id_user'
@@ -30,8 +34,10 @@ $fetcheddata_onprogress = mysqli_query($connect, $query_onprogress);
 
 // FINISHED QUERY
 
-$query_finished = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
+$query_finished = "SELECT w.*, u.USER_ID, u.NAMA, u.EMAIL, d.*,COUNT(l.ID_LIKE) LIKE_COUNT FROM webinar w 
 JOIN user u ON w.USER_ID = u.USER_ID 
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l ON w.WEBINAR_ID = l.WEBINAR_ID 
 JOIN webinar_regist wr ON wr.WEBINAR_ID = w.WEBINAR_ID
 WHERE w.WAKTU_WEBINAR < '$currentdate'  AND wr.USER_ID ='$id_user'
@@ -83,7 +89,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
                                                             <div class="meta-info">
                                                                 <div class="meta-user">
                                                                     <div class="avatar avatar-sm">
-                                                                        <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data['NAMA']), 0, 2); ?></span>
+                                                                    <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
                                                                     </div>
                                                                     <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                                                 </div>
@@ -149,7 +155,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
                                                         <div class="meta-info">
                                                             <div class="meta-user">
                                                                 <div class="avatar avatar-sm">
-                                                                    <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data_finished['NAMA']), 0, 2); ?></span>
+                                                                <img src="<?php echo $data_finished['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
                                                                 </div>
                                                                 <div class="user-name"><?php echo $data_finished['NAMA']; ?></div>
                                                             </div>
@@ -215,7 +221,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
                                                             <div class="meta-info">
                                                                 <div class="meta-user">
                                                                     <div class="avatar avatar-sm">
-                                                                        <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data_onprogress['NAMA']), 0, 2); ?></span>
+                                                                    <img src="<?php echo $data_onprogress['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
                                                                     </div>
                                                                     <div class="user-name"><?php echo $data_onprogress['NAMA']; ?></div>
                                                                 </div>

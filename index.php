@@ -455,9 +455,28 @@
                     <!-- Start Profile -->
                     <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
                         <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php
+                                $akun = $_SESSION["user"];
+                                if ($akun['ROLE'] == 2) {
+                                    $userid = $akun["USER_ID"];
+                                    $query = "SELECT u.*, d.* FROM user u INNER JOIN user_detail d ON u.USER_ID = d.USER_ID where u.user_id = '$userid' GROUP BY u.USER_ID, d.USER_ID;";
+                                    $result = mysqli_query($connect, $query);
+
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <div class="media">
+                                <img src="<?php echo $row['FOTO_PROFILE'];?>" class="img-fluid" alt="admin-profile">
+                            </div>
+                            <?php
+                                    }
+                                }else{
+                            ?>
                             <div class="media">
                                 <img src="styles/assets/img/user.png" class="img-fluid" alt="admin-profile">
                             </div>
+                            <?php
+                                }
+                            ?>
                         </a>
                         <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                             <div class="user-profile-section">
@@ -535,7 +554,7 @@
                                 include './pages/mentor/mentor-profile.php';
                             }
                             break;
-
+                    
                         case 'kategori':
                             if ($akun['ROLE'] == 3) {
                                 include './pages/admin/category_manage.php';
@@ -594,7 +613,9 @@
                         case 'kategori':
                             include './pages/kategori.php';
                             break;
-
+                        case 'userseen':
+                                include './pages/mentor_userseen.php';
+                            break;
                         case 'eventku':
                             include './pages/my_event_page.php';
                             break;

@@ -5,7 +5,7 @@ $selected_id_kategori = $_GET['kategori'];
 
 if (isset($_GET['kategori'])) {
 
-    $query = "SELECT w.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+    $query = "SELECT w.*, u.*, d.*,COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 INNER JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
@@ -13,6 +13,8 @@ INNER JOIN kategori k
  ON wk.KATEGORI_ID = k.KATEGORI_ID 
 INNER JOIN user u
  ON w.USER_ID = u.USER_ID
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID 
  JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID 
@@ -21,12 +23,14 @@ LEFT JOIN like_webinar l
  GROUP BY w.WEBINAR_ID";
     //  echo $query;
 } else {
-    $query = "SELECT w.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+    $query = "SELECT w.*, u.*, d.*,COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
 INNER JOIN user u
  ON w.USER_ID = u.USER_ID
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID
  JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
@@ -123,7 +127,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                             <div class="meta-info">
                                                 <div class="meta-user">
                                                     <div class="avatar avatar-sm">
-                                                        <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data['NAMA']), 0, 2); ?></span>
+                                                    <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
                                                     </div>
                                                     <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                                 </div>

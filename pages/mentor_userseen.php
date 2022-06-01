@@ -1,4 +1,17 @@
-  <!--  Main Container  -->
+<?php
+include './config/connection.php';
+
+$user_id = $_GET['id'];
+
+$query = "	SELECT u.*, d.*  
+FROM user u
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
+ WHERE d.user_id = '$user_id'";
+// echo $query;
+$data = mysqli_query($connect, $query);
+?>
+ <!--  Main Container  -->
   <div class="main-container" id="container">
 
 <div class="overlay"></div>
@@ -22,24 +35,13 @@
         <div class="card component-card_4 user-profile">
             <div class="widget-content widget-content-area">
                 <div class="d-flex justify-content-between">
-                    <h3 class="">Info</h3>
-                    <a href="#" class="mt-2 edit-profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
-                            <path d="M12 20h9"></path>
-                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                        </svg>
-                    </a>
+                    <h4 style="color:black;"><b><u style="text-decoration-line: underline; text-decoration-color:#4361ee;">Info</u></b></h4>
                 </div>
                 <?php
-                    if (isset($_SESSION["user"])) {
-                        $akun = $_SESSION["user"];
-                        $userid = $akun["USER_ID"];
-                    }
-                    $query = "SELECT u.*, d.* FROM user u INNER JOIN user_detail d ON u.USER_ID = d.USER_ID where u.user_id = '$userid' GROUP BY u.USER_ID, d.USER_ID;";
-                    $result = mysqli_query($connect, $query);
+                    $i = 0;
+                    while (($row = mysqli_fetch_array($data))  && $i <= 2) {
 
-                    while ($row = mysqli_fetch_assoc($result)) {
-                ?>
+                    ?>
                 <div class="user-info">
                     <div class="text-center">
                         <img src="<?php echo $row['FOTO_PROFILE'];?>" alt="avatar" style="width:30%; height:30%; border-radius: 100%;">

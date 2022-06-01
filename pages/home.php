@@ -1,6 +1,6 @@
 <?php
 include './config/connection.php';
-$query = "SELECT w.*, wk.*, k.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+$query = "SELECT w.*, wk.*, k.*, u.*, d.*, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
@@ -8,6 +8,8 @@ LEFT JOIN kategori k
  ON wk.KATEGORI_ID = k.KATEGORI_ID 
 INNER JOIN user u
  ON w.USER_ID = u.USER_ID
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID
  JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
@@ -16,7 +18,7 @@ ORDER BY w.LOOKED DESC;";
 
 $currentdate = date("Y-m-d");
 
-$query_latest = "SELECT w.*, wk.*, k.*, u.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+$query_latest = "SELECT w.*, wk.*, k.*, u.*,d.*, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
@@ -24,6 +26,8 @@ LEFT JOIN kategori k
  ON wk.KATEGORI_ID = k.KATEGORI_ID 
 INNER JOIN user u
  ON w.USER_ID = u.USER_ID
+INNER JOIN user_detail d
+ ON d.USER_ID = u.USER_ID
 LEFT JOIN like_webinar l
  ON w.WEBINAR_ID = l.WEBINAR_ID
  JOIN acc_webinar aw ON aw.WEBINAR_ID = w.WEBINAR_ID WHERE aw.STATUS_PROPOSAL = 1 
@@ -66,7 +70,7 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
                                             <span class="badge"><?php echo $data_latest["NAMA_KATEGORI"] ?></span>
                                             <h3><?php echo $data_latest["JUDUL_WEBINAR"] ?></h3>
                                             <div class="media">
-                                                <img src="styles/assets/img/90x90.jpg" class="" alt="avatar">
+                                                <img src="<?php echo $data_latest["FOTO_PROFILE"] ?>" class="" alt="avatar">
                                                 <div class="media-body">
                                                     <h6 class="user-name"><?php echo $data_latest["NAMA"] ?></h6>
                                                     <p class="meta-time"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
@@ -78,7 +82,6 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
                                                 </div>
                                             </div>
                                         </div>
-
                                     </a>
                                 </div>
                             <?php
@@ -140,7 +143,7 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
                                             <div class="meta-info">
                                                 <div class="meta-user">
                                                     <div class="avatar avatar-sm">
-                                                        <span class="avatar-title rounded-circle"><?php echo substr(preg_replace('/\b(\w)|./', '$1', $data['NAMA']), 0, 2); ?></span>
+                                                        <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
                                                     </div>
                                                     <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                                 </div>
