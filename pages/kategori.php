@@ -127,7 +127,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                             <div class="meta-info">
                                                 <div class="meta-user">
                                                     <div class="avatar avatar-sm">
-                                                    <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
+                                                    <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%; object-fit: cover;" >
                                                     </div>
                                                     <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                                 </div>

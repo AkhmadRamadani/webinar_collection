@@ -70,7 +70,7 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
                                             <span class="badge"><?php echo $data_latest["NAMA_KATEGORI"] ?></span>
                                             <h3><?php echo $data_latest["JUDUL_WEBINAR"] ?></h3>
                                             <div class="media">
-                                                <img src="<?php echo $data_latest["FOTO_PROFILE"] ?>" class="" alt="avatar">
+                                                <img src="<?php echo $data_latest["FOTO_PROFILE"] ?>" class="" alt="avatar" style="object-fit: cover;">
                                                 <div class="media-body">
                                                     <h6 class="user-name"><?php echo $data_latest["NAMA"] ?></h6>
                                                     <p class="meta-time"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
@@ -143,7 +143,7 @@ $fetcheddatalatest = mysqli_query($connect, $query_latest);
                                             <div class="meta-info">
                                                 <div class="meta-user">
                                                     <div class="avatar avatar-sm">
-                                                        <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
+                                                        <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%; object-fit: cover;" >
                                                     </div>
                                                     <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                                 </div>

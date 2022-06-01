@@ -44,7 +44,7 @@ $data = mysqli_query($connect, $query);
                     ?>
                 <div class="user-info">
                     <div class="text-center">
-                        <img src="<?php echo $row['FOTO_PROFILE'];?>" alt="avatar" style="width:30%; height:30%; border-radius: 100%;">
+                        <img src="<?php echo $row['FOTO_PROFILE'];?>" alt="avatar" style="width:130px; height:130px; border-radius: 100%; object-fit: cover;">
                         <p class=""><?php echo $row['NAMA']; ?> </p>
                     </div>
                     <div class="user-info-list text-center">

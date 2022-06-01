@@ -96,7 +96,7 @@ $fetcheddata = mysqli_fetch_assoc($data);
                         </div>
                         <div class="image-wrapper avatar mt-2 mb-4" style="width: 550px; height: 50px;">
                         <a href="?page=userseen&id=<?php echo $fetcheddata['USER_ID']; ?>">
-                            <img alt="avatar" src="<?php echo $fetcheddata['FOTO_PROFILE'];?>" class="rounded-circle" style="width: 50px; height: 50px;" />&nbsp;&nbsp;&nbsp;<?php echo $fetcheddata['NAMA']; ?>
+                            <img alt="avatar" src="<?php echo $fetcheddata['FOTO_PROFILE'];?>" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" />&nbsp;&nbsp;&nbsp;<?php echo $fetcheddata['NAMA']; ?>
                         </a>
                         </div>
                         <?php

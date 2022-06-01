@@ -414,14 +414,14 @@
 
                 <!-- Notification -->
                 <ul class="navbar-item flex-row nav-dropdowns">
-                    <li class="nav-item dropdown notification-dropdown">
+                    <!-- <li class="nav-item dropdown notification-dropdown">
                         <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                                 <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                             </svg>
-                            <!-- Green Alert -->
-                            <!-- <span class="badge badge-success"></span> -->
+                            Green Alert
+                            <span class="badge badge-success"></span>
                         </a>
                         <div class="dropdown-menu position-absolute" aria-labelledby="notificationDropdown">
                             <div class="notification-scroll">
@@ -432,26 +432,26 @@
                                                 <h6 class="">You don't have notification</h6>
                                                 <p class="">...</p>
                                             </div>
-                                            <!-- x -->
+                                            <!
                                             <div class="icon-status">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                                 </svg>
                                             </div>
-                                            <!-- v -->
-                                            <!-- 
+                                            -
+                                            
                                         <div class="icon-status">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
                                                 <polyline points="20 6 9 17 4 12"></polyline>
                                             </svg>
-                                        </div> -->
+                                        </div> --
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
+                        </div> 
+                    </li> -->
                     <!-- Start Profile -->
                     <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
                         <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -465,7 +465,7 @@
                                     while ($row = mysqli_fetch_assoc($result)) {
                             ?>
                             <div class="media">
-                                <img src="<?php echo $row['FOTO_PROFILE'];?>" class="img-fluid" alt="admin-profile">
+                                <img src="<?php echo $row['FOTO_PROFILE'];?>" class="img-fluid" alt="admin-profile" style="object-fit: cover;">
                             </div>
                             <?php
                                     }
@@ -566,7 +566,10 @@
                         case 'eventku':
                             include './pages/my_event_page.php';
                             break;
-
+                            
+                        case 'userseen':
+                            include './pages/mentor_userseen.php';
+                            break;
                         case 'webinarku':
                             include './pages/mentor/my_webinar.php';
                             break;

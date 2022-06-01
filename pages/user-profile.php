@@ -31,7 +31,7 @@
                             </a>
                         </div>
                         <div class="text-center user-info">
-                            <img src="styles/assets/img/user.png" alt="avatar" style="width:30%; height:30%; border-radius: 100%;">
+                            <img src="styles/assets/img/user.png" alt="avatar" style="width:30%; height:30%; border-radius: 100%; object-fit: cover;">
                             <?php
                             if (isset($_SESSION["user"])) {
                                 $akun = $_SESSION["user"];

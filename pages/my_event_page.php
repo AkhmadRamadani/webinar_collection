@@ -89,7 +89,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
                                                             <div class="meta-info">
                                                                 <div class="meta-user">
                                                                     <div class="avatar avatar-sm">
-                                                                    <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
+                                                                    <img src="<?php echo $data['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%; object-fit: cover;" >
                                                                     </div>
                                                                     <div class="user-name"><?php echo $data['NAMA']; ?></div>
                                                                 </div>
@@ -155,7 +155,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
                                                         <div class="meta-info">
                                                             <div class="meta-user">
                                                                 <div class="avatar avatar-sm">
-                                                                <img src="<?php echo $data_finished['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
+                                                                <img src="<?php echo $data_finished['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%; object-fit: cover;" >
                                                                 </div>
                                                                 <div class="user-name"><?php echo $data_finished['NAMA']; ?></div>
                                                             </div>
@@ -221,7 +221,7 @@ $fetcheddata_finished = mysqli_query($connect, $query_finished);
                                                             <div class="meta-info">
                                                                 <div class="meta-user">
                                                                     <div class="avatar avatar-sm">
-                                                                    <img src="<?php echo $data_onprogress['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%;" >
+                                                                    <img src="<?php echo $data_onprogress['FOTO_PROFILE'];?>" class="" alt="avatar" style="height: 39px; width: 39px; border-radius: 100%; object-fit: cover;" >
                                                                     </div>
                                                                     <div class="user-name"><?php echo $data_onprogress['NAMA']; ?></div>
                                                                 </div>
