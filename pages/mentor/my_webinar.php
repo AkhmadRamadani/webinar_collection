@@ -457,25 +457,32 @@ if ($update) {
         if ($upload_update) {
             $hasil = mysqli_query($connect, $query_update);
             if ($hasil) {
-                $query_update_acc_webinar = "UPDATE `acc_webinar` SET `STATUS_PROPOSAL`='0' WHERE `WEBINAR_ID`='$id_update_webinar'";
-                $update_acc_webinar = mysqli_query($connect, $query_update_acc_webinar);
-                if ($update_acc_webinar) {
-                    if ($categories_update != null) {
-                        $last_id = $_POST['id_update_webinar'];
-                        $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
-                        $query_update_categories_parts = array();
-                        foreach ($categories_update as $cat) {
-                            $query_update_categories_parts[] = "('" . $cat . "', '" . $last_id . "')";
-                        }
-                        $query_update_categories .= implode(',', $query_update_categories_parts);
-                        $add_categories = mysqli_query($connect, $query_update_categories);
-                        if ($add_categories) {
+                $query_delete_kategori = "DELETE FROM `webinar_kategori` WHERE `WEBINAR_ID`='$id_update_webinar'";
+                $hasil_delete = mysqli_query($connect, $query_delete_kategori);
+                if ($hasil_delete) {
+                    $query_update_acc_webinar = "UPDATE `acc_webinar` SET `STATUS_PROPOSAL`='0' WHERE `WEBINAR_ID`='$id_update_webinar'";
+                    $update_acc_webinar = mysqli_query($connect, $query_update_acc_webinar);
+                    if ($update_acc_webinar) {
+                        if ($categories_update != null) {
+                            $last_id = $_POST['id_update_webinar'];
+                            $query_update_categories = "INSERT INTO `webinar_kategori`(`KATEGORI_ID`, `WEBINAR_ID`) VALUES ";
+                            $query_update_categories_parts = array();
+                            foreach ($categories_update as $cat) {
+                                $query_update_categories_parts[] = "('" . $cat . "', '" . $last_id . "')";
+                            }
+                            $query_update_categories .= implode(',', $query_update_categories_parts);
+                            $add_categories = mysqli_query($connect, $query_update_categories);
+                            if ($add_categories) {
+                                echo "<script>location='index.php?page=webinarku';</script>";
+                            }
+                        } else {
                             echo "<script>location='index.php?page=webinarku';</script>";
                         }
                     } else {
+                        echo "<script>alert('Gagal mengupdate data acceptance'); </script>";
                         echo "<script>location='index.php?page=webinarku';</script>";
                     }
-                } else {
+                }else{
                     echo "<script>alert('Gagal mengupdate data acceptance'); </script>";
                     echo "<script>location='index.php?page=webinarku';</script>";
                 }
