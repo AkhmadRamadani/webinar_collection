@@ -37,6 +37,10 @@ LEFT JOIN like_webinar l
 // echo $query;
 $data = mysqli_query($connect, $query);
 $fetcheddata = mysqli_fetch_assoc($data);
+
+//seen data
+$update_looked = "UPDATE webinar SET LOOKED=LOOKED+1 WHERE WEBINAR_ID = '$id_webinar'";
+$data_looked = mysqli_query($connect, $update_looked);
 ?>
 <div id="content">
 
