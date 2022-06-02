@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2022 at 01:06 PM
+-- Generation Time: Jun 01, 2022 at 10:31 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -41,8 +41,7 @@ CREATE TABLE `acc_mentor` (
 
 INSERT INTO `acc_mentor` (`ACC_MENTOR_ID`, `USER_ID`, `ADMIN_ID`, `MESSAGE`, `STATUS_PROPOSAL`) VALUES
 (4, 1, 4, 'Data kurang lengkap pada biodata. Testt tolong dong sfsafafsaf sas', 1),
-(5, 6, 4, '', 1),
-(6, 7, 0, '', 0),
+(5, 5, 4, '', 0),
 (8, 8, 4, '', 1);
 
 -- --------------------------------------------------------
@@ -65,14 +64,14 @@ CREATE TABLE `acc_webinar` (
 
 INSERT INTO `acc_webinar` (`ACC_WEBINAR_ID`, `USER_ID`, `WEBINAR_ID`, `PESAN`, `STATUS_PROPOSAL`) VALUES
 (3, 4, 2, 'test', 1),
-(6, 4, 6, 'Judul', 0),
+(6, 4, 6, 'Judul', 1),
 (8, 4, 8, 'Oke, baik., Diterima', 1),
-(10, 4, 10, 'Judul', 2),
-(12, 4, 12, 'Judul', 2),
-(15, NULL, 15, NULL, 0),
-(16, NULL, 16, NULL, 0),
-(17, NULL, 17, NULL, 0),
-(18, NULL, 18, NULL, 0);
+(10, 4, 10, 'Judul', 1),
+(12, 4, 12, 'Judul', 1),
+(15, 4, 15, '', 1),
+(16, 4, 16, '', 1),
+(17, 4, 17, '', 1),
+(18, 4, 18, '', 1);
 
 -- --------------------------------------------------------
 
@@ -102,8 +101,7 @@ INSERT INTO `kategori` (`KATEGORI_ID`, `NAMA_KATEGORI`, `ICON_KATEGORI`) VALUES
 (10, 'Sciences', ''),
 (11, 'Kesehatan', ''),
 (12, 'Seni', ''),
-(13, 'Olahraga', ''),
-(16, 'Apa', NULL);
+(13, 'Olahraga', '');
 
 --
 -- Triggers `kategori`
@@ -153,12 +151,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`USER_ID`, `NAMA`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
-(1, 'Syekh Akhmad Ramadani', 'ram@gmail.com', '202cb962ac59075b964b07152d234b70', 2),
-(4, 'rama', 'ramadani@gmail.com', '202cb962ac59075b964b07152d234b70', 3),
-(5, 'Akhmad Ramadani', 'a@g.com', '202cb962ac59075b964b07152d234b70', 2),
-(6, 'Yaya Ying Gopal', 'yyingg@gmail.com', '202cb962ac59075b964b07152d234b70', 2),
-(7, 'Boboi Boy', 'bby@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
-(8, 'Akhmad Ramadani', 'rama1@gmail.com', '202cb962ac59075b964b07152d234b70', 2);
+(1, 'Syekh Akhmad', 'ram@gmail.com', '202cb962ac59075b964b07152d234b70', 2),
+(4, 'Annisa', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', 3),
+(5, 'Akhmad Ramadhani', 'a@g.com', '202cb962ac59075b964b07152d234b70', 2),
+(7, 'BoBoiBoy', 'bbb@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
+(8, 'Rama', 'rama1@gmail.com', '202cb962ac59075b964b07152d234b70', 2),
+(10, 'Annisa Fitri Yuliandra', 'annisa@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(11, 'Kageyama Tobio', 'tobio@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
+(12, 'Sakura', 'skr@gmail.com', '698d51a19d8a121ce581499d7b701668', 1);
 
 -- --------------------------------------------------------
 
@@ -180,10 +180,8 @@ CREATE TABLE `user_detail` (
 --
 
 INSERT INTO `user_detail` (`USER_ID`, `BIODATA`, `PENDIDIKAN`, `PEKERJAAN`, `FOTO_PROFILE`, `BUKTI_IJAZAH`) VALUES
-(1, 'test422341', 'test241421', 'test2145421', 'media/profile/a3560a61337bf6469c30e6da34a6f03d.jpg', 'media/ijazah/dadd20c5a66ebadf086c1ce2ba186a71.png'),
-(6, 'Bekerja sebagai seorang buruh harian pada perusahaan les untuk anak sd. Keahlian saya di bidang matematika.', 'SMK', 'Buruh Les', 'media/profile/208f6f9952b7e16bacf9969bfcf236a1.png', 'media/ijazah/a367a9a714dbdc89b33c1dfdf76a300e.png'),
-(7, 'safgsfg', 'gsdag', 'gsadgs', 'media/profile/fbb170565360ca7e4518589e21568382.png', 'media/ijazah/45775c086200a4b093b15f520609f5c7.png'),
-(7, 'safgsfg', 'gsdag', 'gsadgs', 'media/profile/033c7a01bce9b8101312f60f43b233ab.png', 'media/ijazah/9c069f1a6d3f6cec22b643f87a72c593.png'),
+(1, 'test422341', 'Pondok Pesantren', 'Ustadz', 'media/profile/s2.png', 'media/ijazah/dadd20c5a66ebadf086c1ce2ba186a71.png'),
+(5, 'Bekerja sebagai seorang buruh harian pada perusahaan les untuk anak sd. Keahlian saya di bidang matematika.', 'Pendidikan Teknologi UM', 'Buruh Les', 'media/profile/download.jpg', 'media/ijazah/download.png'),
 (8, 'Programmer di sebuah perusahaan multiverse company. Bekerja sebagai programmer selama 5 tahun.', 'SMK', 'Programmer', 'media/profile/54432b4345781fd74cda7ae413d16dcc.jpg', 'media/ijazah/1d3ec9890aeb2e44d8f1f249ee517828.jpg');
 
 -- --------------------------------------------------------
@@ -209,15 +207,15 @@ CREATE TABLE `webinar` (
 --
 
 INSERT INTO `webinar` (`WEBINAR_ID`, `USER_ID`, `JUDUL_WEBINAR`, `DESKRIPSI_WEBINAR`, `WAKTU_WEBINAR`, `MAKS_KAPASITAS`, `LINK_MEETING`, `COVER_WEBINAR`, `LOOKED`) VALUES
-(2, 5, 'Photoshop Dasar 3', 'Belajar Photoshop Dasar dengan materi sebagai berikut: \r\n1. \r\n2. \r\n3. \r\n4. \r\n5. ', '2022-04-29 15:30:00', 80, 'https://meet.google.com', 'media/webinar_cover/3291884e8fa3342895025a2e8c8cbae6.png', 2),
-(6, 5, 'jhjh', 'safwqfsafa', '2022-04-23 23:43:00', 241, 'https://facebook.com', 'media/webinar_cover/0f7bd580ccc4631e01233525d6e14f63.png', 0),
-(8, 5, 'Teknik Penjinakan Ular Weling', 'Kali ini kita akan mempelajari teknik untuk menjinakkan ular weling. Ular Weling adalah ular yang sangat sering kita temui di sawah. Ular ini memiliki warna hijau. Sehingga, ular ini sangat sulit untuk dilihat dan dibedakan dengan lingkungan sawah.', '2022-04-30 13:00:00', 254, 'https://facebook.com', 'media/webinar_cover/a2793bde6deb883db3fe597cf5a56941.jpg', 0),
-(10, 5, 'hy', 'h', '2022-04-29 20:26:00', 0, 'https://twitter.com', 'media/webinar_cover/7241454acd51162b0bc094fb557f79cb.png', 0),
-(12, 5, 'test1322142', 'safdsfaasfsaf', '2022-04-20 22:57:00', 2421, 'https://asasfs', 'media/webinar_cover/64c2715cff82ef6fb94485248e1d5be6.jpg', 0),
-(15, 5, 'Test ', 'test', '2022-04-23 12:08:00', 100, 'https://facebook.com', 'media/webinar_cover/e7207125abe95cfce402401f689eada2.png', 0),
-(16, 5, 'Test from phone', 'Yeyeyeue', '2022-05-09 11:04:00', 100, 'https://', 'media/webinar_cover/f2d4be27346e216536cd94e0b6eed97b.jpeg', 0),
-(17, 1, 'TEST', 'sag', '2022-05-14 17:13:00', 2, 'https://facebook.com', 'media/webinar_cover/88ab6590dec7c3206a6c1d0c3d1869e1.jpg', 0),
-(18, 5, 'Be a Data Scientist, Now!!!', 'Want to be a data scientist? Still do not know what is first to do? Join us now to knowing about how to be a data scientist.', '2022-05-17 20:45:00', 200, 'https://meet.google.com/fsakfja', 'media/webinar_cover/f8baa1e2a3543e3fba86fecad4489de4.jpeg', 0);
+(2, 5, 'Photoshop Dasar 3', 'Belajar Photoshop Dasar dengan materi sebagai berikut: \r\n1. \r\n2. \r\n3. \r\n4. \r\n5. ', '2022-04-29 15:30:00', 80, 'https://meet.google.com', 'media/webinar_cover/1green.png', 2),
+(6, 5, 'Analogi Sketsa Badan', 'Apa gaya gambar favoritmu? Realistis, kartun, atau manga? Apa pun gaya favoritmu, sebagai desainer kamu mesti banget memiliki keterampilan menggambar anatomi tubuh manusia loh. Ini adalah dasarnya. Walaupun terdengar sepele, tapi bermanfaat banget untuk memperkuat fondasi keterampilan menggambarmu. Mungkin awalnya akan terasa sulit. Toh semuanya tidak ada yang instan. Dibutuhkan latihan secara rutin agar dapat menghasilkan gambar tubuh yang proporsional. ', '2022-04-23 23:43:00', 241, 'https://facebook.com', 'media/webinar_cover/2green.png', 0),
+(8, 5, 'Teknik Penjinakan Ular Weling', 'Kali ini kita akan mempelajari teknik untuk menjinakkan ular weling. Ular Weling adalah ular yang sangat sering kita temui di sawah. Ular ini memiliki warna hijau. Sehingga, ular ini sangat sulit untuk dilihat dan dibedakan dengan lingkungan sawah.', '2022-04-30 13:00:00', 254, 'https://facebook.com', 'media/webinar_cover/RED2.png', 0),
+(10, 5, 'Teknik Pembiakan Ikan Cupang', 'Cara budidaya ikan cupang gampang-gampang susah. Belakangan, ikan cupang menjadi primadona bagi para pecinta ikan. Ikan mungil ini dikenal akan keindahannya sebagai hewan hias. Tak heran, saat ini banyak sekali orang yang ingin memeliharanya. Bahkan, para pemula pun juga ada begitu banyak.', '2022-04-29 20:26:00', 1000, 'https://twitter.com', 'media/webinar_cover/RED3.png', 0),
+(12, 5, 'Cara Memulai Bisnis Untuk Pemula', 'Kesuksesan adalah hal yang dicari setiap orang. Salah satu cara yang banyak dilakukan orang untuk meraihnya adalah dengan memulai bisnis. Pemikiran untuk menjadi pengusaha sudah menjadi tren di semua kalangan masyarakat, terutama kalangan muda. Oleh karena itu, saat ini banyak orang yang sudah sukses menjadi pengusaha di usia muda. Hal ini memang tidak mengherankan, karena banyak orang yang mulai merasa lelah dan terbatas dengan hanya menjadi karyawan, sehingga pemikiran untuk membuat bisnis menjadi pilihannya', '2022-04-20 22:57:00', 2421, 'https://asasfs', 'media/webinar_cover/ORANGE1.png', 0),
+(15, 5, 'Cara Parenting Yang Baik', 'Membesarkan dan mendidik anak bukanlah perkara mudah. Kekeliruan orang tua dalam menerapkan pola asuh dapat memengaruhi perilaku anak di kemudian hari. Oleh karena itu, penting bagi orang tua untuk mempelajari prinsip parenting yang benar agar bisa membentuk karakter positif pada anak.', '2022-04-23 12:08:00', 100, 'https://facebook.com', 'media/webinar_cover/3green.png', 0),
+(16, 5, 'Belajar Data Analyst', 'Saat ini, profesi data analyst semakin populer dan banyak dibutuhkan oleh perusahaan. Tugas seorang data analyst adalah mengumpulkan, mengelola, dan menganalisis data dari berbagai sumber. Hasil analisis tersebut disampaikan kepada pihak terkait untuk dipakai sebagai bahan pertimbangan sebelum mengambil keputusan. Meskipun demikian, belajar data analyst tidak mudah dan cepat.', '2022-06-09 11:04:00', 100, 'https://', 'media/webinar_cover/BLUE1.png', 0),
+(17, 1, 'Mencegah COVID-19', 'Lindungi diri Anda dan orang lain di sekitar Anda dengan mengetahui fakta-fakta terkait virus ini dan mengambil langkah pencegahan yang sesuai. Ikuti saran yang diberikan oleh otoritas kesehatan setempat.', '2022-06-14 17:13:00', 200, 'https://facebook.com', 'media/webinar_cover/RED1.png', 0),
+(18, 5, 'Be a Data Scientist, Now!!!', 'Want to be a data scientist? Still do not know what is first to do? Join us now to knowing about how to be a data scientist.', '2022-06-17 20:45:00', 200, 'https://meet.google.com/fsakfja', 'media/webinar_cover/BLUE2.png', 0);
 
 --
 -- Triggers `webinar`
@@ -261,21 +259,12 @@ CREATE TABLE `webinar_kategori` (
 --
 
 INSERT INTO `webinar_kategori` (`KATEGORI_ID`, `WEBINAR_ID`) VALUES
-(2, 15),
-(3, 10),
-(3, 15),
-(6, 10),
-(6, 16),
-(7, 16),
-(7, 17),
-(8, 10),
-(8, 16),
-(8, 17),
+(4, 12),
+(9, 16),
 (9, 18),
-(10, 2),
-(10, 18),
-(11, 2),
-(11, 8);
+(11, 17),
+(12, 2),
+(12, 6);
 
 -- --------------------------------------------------------
 
@@ -294,6 +283,9 @@ CREATE TABLE `webinar_regist` (
 
 INSERT INTO `webinar_regist` (`USER_ID`, `WEBINAR_ID`) VALUES
 (1, 2),
+(1, 6),
+(1, 16),
+(5, 17),
 (8, 2),
 (8, 8),
 (8, 18);
@@ -392,7 +384,7 @@ ALTER TABLE `like_webinar`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `webinar`
