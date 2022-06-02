@@ -7,7 +7,7 @@ $id_webinar = $_GET['id'];
 @$id_user = $akun['USER_ID'];
 
 $query = "	SELECT * FROM 
-(SELECT w.*, wk.KATEGORI_ID, k.NAMA_KATEGORI, u.NAMA, d.FOTO_PROFILE, COUNT(l.ID_LIKE) LIKE_COUNT  
+(SELECT w.*, u.NAMA, d.FOTO_PROFILE, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
@@ -39,8 +39,8 @@ $data = mysqli_query($connect, $query);
 $fetcheddata = mysqli_fetch_assoc($data);
 
 //seen data
-$update_looked = "UPDATE webinar SET LOOKED=LOOKED+1 WHERE WEBINAR_ID = '$id_webinar'";
-$data_looked = mysqli_query($connect, $update_looked);
+// $update_looked = "UPDATE webinar SET LOOKED=LOOKED+1 WHERE WEBINAR_ID = '$id_webinar'";
+// $data_looked = mysqli_query($connect, $update_looked);
 ?>
 <div id="content">
 

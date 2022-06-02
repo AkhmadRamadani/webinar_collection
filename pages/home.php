@@ -1,6 +1,6 @@
 <?php
 include './config/connection.php';
-$query = "SELECT w.*, wk.*, k.*, u.*, d.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+$query = "SELECT w.*, u.NAMA, d.FOTO_PROFILE, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
@@ -18,7 +18,7 @@ ORDER BY w.LOOKED DESC;";
 
 $currentdate = date("Y-m-d");
 
-$query_latest = "SELECT w.*, wk.*, k.*, u.*,d.*, COUNT(l.ID_LIKE) LIKE_COUNT  
+$query_latest = "SELECT w.*, wk.KATEGORI_ID, k.NAMA_KATEGORI,u.*,d.*, COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 LEFT JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 

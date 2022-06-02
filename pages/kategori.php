@@ -2,10 +2,10 @@
 include './config/connection.php';
 error_reporting(0);
 $selected_id_kategori = $_GET['kategori'];
-
+//  wk.KATEGORI_ID, k.NAMA_KATEGORI,
 if (isset($_GET['kategori'])) {
 
-    $query = "SELECT w.*, u.*, d.*,COUNT(l.ID_LIKE) LIKE_COUNT  
+$query = "SELECT w.*, u.*, d.*,COUNT(l.ID_LIKE) LIKE_COUNT  
 FROM webinar w
 INNER JOIN webinar_kategori wk 
  ON wk.WEBINAR_ID = w.WEBINAR_ID 
