@@ -32,15 +32,19 @@ LEFT JOIN like_webinar l
          SELECT webinar_regist.WEBINAR_ID as WEBINAR_COUNT_ID,
          COUNT(webinar_regist.WEBINAR_ID) as PARTICIPANTS_JOINNED 
          FROM webinar_regist WHERE webinar_regist.WEBINAR_ID = '$id_webinar'
-     ) as t3 ON t1.WEBINAR_ID = t3.WEBINAR_COUNT_ID
+     ) as t3 ON t1.WEBINAR_ID = t3.WEBINAR_COUNT_ID,
+     (
+     	SELECT COUNT(lw.ID_LIKE) as IS_LIKED FROM like_webinar lw 
+        WHERE lw.USER_ID = '$id_user' AND lw.WEBINAR_ID = '$id_webinar'
+     )  t4
 ";
 // echo $query;
 $data = mysqli_query($connect, $query);
 $fetcheddata = mysqli_fetch_assoc($data);
 
 //seen data
-// $update_looked = "UPDATE webinar SET LOOKED=LOOKED+1 WHERE WEBINAR_ID = '$id_webinar'";
-// $data_looked = mysqli_query($connect, $update_looked);
+$update_looked = "UPDATE webinar SET LOOKED=LOOKED+1 WHERE WEBINAR_ID = '$id_webinar'";
+$data_looked = mysqli_query($connect, $update_looked);
 ?>
 <div id="content">
 
@@ -76,10 +80,44 @@ $fetcheddata = mysqli_fetch_assoc($data);
                             <img src="<?php echo $fetcheddata['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $fetcheddata['COVER_WEBINAR']; ?>" style="height: 500px; max-width: 100%; object-fit: cover; border-radius: 15px;" alt>
                         </div>
                         <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                </path>
-                            </svg>&nbsp;<?php echo $fetcheddata['LIKE_COUNT']; ?>
+                            <?php
+                            if ($fetcheddata['IS_LIKED'] == 0) {
+                            ?>
+                                <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
+                                    <input type="text" name="like_webinar_id" hidden value="<?php echo $fetcheddata['WEBINAR_ID']; ?>">
+                                    <button type="submit" name="like_webinar" value="true" style=" background-color: transparent; 
+                                    background-repeat: no-repeat;
+                                    border: none;
+                                    cursor: pointer;
+                                    overflow: hidden;
+                                    outline: none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                            </path>
+                                        </svg>&nbsp;<?php echo $fetcheddata['LIKE_COUNT']; ?>
+                                    </button>
+                                </form>
+                            <?php
+                            } else {
+                            ?>
+                                <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
+                                    <input type="text" name="delete_like_webinar_id" hidden value="<?php echo $fetcheddata['WEBINAR_ID']; ?>">
+                                    <button type="submit" name="delete_like_webinar" value="true" style=" background-color: transparent;
+                                    background-repeat: no-repeat;
+                                    border: none;
+                                    cursor: pointer;
+                                    overflow: hidden;
+                                    outline: none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="red" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                            </path>
+                                        </svg>&nbsp;<?php echo $fetcheddata['LIKE_COUNT']; ?>
+                                    </button>
+                                </form>
+
+                            <?php
+                            }
+                            ?>
                             &nbsp;&nbsp;&nbsp;
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
@@ -99,9 +137,9 @@ $fetcheddata = mysqli_fetch_assoc($data);
                             <p class=""><?php echo $fetcheddata['DESKRIPSI_WEBINAR']; ?></p>
                         </div>
                         <div class="image-wrapper avatar mt-2 mb-4" style="width: 550px; height: 50px;">
-                        <a href="?page=userseen&id=<?php echo $fetcheddata['USER_ID']; ?>">
-                            <img alt="avatar" src="<?php echo $fetcheddata['FOTO_PROFILE'];?>" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" />&nbsp;&nbsp;&nbsp;<?php echo $fetcheddata['NAMA']; ?>
-                        </a>
+                            <a href="?page=userseen&id=<?php echo $fetcheddata['USER_ID']; ?>">
+                                <img alt="avatar" src="<?php echo $fetcheddata['FOTO_PROFILE']; ?>" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" />&nbsp;&nbsp;&nbsp;<?php echo $fetcheddata['NAMA']; ?>
+                            </a>
                         </div>
                         <?php
                         if (isset($akun)) {
@@ -135,6 +173,45 @@ $fetcheddata = mysqli_fetch_assoc($data);
 @$kirim = $_POST['join_webinar'];
 $query = "INSERT INTO `webinar_regist`(`USER_ID`, `WEBINAR_ID`) VALUES ('$id_user', '$id_webinar')";
 if ($kirim) {
+
+    $hasil = mysqli_query($connect, $query);
+    if ($hasil) {
+        echo "<script>location='index.php?page=detail&id=$id_webinar';</script>";
+    } else {
+        // echo "2";
+        // echo $query;
+        echo "<script>alert('Gagal menambahkan data'); </script>";
+        echo "<script>location='index.php?page=detail&id=$id_webinar';</script>";
+    }
+}
+?>
+
+
+<?php
+
+@$id_webinar = $_POST['like_webinar_id'];
+@$kirim_like = $_POST['like_webinar'];
+$query = "INSERT INTO `like_webinar`(`ID_LIKE`, `USER_ID`, `WEBINAR_ID`) VALUES (NULL, '$id_user', '$id_webinar')";
+if ($kirim_like) {
+
+    $hasil = mysqli_query($connect, $query);
+    if ($hasil) {
+        echo "<script>location='index.php?page=detail&id=$id_webinar';</script>";
+    } else {
+        // echo "2";
+        // echo $query;
+        echo "<script>alert('Gagal menambahkan data'); </script>";
+        echo "<script>location='index.php?page=detail&id=$id_webinar';</script>";
+    }
+}
+?>
+
+<?php
+
+@$id_webinar = $_POST['delete_like_webinar_id'];
+@$delete_like = $_POST['delete_like_webinar'];
+$query = "DELETE FROM `like_webinar` WHERE WEBINAR_ID = '$id_webinar' AND USER_ID = '$id_user'";
+if ($delete_like) {
 
     $hasil = mysqli_query($connect, $query);
     if ($hasil) {
