@@ -79,10 +79,11 @@ $data_looked = mysqli_query($connect, $update_looked);
                         <div class="image-wrapper mb-2" style="background:#F1F6F9; text-align: center; border-radius: 15px; /* border: 2px solid #4361ee;*/">
                             <img src="<?php echo $fetcheddata['COVER_WEBINAR'] === null ? "styles/assets/img/400x300.jpg" : $fetcheddata['COVER_WEBINAR']; ?>" style="height: 500px; max-width: 100%; object-fit: cover; border-radius: 15px;" alt>
                         </div>
-                        <div>
+                        <div class="row" style="margin-left: 3px;">
                             <?php
                             if ($fetcheddata['IS_LIKED'] == 0) {
                             ?>
+                            <div class="col-md-1.5">
                                 <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
                                     <input type="text" name="like_webinar_id" hidden value="<?php echo $fetcheddata['WEBINAR_ID']; ?>">
                                     <button type="submit" name="like_webinar" value="true" style=" background-color: transparent; 
@@ -97,9 +98,11 @@ $data_looked = mysqli_query($connect, $update_looked);
                                         </svg>&nbsp;<?php echo $fetcheddata['LIKE_COUNT']; ?>
                                     </button>
                                 </form>
+                            </div>
                             <?php
                             } else {
                             ?>
+                            <div class="col-md-1.5">
                                 <form class="form-vertical" enctype="multipart/form-data" action="" method="POST">
                                     <input type="text" name="delete_like_webinar_id" hidden value="<?php echo $fetcheddata['WEBINAR_ID']; ?>">
                                     <button type="submit" name="delete_like_webinar" value="true" style=" background-color: transparent;
@@ -114,16 +117,20 @@ $data_looked = mysqli_query($connect, $update_looked);
                                         </svg>&nbsp;<?php echo $fetcheddata['LIKE_COUNT']; ?>
                                     </button>
                                 </form>
-
+                            </div>
                             <?php
                             }
                             ?>
                             &nbsp;&nbsp;&nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                </path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>&nbsp;<?php echo $fetcheddata['LOOKED']; ?>
+                            <div class="col-md-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                    </path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>&nbsp;<?php echo $fetcheddata['LOOKED']; ?>
+                            </div>
+                            <!-- <div class="col">
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-lg-6">

@@ -107,7 +107,7 @@
                                 <div class="row">
                                     <div class="col mb-2">
                                         <div class="card">
-                                            <img src="styles/assets/img/400x300.jpg" class="card-img-top" alt="faq-video-tutorials">
+                                            <img src="styles/assets/img/user.png" class="card-img-top" alt="faq-video-tutorials">
                                             <div class="card-body">
                                                 <h5 class="card-title">Adika Ahmad <br>Hanif Nazhir</h5>
                                                 <p class="card-text">2041720171</p>
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="col mb-2">
                                         <div class="card">
-                                            <img src="styles/assets/img/400x300.jpg" class="card-img-top" alt="faq-video-tutorials">
+                                            <img src="styles/assets/img/user.png" class="card-img-top" alt="faq-video-tutorials">
                                             <div class="card-body">
                                                 <h5 class="card-title">Akhmad Ramadani</h5>
                                                 <p class="card-text">2041720002</p>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="col mb-2">
                                         <div class="card">
-                                            <img src="styles/assets/img/400x300.jpg" class="card-img-top" alt="faq-video-tutorials">
+                                            <img src="styles/assets/img/user.png" class="card-img-top" alt="faq-video-tutorials">
                                             <div class="card-body">
                                                 <h5 class="card-title">Annisa Fitri <br>Yuliandra</h5>
                                                 <p class="card-text">2041720123</p>
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="col mb-2">
                                         <div class="card">
-                                            <img src="styles/assets/img/400x300.jpg" class="card-img-top" alt="faq-video-tutorials">
+                                            <img src="styles/assets/img/user.png" class="card-img-top" alt="faq-video-tutorials">
                                             <div class="card-body">
                                                 <h5 class="card-title">Diajeng Nidzom Y.</h5>
                                                 <p class="card-text">2041720165</p>
@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="col mb-2">
                                         <div class="card">
-                                            <img src="styles/assets/img/400x300.jpg" class="card-img-top" alt="faq-video-tutorials">
+                                            <img src="styles/assets/img/user.png" class="card-img-top" alt="faq-video-tutorials">
                                             <div class="card-body">
                                                 <h5 class="card-title">Farah Zulfa <br>Hamidah</h5>
                                                 <p class="card-text">2041720069</p>
