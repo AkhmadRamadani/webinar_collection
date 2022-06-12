@@ -4,6 +4,7 @@ include "config/connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,24 +22,27 @@ include "config/connection.php";
     <link rel="stylesheet" type="text/css" href="styles/assets/css/forms/theme-checkbox-radio.css">
     <link rel="stylesheet" type="text/css" href="styles/assets/css/forms/switches.css">
     <script type="text/javascript">
-    function valid()
-    {
-      if(document.forgot.password.value!= document.forgot.confirmpassword.value)
-      {
-        alert("Password and Confirm Password field do not match!!");
-        document.forgot.confirmpassword.focus();
-        return false;
-      }
-      return true;
-    }
-  </script>
+        function valid() {
+            if (document.forgot.password.value != document.forgot.confirmpassword.value) {
+                alert("Password and Confirm Password field do not match!!");
+                document.forgot.confirmpassword.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
+
 <body class="form no-image-content">
 
     <!-- BEGIN LOADER -->
-    <div id="load_screen"> <div class="loader"> <div class="loader-content">
-        <div class="spinner-grow align-self-center"></div>
-    </div></div></div>
+    <div id="load_screen">
+        <div class="loader">
+            <div class="loader-content">
+                <div class="spinner-grow align-self-center"></div>
+            </div>
+        </div>
+    </div>
     <!--  END LOADER -->
 
     <div class="form-container outer">
@@ -47,11 +51,11 @@ include "config/connection.php";
                 <div class="form-container">
                     <div class="form-content">
                         <div class="mb-4"><a href="index.php">
-                            <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
+                                <img src="styles/assets/img/webion.png" style="width:20%; height:20%;"></a>
                         </div>
                         <h1 class="">Password Recovery</h1>
                         <p class="signup-link recovery">Enter your name & email!</p>
-                        
+
                         <form class="text-left" name="forgot" method="POST">
                             <div class="form">
                                 <!-- Username -->
@@ -69,7 +73,10 @@ include "config/connection.php";
                                     <div class="d-flex justify-content-between">
                                         <label for="email">EMAIL</label>
                                     </div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+                                    </svg>
                                     <input id="email" name="email" type="text" class="form-login" value="" placeholder="Email">
                                 </div>
 
@@ -118,50 +125,53 @@ include "config/connection.php";
                             </div>
                         </form>
 
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<?php
+    <?php
     error_reporting(0);
-    if(isset($_POST['submit'])) {
-        $_SESSION['submit']='';
+    if (isset($_POST['submit'])) {
+        $_SESSION['submit'] = '';
     }
 
-    if(isset($_POST['change'])){
-        $name=$_POST['name'];
-        $email=$_POST['email'];
-        $password=md5($_POST['password']);
-        $query=$connect->query("SELECT * FROM user WHERE nama='$name' AND email='$email'");
+    if (isset($_POST['change'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+        $query = $connect->query("SELECT * FROM user WHERE nama='$name' AND email='$email'");
         $totalakun = $query->num_rows;
-        if($totalakun>0){
+        if ($totalakun > 0) {
             $sql = "UPDATE USER set password='$password' WHERE nama='$name' AND email='$email'";
-            mysqli_query($connect, $sql);
-            echo "<script>alert('Password Changed Successfully! Please Login again!'); </script>";
-            echo "<script>location='login.php';</script>";
-        }
-        else
-        {
+            $update_password = mysqli_query($connect, $sql);
+            if ($update_password) {
+                echo "<script>alert('Password Changed Successfully! Please Login again!'); </script>";
+                echo "<script>location='login.php';</script>";
+            } else {
+                echo "<script>alert('Invalid Data'); </script>";
+            }
+        } else {
             echo "<script>alert('Invalid Email and Name'); </script>";
         }
     }
     ?>
-    
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="styles/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="styles/bootstrap/js/popper.min.js"></script>
     <script src="styles/bootstrap/js/bootstrap.min.js"></script>
-    
+
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <script src="styles/assets/js/authentication/form-2.js"></script>
 
     <script>
         var loaderElement = document.querySelector('#load_screen');
-        setTimeout( function() {
+        setTimeout(function() {
             loaderElement.style.display = "none";
         }, 3000);
     </script>
 
 </body>
+
 </html>
