@@ -359,7 +359,7 @@ $fetchdatakategori = mysqli_query($connect, $query_kategori);
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-primary" value="Update" name="update" form="formupdate<?php echo $data['WEBINAR_ID']; ?>">
+                                            <input type="submit" class="btn btn-primary" value="Update" name="update_my_webinar" form="formupdate<?php echo $data['WEBINAR_ID']; ?>">
 
                                         </div>
 
@@ -450,7 +450,7 @@ if ($nama_file_update == null) {
 
 $upload_update = move_uploaded_file($nama_tmp_update, $upload_file_update);
 
-@$update = $_POST['update'];
+@$update = $_POST['update_my_webinar'];
 $query_update = "UPDATE `webinar` SET `JUDUL_WEBINAR`='$title_update',`DESKRIPSI_WEBINAR`='$description_update',`WAKTU_WEBINAR`='$time_start_update',`MAKS_KAPASITAS`='$max_caps_update',`LINK_MEETING`='$meeting_link_update',`COVER_WEBINAR`='$upload_file_update' WHERE `WEBINAR_ID`='$id_update_webinar'";
 if ($update) {
     if ($nama_file_update != null) {
